@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('calendars', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->unsignedBigInteger('companies_employees_id')->nullable()->constrained();
             $table->foreign('companies_employees_id')->references('id')->on('companies_employees');

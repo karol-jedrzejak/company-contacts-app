@@ -17,8 +17,7 @@ class SalesContactsFactory extends Factory
     public function definition(): array
     {
         return [
-            //'companies_employees_id' => fake()->numberBetween(1, 250),
-            'topic ' => fake()->sentence(),
+            'topic' => fake()->sentence(),
             'importance' => fake()->randomElement(['high', 'medium', 'low']),
             'created_at' => now(),
             'updated_at' => now(),

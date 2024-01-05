@@ -18,8 +18,8 @@ class CalendarsFactory extends Factory
     {
 
         return [
-            //'users_id' => fake()->numberBetween(1, 250),
-            //'companies_employees_id' => fake()->numberBetween(1, 250),
+            'user_id' => fake()->numberBetween(1, 20),
+            'companies_employees_id' => fake()->numberBetween(1, 200),
             'description' => fake()->sentence(),
             'start' => fake()->dateTime(),
             'end' => fake()->dateTime(),

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('sales_contacts_id');
             $table->foreign('sales_contacts_id')->references('id')->on('sales_contacts');
 
-            $table->unsignedBigInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->text('description');
 
