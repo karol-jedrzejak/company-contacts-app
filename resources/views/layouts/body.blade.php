@@ -14,8 +14,10 @@
         <!-- Scripts -->
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     </head>
-    <body class="antialiased">
+    <body>
         @include('layouts.navigation')
-        @yield('content')
+        <div id="content">
+            @yield('content')
+        </div>
     </body>
 </html>

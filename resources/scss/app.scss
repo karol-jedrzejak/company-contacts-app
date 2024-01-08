@@ -1,3 +1,14 @@
 // Bootstrap
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap"; // Custom bootstrap color
+
+#content {
+    margin-top: 56px;
+    padding-top: 10px;
+}
+
+.navi-icon {
+    height: 1rem;
+    filter: invert(78%) sepia(34%) saturate(5231%) hue-rotate(143deg)
+        brightness(97%) contrast(94%);
+}
