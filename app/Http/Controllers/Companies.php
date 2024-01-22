@@ -27,7 +27,7 @@ class Companies extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 'test';
     }
 
     /**
