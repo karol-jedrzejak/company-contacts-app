@@ -51,7 +51,7 @@ class Companies extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return 'test';
+        return 'test2';
     }
 
     /**
