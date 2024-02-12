@@ -59,6 +59,6 @@ class Companies extends Controller
      */
     public function destroy(string $id)
     {
-        return 'test2';
+        return 'test3';
     }
 }
