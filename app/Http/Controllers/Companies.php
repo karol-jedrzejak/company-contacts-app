@@ -11,7 +11,7 @@ class Companies extends Controller
      */
     public function index()
     {
-        return 'test233dsfs';
+        return 'test233dsfasdass';
     }
 
     /**
