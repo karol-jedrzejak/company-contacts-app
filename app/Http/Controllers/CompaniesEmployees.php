@@ -19,7 +19,7 @@ class CompaniesEmployees extends Controller
      */
     public function create()
     {
-        return 'create';
+        return 'createz';
     }
 
     /**
