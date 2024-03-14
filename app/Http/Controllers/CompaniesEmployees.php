@@ -11,7 +11,7 @@ class CompaniesEmployees extends Controller
      */
     public function index()
     {
-        return 'indexs';
+        return 'insdsdexs';
     }
 
     /**
