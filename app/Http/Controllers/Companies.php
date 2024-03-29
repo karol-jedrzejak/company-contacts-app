@@ -19,7 +19,7 @@ class Companies extends Controller
      */
     public function create()
     {
-        return 'createss';
+        return 'creatsdfsdfess';
     }
 
     /**
