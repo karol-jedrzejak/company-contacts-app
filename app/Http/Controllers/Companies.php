@@ -11,7 +11,7 @@ class Companies extends Controller
      */
     public function index()
     {
-        return 'test233dsfasgfgfdass';
+        return 'test233dsfgfhfghfgasdassdssdefsdfsdsds';
     }
 
     /**
@@ -19,7 +19,7 @@ class Companies extends Controller
      */
     public function create()
     {
-        return 'create';
+        return 'creatsdfsdfess';
     }
 
     /**
