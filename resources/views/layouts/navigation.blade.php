@@ -12,7 +12,7 @@
                 Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('companies.index') }}">
                 <img src="{{ URL::to('/') }}/images/icons/companies.svg" class="navi-icon">
                 Companies</a>
           </li>
