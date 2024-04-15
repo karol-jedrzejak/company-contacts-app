@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Datatransfer;
+namespace App\Repository;
 
 use Illuminate\Support\Facades\URL;
 

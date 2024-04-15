@@ -16,7 +16,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Route::resource('companies', Companies::class)->except(['destroy']);
+// -------------- Companies --------------
+Route::resource('companies', Companies::class);
+Route::post('companies/ajax', [Companies::class, 'index_ajax'])->name('companies.ajax');
+
+// -------------- Employees --------------
+Route::resource('companies.employees', CompaniesEmployees::class)->where(['id' => '[0-9]+'])->shallow();
+Route::post('companies/{id}/employees/ajax', [CompaniesEmployees::class, 'index_ajax'])->where(['id' => '[0-9]+'])->name('companies.employees.ajax');
+
+
+
+// -------------- Quest --------------
+Route::middleware(['guest'])->group(function () {
+});
+
+// -------------- Loged --------------
+Route::middleware(['auth'])->group(function () {
+});

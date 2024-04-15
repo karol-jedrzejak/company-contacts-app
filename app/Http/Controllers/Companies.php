@@ -2,16 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Companies as CompaniesModel;
+use App\Repository\Companies\CompaniesRepository;
+
+//use App\Http\Requests\Companies\Create as CompaniesCreate;
+//use App\Http\Requests\Companies\Update as CompaniesUpdate;
+
 use Illuminate\Http\Request;
 
 class Companies extends Controller
 {
+
+    private CompaniesRepository $CompaniesRepository;
+
+    public function __construct(CompaniesRepository $repositoryCompanies)
+    {
+        $this->CompaniesRepository = $repositoryCompanies;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return 'test233dsfgfhfghfgasdassdssdefsdfsdsds';
+
+
+        return view('companies.index', [
+            'page_title' => '-> Firmy',
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index_ajax()
+    {
+        return $this->CompaniesRepository->ajax();
     }
 
     /**
