@@ -45,27 +45,26 @@ updated_at
         $columnSorting = [
             'name_short',
             'name_complete',
-            'voivodeship',
-            'name_short',
-            'id'
+            'country',
         ];
 
         // Zapytanie SQL
-        $querry = DB::table('companies')
-            ->select(
-                'id',
-                'name_short',
-                'name_complete',
-                'voivodeship',
-                'distance',
-                'distance_time',
-                'adress_street',
-                'adress_number',
-                'adress_sub_number',
-                'adress_city',
-                'adress_postcode',
-                'adress_post_office',
-            );
+        $querry = DB::table('companies')->select(
+            'id',
+            'nip',
+            'name_short',
+            'name_complete',
+            'adress_number',
+            'adress_street',
+            'adress_city',
+            'adress_postcode',
+            'country',
+            'coordinate_latitude',
+            'coordinate_longitude',
+            'active',
+            'created_at',
+            'updated_at',
+        );
 
         //$where = [['active', '=', 1]];
         $where = [];
@@ -97,9 +96,11 @@ updated_at
             $dataArray[] = [
                 $item->name_short,
                 $item->name_complete,
-                $item->voivodeship,
-                Datatables::button('link', 'btn-ts-yellow', $item->adress_google, $item->adress_1 . '; ' . $item->adress_2),
-                Datatables::buttons($buttonsData)
+                $item->country,
+                'test',
+                'test'
+                //Datatables::button('link', 'btn-ts-yellow', $item->adress_google, $item->adress_1 . '; ' . $item->adress_2),
+                //Datatables::buttons($buttonsData)
             ];
         }
 

@@ -17,6 +17,10 @@ let additionalData = function (d) {
 let columns = [
     {
         orderable: false,
+        targets: 3,
+    },
+    {
+        orderable: false,
         targets: 4,
     },
 ];
