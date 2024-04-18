@@ -50,23 +50,20 @@ updated_at
 
         // Zapytanie SQL
         $querry = DB::table('companies')->select(
-            'id',
-            'nip',
-            'name_short',
-            'name_complete',
-            'adress_number',
-            'adress_street',
-            'adress_city',
-            'adress_postcode',
-            'country',
-            'coordinate_latitude',
-            'coordinate_longitude',
-            'active',
-            'created_at',
-            'updated_at',
-        );
+                'id',
+                'nip',
+                'name_short',
+                'name_complete',
+                'adress_number',
+                'adress_street',
+                'adress_city',
+                'adress_postcode',
+                'country',
+                'coordinate_latitude',
+                'coordinate_longitude',
+                'active',
+            );
 
-        //$where = [['active', '=', 1]];
         $where = [];
 
         $getValues = Datatables::prepare($searchable, $columnSorting, $querry, $where, 'active');
@@ -87,7 +84,7 @@ updated_at
                     'link' => route('companies.employees.index', ['company' => $item->id]),
                     'image' => '/images/icons/datatables/employees.svg'
                 ], [
-                    'class' => 'btn-ts-yellow',
+                    'class' => 'btn-warning',
                     'link' => route('companies.edit', ['company' => $item->id]),
                     'image' => '/images/icons/datatables/edit.svg'
                 ]
@@ -97,10 +94,8 @@ updated_at
                 $item->name_short,
                 $item->name_complete,
                 $item->country,
-                'test',
-                'test'
-                //Datatables::button('link', 'btn-ts-yellow', $item->adress_google, $item->adress_1 . '; ' . $item->adress_2),
-                //Datatables::buttons($buttonsData)
+                Datatables::button('link', 'btn-ts-yellow', 'www.google.pl', 'show'),
+                Datatables::buttons($buttonsData)
             ];
         }
 

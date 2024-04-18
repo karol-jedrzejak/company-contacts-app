@@ -14,6 +14,11 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
+
+        <!-- Icons -->
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
         <!-- Styles -->
         <!-- Scripts -->
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])

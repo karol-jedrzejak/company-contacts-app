@@ -62,7 +62,7 @@ class Companies extends Controller
      */
     public function show(string $id)
     {
-        return 'test';
+        return 'tffffest';
     }
 
     /**
