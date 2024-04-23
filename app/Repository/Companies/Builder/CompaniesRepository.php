@@ -66,35 +66,44 @@ updated_at
 
         $where = [];
 
-        $getValues = Datatables::prepare($searchable, $columnSorting, $querry, $where, 'active');
+        $getValues = Datatables::prepare($searchable, $columnSorting, $querry, $where,null);
         $data = $getValues[0];
 
 
         $dataArray = [];
         // Kolumny
         foreach ($data->items() as $item) {
-
             $buttonsData = [
                 [
-                    'class' => 'btn-info',
+                    'class' => 'btn-info bi bi-binoculars',
+                    'color' => 'blue',
                     'link' => route('companies.show', ['company' => $item->id]),
                     'image' => '/images/icons/datatables/view.svg'
                 ], [
-                    'class' => 'btn-primary',
+                    'class' => 'btn-warning bi bi-pencil-square',
+                    'color' => 'yellow',
                     'link' => route('companies.employees.index', ['company' => $item->id]),
                     'image' => '/images/icons/datatables/employees.svg'
                 ], [
-                    'class' => 'btn-warning',
+                    'class' => 'btn-danger bi bi-x-circle',
+                    'color' => '#8A0000',
                     'link' => route('companies.edit', ['company' => $item->id]),
                     'image' => '/images/icons/datatables/edit.svg'
                 ]
             ];
 
+           $googleLink = config('google.api.maps.route') .
+           $item->adress_number.'+'.
+           $item->adress_street.'+'.
+           $item->adress_city.'+'.
+           $item->adress_postcode.'+'.
+           $item->country;
+
             $dataArray[] = [
                 $item->name_short,
                 $item->name_complete,
                 $item->country,
-                Datatables::button('link', 'btn-ts-yellow', 'www.google.pl', 'show'),
+                Datatables::button('link', 'btn-primary', $googleLink, 'Show on map'),
                 Datatables::buttons($buttonsData)
             ];
         }

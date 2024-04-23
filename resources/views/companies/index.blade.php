@@ -11,7 +11,7 @@
                     <tr>
                         <th scope="col">Nazwa<br>Skrócona</th>
                         <th scope="col">Nazwa<br>Pełna</th>
-                        <th scope="col">Województwo</th>
+                        <th scope="col">Państwo</th>
                         <th scope="col">Adres</th>
                         <th scope="col" class="datatable-row-auto">Edycja</th>
                     </tr>

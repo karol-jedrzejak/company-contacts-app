@@ -91,11 +91,18 @@ class Datatables
             }
             if (isset($data[$i]['onclick'])) {
                 $buttons .= '<button class="btn datatable-button ' . $data[$i]['class'] . '" onclick="' . $data[$i]['onclick'] .
+                    '" ' . $disabled . '></button>';
+            } else {
+                $buttons .= '<a class="btn datatable-button ' . $data[$i]['class'] . '" style="color: '.$data[$i]['color'].';" href="' . $data[$i]['link'] .
+                    '" ' . $disabled . '></a>';
+            }
+/*             if (isset($data[$i]['onclick'])) {
+                $buttons .= '<button class="btn datatable-button ' . $data[$i]['class'] . '" onclick="' . $data[$i]['onclick'] .
                     '" ' . $disabled . '><img src="' . URL::to('/') . $data[$i]['image'] . '" class="datatable-icon" $disabled/></button>';
             } else {
                 $buttons .= '<a class="btn datatable-button ' . $data[$i]['class'] . '" href="' . $data[$i]['link'] .
                     '" ' . $disabled . '><img src="' . URL::to('/') . $data[$i]['image'] . '" class="datatable-icon" /></a>';
-            }
+            } */
         }
         $buttons .= '</div';
 
