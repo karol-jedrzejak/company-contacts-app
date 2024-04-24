@@ -4,7 +4,7 @@
 
 <main class="container-fluid mb-3">
     <div class="card ">
-        <div class="card-header text-bg-primary">Firmy</div>
+        <div class="card-header bg-info">Firmy</div>
         <div class="card-body ">
             <table class="table table-striped align-middle" id="table_grid">
                 <thead class="thead">

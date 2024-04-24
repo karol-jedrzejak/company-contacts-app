@@ -26,8 +26,6 @@ class Companies extends Controller
      */
     public function index()
     {
-
-
         return view('companies.index', [
             'page_title' => '-> Firmy',
         ]);
@@ -42,11 +40,37 @@ class Companies extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        return 'tffffest';
+    }
+
+
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return 'creatsdfsdfess';
+        return view('companies.edit', [
+            'page_title' => '-> Dodanie Firmy',
+            'mode' => 'create',
+            'company' => new CompaniesModel,
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        return view('companies.edit', [
+            'page_title' => '-> Edycja Firmy',
+            'mode' => 'edit',
+            'company' => $this->CompaniesRepository->get($id),
+        ]);
     }
 
     /**
@@ -57,21 +81,6 @@ class Companies extends Controller
         return 'test';
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        return 'tffffest';
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        return 'test';
-    }
 
     /**
      * Update the specified resource in storage.

@@ -9,6 +9,7 @@ export default defineConfig({
                 "resources/js/app.js",
                 "resources/js/Datatables/companies.js",
                 "resources/js/Datatables/standard.js",
+                "resources/js/companies-GPS.js",
             ],
             refresh: true,
         }),
