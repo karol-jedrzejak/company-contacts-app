@@ -111,6 +111,16 @@ class Companies extends Controller
      */
     public function destroy(string $id)
     {
-        return 'test3';
+        if ($this->CompaniesRepository->canBeRemoved($id)) {
+            $company = CompaniesModel::find($id);
+            $company->delete();
+            return redirect()
+                ->route('companies.index')
+                ->with('warning', 'Poprawnie usunieto firmę.');
+        } else {
+            return redirect()
+                ->route('companies.index')
+                ->with('error', 'Nie usunięto firmy - Do firmy przypisani są pracownicy bądź stanowiska.');
+        }
     }
 }

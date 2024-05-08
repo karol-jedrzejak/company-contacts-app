@@ -114,4 +114,16 @@ updated_at
         return $querry;
     }
 
+    public function canBeRemoved(int $id)
+    {
+        // Zapytanie SQL
+        $emplyees = DB::table('companies_employees')->where('companies_id', '=', $id)->count();
+
+        if ($emplyees > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }
