@@ -24,8 +24,8 @@ class Companies extends Model
         'adress_city',
         'adress_postcode',
         'country',
-        'coordinate_NS',
-        'coordinate_WE',
+        'coordinate_longitude',
+        'coordinate_latitude',
         'active',
         'created_at',
         'updated_at'

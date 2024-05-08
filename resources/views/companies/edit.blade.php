@@ -158,8 +158,8 @@
                 <!-- Modal -->
                 <div class="modal fade" id="DelateModal" tabindex="-1" aria-labelledby="DelateModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content bg-dark">
-                    <div class="modal-header card-header bg-ts-yellow text-black">
+                    <div class="modal-content">
+                    <div class="modal-header card-header bg-info">
                         <h4 class="modal-title" id="DelateModalLabel"><strong>!! UWAGA !!</strong></h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>

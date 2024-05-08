@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Companies as CompaniesModel;
 use App\Repository\Companies\CompaniesRepository;
 
-//use App\Http\Requests\Companies\Create as CompaniesCreate;
-//use App\Http\Requests\Companies\Update as CompaniesUpdate;
+use App\Http\Requests\Companies\Create as CompaniesCreate;
+use App\Http\Requests\Companies\Update as CompaniesUpdate;
 
 use Illuminate\Http\Request;
 
@@ -40,16 +40,6 @@ class Companies extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        return 'tffffest';
-    }
-
-
-
-    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -76,19 +66,45 @@ class Companies extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CompaniesCreate $request)
     {
-        return 'test';
+        $request->validated();
+
+        $data = $request->post();
+
+        CompaniesModel::create($data);
+
+        return redirect()
+            ->route('companies.index')
+            ->with('success', 'Poprawnie dodano firmę ' . $data['name_complete'] . '.');
     }
 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CompaniesUpdate $request, string $id)
     {
-        return 'test2';
+        $request->validated();
+
+        $data = $request->post();
+
+        $company = CompaniesModel::find($id);
+        $company->update($data);
+
+        return redirect()
+            ->route('companies.index')
+            ->with('success', 'Poprawnie zedytowano dane firmy ' . $data['name_complete'] . '.');
     }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        return 'tffffest';
+    }
+
 
     /**
      * Remove the specified resource from storage.

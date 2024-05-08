@@ -7,7 +7,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>CCA
-            @if(isset($page_title)) - {{ $page_title }} @endif
+            @if(isset($page_title)) {{ $page_title }} @endif
         </title>
 
         <!-- Fonts -->
