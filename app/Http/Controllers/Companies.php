@@ -102,7 +102,11 @@ class Companies extends Controller
      */
     public function show(string $id)
     {
-        return 'tffffest';
+        return view('companies.show', [
+            'page_title' => '-> Informacje o firmie',
+            'mode' => 'edit',
+            'company' => $this->CompaniesRepository->get($id),
+        ]);
     }
 
 
