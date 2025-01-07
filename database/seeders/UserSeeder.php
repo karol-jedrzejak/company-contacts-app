@@ -25,6 +25,6 @@ class UserSeeder extends Seeder
 
         User::factory()
             ->count(20)
-            ->has(Tasklists::factory()->count(10))->create();
+            ->has(Tasklists::factory()->count(50))->create();
     }
 }
