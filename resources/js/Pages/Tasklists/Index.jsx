@@ -4,8 +4,7 @@ import { router } from "@inertiajs/react";
 import ButtonStandard from "@/Components/ButtonStandard";
 import BadgeTable from "@/Components/BadgeTable";
 
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 
 export default function Index({ auth, tasklists }) {
@@ -23,9 +22,83 @@ export default function Index({ auth, tasklists }) {
     const [searchTerm, setSearchTerm] = useState("");
     const [pageNumber, setPageNumber] = useState(0);
 
+    const [sortColumn, setSortColumn] = useState("description");
+    const [sortDirection, setSortDirection] = useState("asc");
+
     const bulletinsPerPage = 8;
     const pagesVisited = pageNumber * bulletinsPerPage;
     const displayBulletins = tasklists
+        .sort((a, b) => {
+            const nameA = a[sortColumn]; // ignore upper and lowercase
+            const nameB = b[sortColumn]; // ignore upper and lowercase
+
+            String(nameA).toUpperCase(); // ignore upper and lowercase
+            String(nameB).toUpperCase(); // ignore upper and lowercase
+
+            if (sortColumn == "importance") {
+                let nameValueA = 1;
+                switch (nameA) {
+                    case "high":
+                        nameValueA = 3;
+                        break;
+                    case "medium":
+                        nameValueA = 2;
+                        break;
+
+                    default:
+                        break;
+                }
+                let nameValueB = 1;
+                switch (nameB) {
+                    case "high":
+                        nameValueB = 3;
+                        break;
+                    case "medium":
+                        nameValueB = 2;
+                        break;
+
+                    default:
+                        break;
+                }
+                if (sortDirection == "asc") {
+                    if (nameValueA < nameValueB) {
+                        return -1;
+                    }
+                    if (nameValueA > nameValueB) {
+                        return 1;
+                    }
+                } else {
+                    if (nameValueA > nameValueB) {
+                        return -1;
+                    }
+                    if (nameValueA < nameValueB) {
+                        return 1;
+                    }
+                }
+
+                // names must be equal
+                return 0;
+            } else {
+                if (sortDirection == "asc") {
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                } else {
+                    if (nameA > nameB) {
+                        return -1;
+                    }
+                    if (nameA < nameB) {
+                        return 1;
+                    }
+                }
+
+                // names must be equal
+                return 0;
+            }
+        })
         .filter((tasklist) => {
             if (searchTerm === "") {
                 return tasklist;
@@ -105,6 +178,21 @@ export default function Index({ auth, tasklists }) {
         setPageNumber(selected);
     };
 
+    const handleSorting = (selectedRow) => {
+        if (sortColumn == selectedRow) {
+            if (sortDirection == "asc") {
+                setSortDirection("desc");
+            } else {
+                setSortDirection("asc");
+            }
+        } else {
+            setSortColumn(selectedRow);
+            setSortDirection("asc");
+        }
+        console.log(sortColumn);
+        console.log(sortDirection);
+    };
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -115,67 +203,6 @@ export default function Index({ auth, tasklists }) {
             }
         >
             <Head title="Tasklists" />
-            {/*  <table className="table-fixed w-full p-12 m-12">
-                <thead>
-                    <tr className="bg-gray-100 p-16">
-                        <th className="px-4 py-2 w-20">No.</th>
-
-                        <th className="px-4 py-2">Title</th>
-
-                        <th className="px-4 py-2">Action</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {tasklists.map(({ id, description }) => (
-                        <tr key={id}>
-                            <td className="border px-4 py-2">{id}</td>
-
-                            <td className="border px-4 py-2">{description}</td>
-
-                            <td className="border px-4 py-2">
-                                <ButtonStandard
-                                    btn_style=""
-                                    className="mx-2"
-                                    link={route("tasklists.edit", id)}
-                                >
-                                    Edit
-                                </ButtonStandard>
-
-                                <ButtonStandard
-                                    btn_style="secondary"
-                                    className="mx-2"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        window.location.href = window.location =
-                                            route("tasklists.edit", id);
-                                    }}
-                                >
-                                    Edit
-                                </ButtonStandard>
-
-                                <ButtonStandard
-                                    btn_style="danger"
-                                    className="mx-2"
-                                    target_id={id}
-                                    tabIndex="-1"
-                                    onClick={destroy}
-                                >
-                                    Delete
-                                </ButtonStandard>
-                            </td>
-                        </tr>
-                    ))}
-
-                    {tasklists.length === 0 && (
-                        <tr>
-                            <td className="px-6 py-4 border-t" colSpan="4">
-                                No tasks found.
-                            </td>
-                        </tr>
-                    )}
-                </tbody>
-            </table> */}
             <div className="search-wrapper">
                 <div
                     className="btn btn-primary"
@@ -198,33 +225,104 @@ export default function Index({ auth, tasklists }) {
             <table xs={1} md={4} className="g-4">
                 <thead>
                     <tr>
-                        <th className="border px-4 py-2">id</th>
-                        <th className="border px-4 py-2">description</th>
-                        <th className="border px-4 py-2">importance</th>
-                        <th className="border px-4 py-2">buttons</th>
+                        <th
+                            className="border px-4 py-2 cursor-pointer"
+                            col_id="id"
+                            onClick={(e) => {
+                                handleSorting(e.target.getAttribute("col_id"));
+                            }}
+                        >
+                            id
+                            {sortColumn == "id" ? (
+                                <>
+                                    {sortDirection == "asc" ? (
+                                        <>
+                                            <span className="ps-1">↓</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span className="ps-1">↑</span>
+                                        </>
+                                    )}
+                                </>
+                            ) : (
+                                <></>
+                            )}
+                        </th>
+                        <th
+                            className="border px-4 py-2 cursor-pointer"
+                            col_id="description"
+                            onClick={(e) => {
+                                handleSorting(e.target.getAttribute("col_id"));
+                            }}
+                        >
+                            description
+                            {sortColumn == "description" ? (
+                                <>
+                                    {sortDirection == "asc" ? (
+                                        <>
+                                            <span className="ps-1">↓</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span className="ps-1">↑</span>
+                                        </>
+                                    )}
+                                </>
+                            ) : (
+                                <></>
+                            )}
+                        </th>
+                        <th
+                            className="border px-4 py-2 cursor-pointer"
+                            col_id="importance"
+                            onClick={(e) => {
+                                handleSorting(e.target.getAttribute("col_id"));
+                            }}
+                        >
+                            importance
+                            {sortColumn == "importance" ? (
+                                <>
+                                    {sortDirection == "asc" ? (
+                                        <>
+                                            <span className="ps-1">↓</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span className="ps-1">↑</span>
+                                        </>
+                                    )}
+                                </>
+                            ) : (
+                                <></>
+                            )}
+                        </th>
+                        <th className="border px-4 py-2">edit</th>
                     </tr>
                 </thead>
                 <tbody>{displayBulletins}</tbody>
             </table>
             <div>
-                <div className="bulletinPagination" md={12}>
-                    <ReactPaginate
-                        previousLabel={"<"}
-                        nextLabel={">"}
-                        pageCount={pageCount}
-                        onPageChange={handlePageChange}
-                        breakClassName={"page-item"}
-                        breakLinkClassName={"page-link"}
-                        containerClassName={"pagination"}
-                        pageClassName={"page-item"}
-                        pageLinkClassName={"page-link"}
-                        previousClassName={"page-item"}
-                        previousLinkClassName={"page-link"}
-                        nextClassName={"page-item"}
-                        nextLinkClassName={"page-link"}
-                        activeClassName={"active"}
-                    />
-                </div>
+                <ReactPaginate
+                    previousLabel={"<"}
+                    nextLabel={">"}
+                    pageCount={pageCount}
+                    onPageChange={handlePageChange}
+                    containerClassName={
+                        "pt-8 flex justify-center gap-2 items-center"
+                    }
+                    pageLinkClassName={
+                        "relative block border border-gray-800 rounded-lg bg-transparent px-3 py-1.5 text-sm text-surface transition duration-300 hover:bg-gray-400"
+                    }
+                    previousLinkClassName={
+                        "relative block border border-gray-800 rounded-lg bg-transparent px-3 py-1.5 text-sm text-surface transition duration-300 hover:bg-gray-400"
+                    }
+                    nextLinkClassName={
+                        "relative block border border-gray-800 rounded-lg bg-transparent px-3 py-1.5 text-sm text-surface transition duration-300 hover:bg-gray-400"
+                    }
+                    activeClassName={"bg-gray-800 rounded-lg text-white"}
+                    disabledClassName={"pointer-events-none opacity-50"}
+                />
             </div>
         </AuthenticatedLayout>
     );
