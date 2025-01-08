@@ -8,7 +8,7 @@ export default function ButtonStandard({
     ...props
 }) {
     let stylingClassNames =
-        "border-transparent bg-gray-800 text-white hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 ";
+        "border-transparent bg-indigo-400 text-white hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 ";
 
     switch (btn_style) {
         case "danger":
@@ -17,7 +17,7 @@ export default function ButtonStandard({
             break;
         case "secondary":
             stylingClassNames =
-                "border border-gray-500 bg-white text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 ";
+                "border-1 border-gray-500 bg-white text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 ";
             break;
 
         default:
@@ -35,7 +35,7 @@ export default function ButtonStandard({
                 }}
                 className={
                     stylingClassNames +
-                    ` inline-flex items-center px-4 py-2 border rounded-md font-semibold text-xs uppercase tracking-widest  focus:ring-offset-2 transition ease-in-out duration-150 ${
+                    ` inline-flex items-center px-4 py-2 border rounded-md font-semibold text-xs uppercase tracking-widest focus:ring-offset-2 transition ease-in-out duration-150 ${
                         disabled && "opacity-25"
                     } ` +
                     className
@@ -52,7 +52,7 @@ export default function ButtonStandard({
                 type={type}
                 className={
                     stylingClassNames +
-                    `inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest  focus:ring-offset-2 transition ease-in-out duration-150 ${
+                    `inline-flex items-center px-4 py-2 border rounded-md font-semibold text-xs uppercase tracking-widest  focus:ring-offset-2 transition ease-in-out duration-150 ${
                         disabled && "opacity-25"
                     } ` +
                     className

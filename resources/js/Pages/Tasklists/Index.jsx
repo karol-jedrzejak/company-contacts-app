@@ -114,17 +114,19 @@ export default function Index({ auth, tasklists }) {
         .slice(pagesVisited, pagesVisited + bulletinsPerPage)
         .map((tasklist) => {
             return (
-                <tr key={tasklist.id}>
-                    <td className="border px-4 py-2">{tasklist.id}</td>
-                    <td className="border px-4 py-2">{tasklist.description}</td>
-                    <td className="border px-4 py-2">
+                <tr
+                    key={tasklist.id}
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                >
+                    <td className="px-4 py-2">{tasklist.id}</td>
+                    <td className="px-4 py-2">{tasklist.description}</td>
+                    <td className="px-4 py-2 text-center">
                         <BadgeTable bdg_style={tasklist.importance}>
                             {tasklist.importance}
                         </BadgeTable>
                     </td>
-                    <td className="border px-4 py-2">
+                    <td className="px-4 py-2 whitespace-nowrap w-px">
                         <ButtonStandard
-                            btn_style=""
                             className="mx-2"
                             link={route("tasklists.edit", tasklist.id)}
                         >
@@ -203,126 +205,127 @@ export default function Index({ auth, tasklists }) {
             }
         >
             <Head title="Tasklists" />
-            <div className="search-wrapper">
-                <div
-                    className="btn btn-primary"
-                    style={{ marginBottom: "20px" }}
-                >
-                    Create New
+            <div className="flex flex-col justify-center items-center">
+                <div className="py-4">
+                    <label>
+                        <input
+                            className="rounded-lg"
+                            placeholder="Search..."
+                            onChange={(e) => {
+                                setSearchTerm(e.target.value);
+                                handlePageChange({ selected: 0 });
+                            }}
+                        />
+                    </label>
                 </div>
-                <label>
-                    <input
-                        type="search"
-                        className="search-input"
-                        placeholder="Search..."
-                        onChange={(e) => {
-                            setSearchTerm(e.target.value);
-                            handlePageChange({ selected: 0 });
-                        }}
+                <table className="w-4/5 p-4 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400  border-b ">
+                        <tr>
+                            <th
+                                className="px-4 py-2 text-center cursor-pointer"
+                                col_id="id"
+                                onClick={(e) => {
+                                    handleSorting(
+                                        e.target.getAttribute("col_id")
+                                    );
+                                }}
+                            >
+                                id
+                                {sortColumn == "id" ? (
+                                    <>
+                                        {sortDirection == "asc" ? (
+                                            <>
+                                                <span className="ps-1">↓</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <span className="ps-1">↑</span>
+                                            </>
+                                        )}
+                                    </>
+                                ) : (
+                                    <></>
+                                )}
+                            </th>
+                            <th
+                                className="px-4 py-2 text-center cursor-pointer"
+                                col_id="description"
+                                onClick={(e) => {
+                                    handleSorting(
+                                        e.target.getAttribute("col_id")
+                                    );
+                                }}
+                            >
+                                description
+                                {sortColumn == "description" ? (
+                                    <>
+                                        {sortDirection == "asc" ? (
+                                            <>
+                                                <span className="ps-1">↓</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <span className="ps-1">↑</span>
+                                            </>
+                                        )}
+                                    </>
+                                ) : (
+                                    <></>
+                                )}
+                            </th>
+                            <th
+                                className="px-4 py-2 text-center cursor-pointer"
+                                col_id="importance"
+                                onClick={(e) => {
+                                    handleSorting(
+                                        e.target.getAttribute("col_id")
+                                    );
+                                }}
+                            >
+                                importance
+                                {sortColumn == "importance" ? (
+                                    <>
+                                        {sortDirection == "asc" ? (
+                                            <>
+                                                <span className="ps-1">↓</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <span className="ps-1">↑</span>
+                                            </>
+                                        )}
+                                    </>
+                                ) : (
+                                    <></>
+                                )}
+                            </th>
+                            <th className="text-center px-4 py-2">edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>{displayBulletins}</tbody>
+                </table>
+                <div>
+                    <ReactPaginate
+                        previousLabel={"<"}
+                        nextLabel={">"}
+                        pageCount={pageCount}
+                        onPageChange={handlePageChange}
+                        containerClassName={
+                            "pt-8 flex justify-center gap-2 items-center"
+                        }
+                        pageLinkClassName={
+                            "relative block border border-indigo-400 rounded-lg bg-transparent px-3 py-1.5 text-sm text-surface transition duration-300 hover:bg-gray-400"
+                        }
+                        previousLinkClassName={
+                            "relative block border border-indigo-400 rounded-lg bg-transparent px-3 py-1.5 text-sm text-surface transition duration-300 hover:bg-gray-400"
+                        }
+                        nextLinkClassName={
+                            "relative block border border-indigo-400 rounded-lg bg-transparent px-3 py-1.5 text-sm text-surface transition duration-300 hover:bg-gray-400"
+                        }
+                        activeClassName={"bg-indigo-400 rounded-lg text-white"}
+                        disabledClassName={"pointer-events-none opacity-50"}
                     />
-                </label>
-            </div>
-            <table xs={1} md={4} className="g-4">
-                <thead>
-                    <tr>
-                        <th
-                            className="border px-4 py-2 cursor-pointer"
-                            col_id="id"
-                            onClick={(e) => {
-                                handleSorting(e.target.getAttribute("col_id"));
-                            }}
-                        >
-                            id
-                            {sortColumn == "id" ? (
-                                <>
-                                    {sortDirection == "asc" ? (
-                                        <>
-                                            <span className="ps-1">↓</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span className="ps-1">↑</span>
-                                        </>
-                                    )}
-                                </>
-                            ) : (
-                                <></>
-                            )}
-                        </th>
-                        <th
-                            className="border px-4 py-2 cursor-pointer"
-                            col_id="description"
-                            onClick={(e) => {
-                                handleSorting(e.target.getAttribute("col_id"));
-                            }}
-                        >
-                            description
-                            {sortColumn == "description" ? (
-                                <>
-                                    {sortDirection == "asc" ? (
-                                        <>
-                                            <span className="ps-1">↓</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span className="ps-1">↑</span>
-                                        </>
-                                    )}
-                                </>
-                            ) : (
-                                <></>
-                            )}
-                        </th>
-                        <th
-                            className="border px-4 py-2 cursor-pointer"
-                            col_id="importance"
-                            onClick={(e) => {
-                                handleSorting(e.target.getAttribute("col_id"));
-                            }}
-                        >
-                            importance
-                            {sortColumn == "importance" ? (
-                                <>
-                                    {sortDirection == "asc" ? (
-                                        <>
-                                            <span className="ps-1">↓</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span className="ps-1">↑</span>
-                                        </>
-                                    )}
-                                </>
-                            ) : (
-                                <></>
-                            )}
-                        </th>
-                        <th className="border px-4 py-2">edit</th>
-                    </tr>
-                </thead>
-                <tbody>{displayBulletins}</tbody>
-            </table>
-            <div>
-                <ReactPaginate
-                    previousLabel={"<"}
-                    nextLabel={">"}
-                    pageCount={pageCount}
-                    onPageChange={handlePageChange}
-                    containerClassName={
-                        "pt-8 flex justify-center gap-2 items-center"
-                    }
-                    pageLinkClassName={
-                        "relative block border border-gray-800 rounded-lg bg-transparent px-3 py-1.5 text-sm text-surface transition duration-300 hover:bg-gray-400"
-                    }
-                    previousLinkClassName={
-                        "relative block border border-gray-800 rounded-lg bg-transparent px-3 py-1.5 text-sm text-surface transition duration-300 hover:bg-gray-400"
-                    }
-                    nextLinkClassName={
-                        "relative block border border-gray-800 rounded-lg bg-transparent px-3 py-1.5 text-sm text-surface transition duration-300 hover:bg-gray-400"
-                    }
-                    activeClassName={"bg-gray-800 rounded-lg text-white"}
-                    disabledClassName={"pointer-events-none opacity-50"}
-                />
+                </div>
             </div>
         </AuthenticatedLayout>
     );
