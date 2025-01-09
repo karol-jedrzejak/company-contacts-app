@@ -8,21 +8,21 @@ export default function Form({}) {
     return (
         <>
             <div>
-                <InputLabel htmlFor="name" value="Name" />
+                <InputLabel htmlFor="Description" value="Description" />
 
                 <TextInput
-                    id="name"
-                    name="name"
-                    //value={data.name}
+                    id="Description"
+                    name="Description"
+                    //value={data.Description}
                     className="mt-1 block w-full"
-                    autoComplete="name"
+                    autoComplete="Description"
                     isFocused={true}
-                    //onChange={(e) => setData("name", e.target.value)}
+                    //onChange={(e) => setData("Description", e.target.value)}
                     required
                 />
 
                 <InputError
-                    //message={errors.name}
+                    //message={errors.Description}
                     className="mt-2"
                 />
             </div>
