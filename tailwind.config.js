@@ -16,7 +16,7 @@ export default {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
             animation: {
-                appear: "appear 3s ease-in-out",
+                appear: "appear 2s ease-in-out",
             },
             keyframes: {
                 appear: {

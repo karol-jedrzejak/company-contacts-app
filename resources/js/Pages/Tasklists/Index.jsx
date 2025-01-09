@@ -6,23 +6,13 @@ import BadgeTable from "@/Components/BadgeTable";
 import Table from "@/Components/Table";
 import Modal from "@/Components/Modal";
 import React from "react";
-import { useRef, useState, useEffect } from "react";
-import TextInput from "@/Components/TextInput";
+import { useState } from "react";
+import Message from "@/Components/Message";
 
-export default function Index({ auth, items, message }) {
+export default function Index({ auth, items }) {
     const [confirmingDeletion, setConfirmingDeletion] = useState(false);
     const [deletionTarget, setDeletionTarget] = useState(null);
-    const [messageShow, setMessageShow] = useState(false);
-
-    useEffect(() => {
-        if (message) {
-            setMessageShow(true);
-            const timeout = setTimeout(() => setMessageShow(false), 2000);
-            return () => {
-                clearTimeout(timeout);
-            };
-        }
-    }, [message]);
+    const [deletionMessageShow, setDeletionMessageShow] = useState(false);
 
     function confirmDeletion(e) {
         setDeletionTarget(e.currentTarget.getAttribute("target_id"));
@@ -37,6 +27,7 @@ export default function Index({ auth, items, message }) {
         e.preventDefault();
         closeModal();
         router.delete(route("tasklists.destroy", deletionTarget));
+        setDeletionMessageShow(true);
     };
 
     const searchitems = ["description", "importance"];
@@ -120,13 +111,13 @@ export default function Index({ auth, items, message }) {
             }
         >
             <Head title="Tasklists" />
-            {messageShow ? (
-                <div className="fixed bottom-4 right-4 bg-red-700 text-white rounded-lg p-2 m-4 text-lg animate-appear">
-                    {message}
-                </div>
-            ) : (
-                <></>
-            )}
+
+            <Message
+                color="red"
+                message="Item was successfully deleted."
+                messageShow={deletionMessageShow}
+                setMessageShow={setDeletionMessageShow}
+            />
 
             <Modal show={confirmingDeletion} onClose={closeModal}>
                 <form onSubmit={destroy} className="p-6">
