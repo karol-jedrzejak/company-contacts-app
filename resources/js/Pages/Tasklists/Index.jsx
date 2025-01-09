@@ -4,10 +4,41 @@ import { router } from "@inertiajs/react";
 import ButtonStandard from "@/Components/ButtonStandard";
 import BadgeTable from "@/Components/BadgeTable";
 import Table from "@/Components/Table";
-
+import Modal from "@/Components/Modal";
 import React from "react";
+import { useRef, useState, useEffect } from "react";
+import TextInput from "@/Components/TextInput";
 
-export default function Index({ auth, items }) {
+export default function Index({ auth, items, message }) {
+    const [confirmingDeletion, setConfirmingDeletion] = useState(false);
+    const [deletionTarget, setDeletionTarget] = useState(null);
+    const [messageShow, setMessageShow] = useState(false);
+
+    useEffect(() => {
+        if (message) {
+            setMessageShow(true);
+            const timeout = setTimeout(() => setMessageShow(false), 2000);
+            return () => {
+                clearTimeout(timeout);
+            };
+        }
+    }, [message]);
+
+    function confirmDeletion(e) {
+        setDeletionTarget(e.currentTarget.getAttribute("target_id"));
+        setConfirmingDeletion(true);
+    }
+
+    const closeModal = () => {
+        setConfirmingDeletion(false);
+    };
+
+    const destroy = (e) => {
+        e.preventDefault();
+        closeModal();
+        router.delete(route("tasklists.destroy", deletionTarget));
+    };
+
     const searchitems = ["description", "importance"];
     const columns = [
         {
@@ -70,24 +101,13 @@ export default function Index({ auth, items }) {
                         className="mx-2"
                         target_id={item.id}
                         tabIndex="-1"
-                        onClick={destroy}
+                        onClick={confirmDeletion}
                     >
                         Delete
                     </ButtonStandard>
                 </td>
             </tr>
         );
-    }
-
-    function destroy(e) {
-        if (confirm("Are you sure you want to delete this task?")) {
-            router.delete(
-                route(
-                    "tasklists.destroy",
-                    e.currentTarget.getAttribute("target_id")
-                )
-            );
-        }
     }
 
     return (
@@ -100,6 +120,35 @@ export default function Index({ auth, items }) {
             }
         >
             <Head title="Tasklists" />
+            {messageShow ? (
+                <div className="fixed bottom-4 right-4 bg-red-700 text-white rounded-lg p-2 m-4 text-lg animate-appear">
+                    {message}
+                </div>
+            ) : (
+                <></>
+            )}
+
+            <Modal show={confirmingDeletion} onClose={closeModal}>
+                <form onSubmit={destroy} className="p-6">
+                    <h2 className="text-lg font-medium text-gray-900">
+                        Confirm
+                    </h2>
+
+                    <p className="mt-1 text-sm text-gray-600">
+                        Are you sure you want to delete this ?
+                    </p>
+
+                    <div className="mt-6 flex justify-end">
+                        <ButtonStandard btn_style="danger" type="submit">
+                            Delete
+                        </ButtonStandard>
+                        <ButtonStandard className="ms-3" onClick={closeModal}>
+                            Cancel
+                        </ButtonStandard>
+                    </div>
+                </form>
+            </Modal>
+
             <Table
                 defaultSort="description"
                 defaultSortDirection="asc"

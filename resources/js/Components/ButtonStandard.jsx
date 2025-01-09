@@ -8,16 +8,16 @@ export default function ButtonStandard({
     ...props
 }) {
     let stylingClassNames =
-        "border-transparent bg-indigo-400 text-white hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 ";
+        "border-transparent bg-indigo-400 text-white hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 ";
 
     switch (btn_style) {
         case "danger":
             stylingClassNames =
-                "border-transparent bg-red-600 text-white hover:bg-red-500 focus:bg-gray-700 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 ";
+                "border-transparent bg-red-600 text-white hover:bg-red-500 focus:bg-red-700 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 ";
             break;
         case "secondary":
             stylingClassNames =
-                "border-1 border-gray-500 bg-white text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 ";
+                "border-1 border-gray-500 bg-white text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-grey-500 ";
             break;
 
         default:

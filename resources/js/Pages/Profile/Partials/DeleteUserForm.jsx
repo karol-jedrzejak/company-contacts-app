@@ -110,6 +110,7 @@ export default function DeleteUserForm({ className = "" }) {
                             className="ms-3"
                             disabled={processing}
                             btn_style="danger"
+                            type="submit"
                         >
                             Delete Account
                         </ButtonStandard>

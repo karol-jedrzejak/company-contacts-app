@@ -18,7 +18,7 @@ class TasklistsController extends Controller
     public function index()
     {
         $tasklists = Tasklists::where('user_id', Auth::id())->get();
-        return Inertia::render('Tasklists/Index', ['items' => $tasklists]);
+        return Inertia::render('Tasklists/Index', ['items' => $tasklists, 'message' => session('message')]);
     }
 
     /**
@@ -69,7 +69,7 @@ class TasklistsController extends Controller
         Tasklists::find($id)->delete();
 
         return redirect()
-            ->route('tasklists.index');
-        //->with('warning', 'Task successfully deleted.');
+            ->route('tasklists.index')
+            ->with('message', 'Task successfully deleted.');
     }
 }
