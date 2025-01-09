@@ -19,6 +19,14 @@ export default function ButtonStandard({
             stylingClassNames =
                 "border-1 border-gray-500 bg-white text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-grey-500 ";
             break;
+        case "yellow":
+            stylingClassNames =
+                "border-transparent bg-yellow-600 text-white hover:bg-yellow-500 focus:bg-yellow-700 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-red-500 ";
+            break;
+        case "green":
+            stylingClassNames =
+                "border-transparent bg-green-600 text-white hover:bg-green-500 focus:bg-green-700 active:bg-green-700 focus:outline-none focus:ring-2 focus:ring-red-500 ";
+            break;
 
         default:
             break;

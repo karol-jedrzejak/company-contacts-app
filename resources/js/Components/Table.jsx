@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
+import ButtonStandard from "@/Components/ButtonStandard";
 
 export default function Table({
+    addButton = false,
     items,
     searchitems,
     defaultSort,
@@ -156,6 +158,17 @@ export default function Table({
     return (
         <div className="flex flex-col justify-center items-center">
             <div className="py-4">
+                {addButton ? (
+                    <ButtonStandard
+                        className="mx-2"
+                        tabIndex="-1"
+                        onClick={addButton}
+                    >
+                        Add
+                    </ButtonStandard>
+                ) : (
+                    <></>
+                )}
                 <label>
                     <input
                         className="rounded-lg"
