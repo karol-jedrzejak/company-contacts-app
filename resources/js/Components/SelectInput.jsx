@@ -12,6 +12,8 @@ export default forwardRef(function SelectInput(
         }
     }, []);
 
+    // test //
+
     return (
         <input
             {...props}
@@ -30,6 +32,6 @@ export default forwardRef(function SelectInput(
             <option value="parrot">Parrot</option>
             <option value="spider">Spider</option>
             <option value="goldfish">Goldfish</option>
-        </select> */
+        </select> up */
     );
 });
