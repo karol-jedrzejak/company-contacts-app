@@ -1,4 +1,4 @@
-# Company Contacts App
+# Company Contacts App [IN DEVELOPMENT]
  
  <img src="https://karol-jedrzejak.github.io/static/media/9.fcb5d96f6b6e2eb8193c.jpg" height="400">
 
