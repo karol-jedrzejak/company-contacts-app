@@ -19,7 +19,7 @@ class TasklistsController extends Controller
     {
         $tasklists = Tasklists::where('user_id', Auth::id())->get();
         $importance_types = $this->get_set_values('tasklists', 'importance');
-        return Inertia::render('Tasklists/Index', ['items' => $tasklists, 'importance_types' => $importance_types]);
+        return Inertia::render('Tasklists/Index', ['items' => $tasklists, 'importance_types' => $importance_types, 'new_task' => new Tasklists]);
     }
 
     /**
@@ -35,7 +35,8 @@ class TasklistsController extends Controller
      */
     public function store(Request $request)
     {
-        return "store";
+        //dd($request->post());
+        //return "store";
     }
 
     /**
@@ -59,6 +60,7 @@ class TasklistsController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        dd($request->post());
         return "update";
     }
 

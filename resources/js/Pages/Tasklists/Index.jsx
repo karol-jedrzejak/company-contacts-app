@@ -7,21 +7,22 @@ import Table from "@/Components/Table";
 import Modal from "@/Components/Modal";
 import React from "react";
 import { useState } from "react";
+
 import Message from "@/Components/Message";
 import Form from "@/Pages/Tasklists/Form";
 
-export default function Index({ auth, items, importance_types }) {
+import ModalAdd from "@/Pages/Tasklists/ModalAdd";
+import ModalDestroy from "@/Pages/Tasklists/ModalDestroy";
+
+export default function Index({ auth, items, importance_types, new_task }) {
+    const [currentTarget, setCurrentTarget] = useState(null);
+
     // Add
     const [addModal, setAddModal] = useState(false);
-    const [addMessageShow, setAddMessageShow] = useState(false);
 
     function confirmAdd() {
         setAddModal(true);
     }
-
-    const closeAddModal = () => {
-        setAddModal(false);
-    };
 
     // Edit
     const [editModal, setEditModal] = useState(false);
@@ -33,32 +34,14 @@ export default function Index({ auth, items, importance_types }) {
         setEditModal(true);
     }
 
-    const closeEditModal = () => {
-        setEditModal(false);
-    };
-
     // Deletion
     const [confirmingDeletionModal, setConfirmingDeletionModal] =
         useState(false);
-    const [deletionTarget, setDeletionTarget] = useState(null);
-    const [deletionMessageShow, setDeletionMessageShow] = useState(false);
 
     function confirmDeletion(e) {
-        setDeletionTarget(e.currentTarget.getAttribute("target_id"));
+        setCurrentTarget(e.currentTarget.getAttribute("target_id"));
         setConfirmingDeletionModal(true);
     }
-
-    const closeDeletionModal = () => {
-        setConfirmingDeletionModal(false);
-    };
-
-    // Functions
-    const destroy = (e) => {
-        e.preventDefault();
-        closeDeletionModal();
-        router.delete(route("tasklists.destroy", deletionTarget));
-        setDeletionMessageShow(true);
-    };
 
     // Tables
     const searchitems = ["description", "importance"];
@@ -105,27 +88,6 @@ export default function Index({ auth, items, importance_types }) {
                     >
                         Edit
                     </ButtonStandard>
-                    {/*                     <ButtonStandard
-                        className="mx-2"
-                        link={route("tasklists.edit", item.id)}
-                    >
-                        Edit
-                    </ButtonStandard>
- */}
-                    {/*                     <ButtonStandard
-                        btn_style="secondary"
-                        className="mx-2"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            window.location.href = window.location = route(
-                                "tasklists.edit",
-                                item.id
-                            );
-                        }}
-                    >
-                        Edit
-                    </ButtonStandard> */}
-
                     <ButtonStandard
                         btn_style="danger"
                         className="mx-2"
@@ -153,7 +115,9 @@ export default function Index({ auth, items, importance_types }) {
             <Head title="Tasklists" />
 
             {/* ---------------- Add ----------------- */}
-            <Message
+            <ModalAdd></ModalAdd>
+
+            {/*             <Message
                 color="green"
                 message="Item was successfully added."
                 messageShow={addMessageShow}
@@ -161,7 +125,7 @@ export default function Index({ auth, items, importance_types }) {
             />
 
             <Modal show={addModal} onClose={closeAddModal}>
-                <form onSubmit={null} className="p-6">
+                <form onSubmit={add} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900">
                         Add Item
                     </h2>
@@ -181,10 +145,10 @@ export default function Index({ auth, items, importance_types }) {
                         </ButtonStandard>
                     </div>
                 </form>
-            </Modal>
+            </Modal> */}
 
             {/* ---------------- Edit ---------------- */}
-            <Message
+            {/*             <Message
                 color="yellow"
                 message="Item was successfully updated."
                 messageShow={editMessageShow}
@@ -212,39 +176,14 @@ export default function Index({ auth, items, importance_types }) {
                         </ButtonStandard>
                     </div>
                 </form>
-            </Modal>
+            </Modal> */}
 
             {/* ---------------- Delete ---------------- */}
-            <Message
-                color="red"
-                message="Item was successfully deleted."
-                messageShow={deletionMessageShow}
-                setMessageShow={setDeletionMessageShow}
-            />
-
-            <Modal show={confirmingDeletionModal} onClose={closeDeletionModal}>
-                <form onSubmit={destroy} className="p-6">
-                    <h2 className="text-lg font-medium text-gray-900">
-                        Confirm
-                    </h2>
-
-                    <p className="mt-1 text-sm text-gray-600">
-                        Are you sure you want to delete this ?
-                    </p>
-
-                    <div className="mt-6 flex justify-end">
-                        <ButtonStandard btn_style="danger" type="submit">
-                            Delete
-                        </ButtonStandard>
-                        <ButtonStandard
-                            className="ms-3"
-                            onClick={closeDeletionModal}
-                        >
-                            Cancel
-                        </ButtonStandard>
-                    </div>
-                </form>
-            </Modal>
+            <ModalDestroy
+                confirmingDeletionModal={confirmingDeletionModal}
+                setConfirmingDeletionModal={setConfirmingDeletionModal}
+                deletionTarget={currentTarget}
+            ></ModalDestroy>
 
             {/* ---------------- Table ---------------- */}
             <Table

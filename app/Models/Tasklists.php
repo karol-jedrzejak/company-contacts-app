@@ -10,6 +10,24 @@ class Tasklists extends Model
 {
     use HasFactory;
 
+    protected $attributes = [
+        'id' => '',
+        'user_id' => '',
+        'description' => 'Text Zadania',
+        'importance' => 'High',
+        'created_at' => '',
+        'updated_at' => '',
+    ];
+
+    protected $fillable = [
+        'id',
+        'user_id',
+        'description',
+        'importance',
+        'created_at',
+        'updated_at',
+    ];
+
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class);

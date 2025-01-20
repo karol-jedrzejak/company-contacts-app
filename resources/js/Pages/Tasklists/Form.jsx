@@ -18,7 +18,7 @@ export default function Form({ importance_types }) {
                     className="mt-1 block w-full"
                     autoComplete="description"
                     isFocused={true}
-                    //onChange={(e) => setData("description", e.target.value)}
+                    onChange={(e) => setData("description", e.target.value)}
                     required
                 />
                 <InputError
@@ -37,7 +37,7 @@ export default function Form({ importance_types }) {
                     autoComplete="importance"
                     isFocused={true}
                     options={importance_types}
-                    //onChange={(e) => setData("importance", e.target.value)}
+                    onChange={(e) => setData("importance", e.target.value)}
                     required
                 />
                 <InputError
