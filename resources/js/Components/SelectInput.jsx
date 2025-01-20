@@ -1,21 +1,21 @@
 import { forwardRef, useEffect, useRef } from "react";
 
 export default forwardRef(function SelectInput(
-    { type = "text", className = "", isFocused = false, ...props },
+    { type = "text", className = "", isFocused = false, options, ...props },
     ref
 ) {
-    const input = ref ? ref : useRef();
+    const select = ref ? ref : useRef();
 
     useEffect(() => {
         if (isFocused) {
-            input.current.focus();
+            select.current.focus();
         }
     }, []);
 
     // test //
 
     return (
-        <input
+        /*         <input
             {...props}
             type={type}
             className={
@@ -23,15 +23,19 @@ export default forwardRef(function SelectInput(
                 className
             }
             ref={input}
-        />
-        /*         <select name="pets" id="pet-select">
-            <option value="">--Please choose an option--</option>
-            <option value="dog">Dog</option>
-            <option value="cat">Cat</option>
-            <option value="hamster">Hamster</option>
-            <option value="parrot">Parrot</option>
-            <option value="spider">Spider</option>
-            <option value="goldfish">Goldfish</option>
-        </select> up */
+        /> */
+        <select
+            {...props}
+            className={
+                "border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm " +
+                className
+            }
+            ref={select}
+        >
+            {options.map((value) => {
+                let text = value.charAt(0).toUpperCase() + value.substr(1);
+                return <option value={value}>{text}</option>;
+            })}
+        </select>
     );
 });

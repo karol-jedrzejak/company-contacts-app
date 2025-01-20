@@ -10,7 +10,7 @@ import { useState } from "react";
 import Message from "@/Components/Message";
 import Form from "@/Pages/Tasklists/Form";
 
-export default function Index({ auth, items }) {
+export default function Index({ auth, items, importance_types }) {
     // Add
     const [addModal, setAddModal] = useState(false);
     const [addMessageShow, setAddMessageShow] = useState(false);
@@ -168,7 +168,7 @@ export default function Index({ auth, items }) {
 
                     <hr className="h-px mt-2 mb-6 bg-gray-200 border-0 dark:bg-gray-700" />
 
-                    <Form></Form>
+                    <Form importance_types={importance_types}></Form>
                     <div className="mt-6 flex justify-end">
                         <ButtonStandard btn_style="green" type="submit">
                             Add
@@ -198,7 +198,7 @@ export default function Index({ auth, items }) {
                     </h2>
 
                     <hr className="h-px mt-2 mb-6 bg-gray-200 border-0 dark:bg-gray-700" />
-                    <Form></Form>
+                    <Form importance_types={importance_types}></Form>
 
                     <div className="mt-6 flex justify-end">
                         <ButtonStandard btn_style="yellow" type="submit">
