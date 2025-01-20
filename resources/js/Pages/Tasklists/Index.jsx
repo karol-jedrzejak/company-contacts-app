@@ -152,7 +152,7 @@ export default function Index({ auth, items }) {
         >
             <Head title="Tasklists" />
 
-            {/* ---------------- Add ---------------- */}
+            {/* ---------------- Add ----------------- */}
             <Message
                 color="green"
                 message="Item was successfully added."
