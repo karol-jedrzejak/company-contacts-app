@@ -154,7 +154,7 @@ export default function Index({ auth, items, importance_types, new_item }) {
                 setShowModal={setAddModal}
                 changeMessage={changeMessage}
                 importance_types={importance_types}
-                new_item={new_item}
+                item={new_item}
             ></ModalAdd>
 
             {/* ---------------- Delete ---------------- */}

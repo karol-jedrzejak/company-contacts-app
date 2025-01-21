@@ -35,8 +35,10 @@ class TasklistsController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->post());
-        //return "store";
+        $data = $request->post();
+        $data['id'] = null;
+        $data['user_id'] = Auth::id();
+        Tasklists::create($data);
     }
 
     /**

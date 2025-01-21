@@ -1,16 +1,40 @@
+import React from "react";
+
 import ButtonStandard from "@/Components/ButtonStandard";
 import Modal from "@/Components/Modal";
-import React from "react";
+
+import InputLabel from "@/Components/InputLabel";
+import TextInput from "@/Components/TextInput";
+import InputError from "@/Components/InputError";
+import SelectInput from "@/Components/SelectInput";
+
 import { router } from "@inertiajs/react";
-import Form from "@/Pages/Tasklists/Form";
+import { useRef } from "react";
+import { useForm } from "@inertiajs/react";
 
 export default function ModalAdd({
     showModal,
     setShowModal,
     changeMessage,
     importance_types,
-    new_item,
+    item,
 }) {
+    const descriptionInput = useRef();
+    const importanceInput = useRef();
+
+    const {
+        data,
+        setData,
+        errors,
+        post,
+        reset,
+        processing,
+        recentlySuccessful,
+    } = useForm({
+        description: item.description,
+        importance: item.importance,
+    });
+
     const closeModal = () => {
         setShowModal(false);
     };
@@ -19,6 +43,24 @@ export default function ModalAdd({
     const add = (e) => {
         e.preventDefault();
         console.log("test");
+
+        post(route("tasklists.store"), {
+            preserveScroll: true,
+            onSuccess: () => reset(),
+            onError: (errors) => {
+                if (errors.description) {
+                    reset("description");
+                    descriptionInput.current.focus();
+                }
+
+                if (errors.importance) {
+                    reset("importance");
+                    importanceInput.current.focus();
+                }
+            },
+        });
+
+        changeMessage("add");
         closeModal();
     };
 
@@ -32,12 +74,51 @@ export default function ModalAdd({
 
                     <hr className="h-px mt-2 mb-6 bg-gray-200 border-0 dark:bg-gray-700" />
 
-                    <Form
-                        importance_types={importance_types}
-                        new_item={new_item}
-                    ></Form>
+                    {/* Description */}
+                    <div className="mt-2">
+                        <InputLabel htmlFor="description" value="Description" />
+                        <TextInput
+                            id="description"
+                            name="description"
+                            ref={descriptionInput}
+                            value={data.description}
+                            onChange={(e) =>
+                                setData("description", e.target.value)
+                            }
+                            className="mt-2 block w-full"
+                            required
+                        />
+                        <InputError
+                            message={errors.description}
+                            className="mt-2"
+                        />
+                    </div>
+                    {/* Importance */}
+                    <div className="mt-2">
+                        <InputLabel htmlFor="importance" value="Importance" />
+                        <SelectInput
+                            id="importance"
+                            name="importance"
+                            ref={importanceInput}
+                            value={data.importance}
+                            className="mt-2 block w-full"
+                            onChange={(e) =>
+                                setData("importance", e.target.value)
+                            }
+                            options={importance_types}
+                            required
+                        />
+                        <InputError
+                            message={errors.importance}
+                            className="mt-2"
+                        />
+                    </div>
                     <div className="mt-6 flex justify-end">
-                        <ButtonStandard btn_style="green" type="submit">
+                        <ButtonStandard
+                            btn_style="green"
+                            disabled={processing}
+                            type="submit"
+                        >
                             Add
                         </ButtonStandard>
                         <ButtonStandard className="ms-3" onClick={closeModal}>
