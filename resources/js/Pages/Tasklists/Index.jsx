@@ -35,12 +35,11 @@ export default function Index({ auth, items, importance_types, new_task }) {
     }
 
     // Deletion
-    const [confirmingDeletionModal, setConfirmingDeletionModal] =
-        useState(false);
+    const [deletionModal, setDeletionModal] = useState(false);
 
     function confirmDeletion(e) {
         setCurrentTarget(e.currentTarget.getAttribute("target_id"));
-        setConfirmingDeletionModal(true);
+        setDeletionModal(true);
     }
 
     // Tables
@@ -115,7 +114,7 @@ export default function Index({ auth, items, importance_types, new_task }) {
             <Head title="Tasklists" />
 
             {/* ---------------- Add ----------------- */}
-            <ModalAdd></ModalAdd>
+            {/*             <ModalAdd></ModalAdd> */}
 
             {/*             <Message
                 color="green"
@@ -180,8 +179,8 @@ export default function Index({ auth, items, importance_types, new_task }) {
 
             {/* ---------------- Delete ---------------- */}
             <ModalDestroy
-                confirmingDeletionModal={confirmingDeletionModal}
-                setConfirmingDeletionModal={setConfirmingDeletionModal}
+                showModal={deletionModal}
+                setShowModal={setDeletionModal}
                 deletionTarget={currentTarget}
             ></ModalDestroy>
 
