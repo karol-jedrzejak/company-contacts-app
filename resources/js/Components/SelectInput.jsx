@@ -32,9 +32,13 @@ export default forwardRef(function SelectInput(
             }
             ref={select}
         >
-            {options.map((value) => {
+            {options.map((value, id) => {
                 let text = value.charAt(0).toUpperCase() + value.substr(1);
-                return <option value={value}>{text}</option>;
+                return (
+                    <option key={id} value={value}>
+                        {text}
+                    </option>
+                );
             })}
         </select>
     );

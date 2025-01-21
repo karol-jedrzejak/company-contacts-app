@@ -319,3 +319,77 @@ export default function Index({ auth, items }) {
         </AuthenticatedLayout>
     );
 }
+
+{
+    /* ---------------- Add ----------------- */
+}
+{
+    /*             <ModalAdd></ModalAdd> */
+}
+
+{
+    /*             <Message
+                color="green"
+                message="Item was successfully added."
+                messageShow={addMessageShow}
+                setMessageShow={setAddMessageShow}
+            />
+
+            <Modal show={addModal} onClose={closeAddModal}>
+                <form onSubmit={add} className="p-6">
+                    <h2 className="text-lg font-medium text-gray-900">
+                        Add Item
+                    </h2>
+
+                    <hr className="h-px mt-2 mb-6 bg-gray-200 border-0 dark:bg-gray-700" />
+
+                    <Form importance_types={importance_types}></Form>
+                    <div className="mt-6 flex justify-end">
+                        <ButtonStandard btn_style="green" type="submit">
+                            Add
+                        </ButtonStandard>
+                        <ButtonStandard
+                            className="ms-3"
+                            onClick={closeAddModal}
+                        >
+                            Cancel
+                        </ButtonStandard>
+                    </div>
+                </form>
+            </Modal> */
+}
+
+{
+    /* ---------------- Edit ---------------- */
+}
+{
+    /*             <Message
+                color="yellow"
+                message="Item was successfully updated."
+                messageShow={editMessageShow}
+                setMessageShow={setEditMessageShow}
+            />
+
+            <Modal show={editModal} onClose={closeEditModal}>
+                <form onSubmit={null} className="p-6">
+                    <h2 className="text-lg font-medium text-gray-900">
+                        Edit Item
+                    </h2>
+
+                    <hr className="h-px mt-2 mb-6 bg-gray-200 border-0 dark:bg-gray-700" />
+                    <Form importance_types={importance_types}></Form>
+
+                    <div className="mt-6 flex justify-end">
+                        <ButtonStandard btn_style="yellow" type="submit">
+                            Update
+                        </ButtonStandard>
+                        <ButtonStandard
+                            className="ms-3"
+                            onClick={closeEditModal}
+                        >
+                            Cancel
+                        </ButtonStandard>
+                    </div>
+                </form>
+            </Modal> */
+}

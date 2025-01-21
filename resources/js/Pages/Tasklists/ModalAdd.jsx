@@ -1,34 +1,30 @@
 import ButtonStandard from "@/Components/ButtonStandard";
 import Modal from "@/Components/Modal";
 import React from "react";
-import Message from "@/Components/Message";
-import { useState } from "react";
 import { router } from "@inertiajs/react";
+import Form from "@/Pages/Tasklists/Form";
 
 export default function ModalAdd({
     showModal,
     setShowModal,
+    changeMessage,
     importance_types,
+    new_item,
 }) {
-    const [messageShow, setMessageShow] = useState(false);
-
     const closeModal = () => {
         setShowModal(false);
     };
 
     // Functions
-    const add = (e) => {};
+    const add = (e) => {
+        e.preventDefault();
+        console.log("test");
+        closeModal();
+    };
 
     return (
         <>
-            <Message
-                color="green"
-                message="Item was successfully added."
-                messageShow={messageShow}
-                setMessageShow={setMessageShow}
-            />
-
-            <Modal show={addModal} onClose={closeModal}>
+            <Modal show={showModal} onClose={closeModal}>
                 <form onSubmit={add} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900">
                         Add Item
@@ -36,7 +32,10 @@ export default function ModalAdd({
 
                     <hr className="h-px mt-2 mb-6 bg-gray-200 border-0 dark:bg-gray-700" />
 
-                    <Form importance_types={importance_types}></Form>
+                    <Form
+                        importance_types={importance_types}
+                        new_item={new_item}
+                    ></Form>
                     <div className="mt-6 flex justify-end">
                         <ButtonStandard btn_style="green" type="submit">
                             Add

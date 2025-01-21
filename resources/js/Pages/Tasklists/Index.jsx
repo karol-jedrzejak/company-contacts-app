@@ -1,21 +1,48 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
-import { router } from "@inertiajs/react";
 import ButtonStandard from "@/Components/ButtonStandard";
 import BadgeTable from "@/Components/BadgeTable";
 import Table from "@/Components/Table";
-import Modal from "@/Components/Modal";
 import React from "react";
 import { useState } from "react";
 
 import Message from "@/Components/Message";
-import Form from "@/Pages/Tasklists/Form";
 
 import ModalAdd from "@/Pages/Tasklists/ModalAdd";
 import ModalDestroy from "@/Pages/Tasklists/ModalDestroy";
 
-export default function Index({ auth, items, importance_types, new_task }) {
+export default function Index({ auth, items, importance_types, new_item }) {
     const [currentTarget, setCurrentTarget] = useState(null);
+
+    // Message
+    const [messageShow, setMessageShow] = useState(false);
+    const [messageColor, setMessageColor] = useState("");
+    const [messageText, setMessageText] = useState("");
+
+    function changeMessage(mode) {
+        switch (mode) {
+            case "store":
+                setMessageColor("green");
+                setMessageText("Item was successfully added.");
+                setMessageShow(true);
+                break;
+
+            case "update":
+                setMessageColor("yellow");
+                setMessageText("Item was successfully updated.");
+                setMessageShow(true);
+                break;
+
+            case "destroy":
+                setMessageColor("red");
+                setMessageText("Item was successfully removed.");
+                setMessageShow(true);
+                break;
+
+            default:
+                break;
+        }
+    }
 
     // Add
     const [addModal, setAddModal] = useState(false);
@@ -113,75 +140,29 @@ export default function Index({ auth, items, importance_types, new_task }) {
         >
             <Head title="Tasklists" />
 
-            {/* ---------------- Add ----------------- */}
-            {/*             <ModalAdd></ModalAdd> */}
-
-            {/*             <Message
-                color="green"
-                message="Item was successfully added."
-                messageShow={addMessageShow}
-                setMessageShow={setAddMessageShow}
+            {/* ---------------- Message ---------------- */}
+            <Message
+                color={messageColor}
+                message={messageText}
+                messageShow={messageShow}
+                setMessageShow={setMessageShow}
             />
 
-            <Modal show={addModal} onClose={closeAddModal}>
-                <form onSubmit={add} className="p-6">
-                    <h2 className="text-lg font-medium text-gray-900">
-                        Add Item
-                    </h2>
-
-                    <hr className="h-px mt-2 mb-6 bg-gray-200 border-0 dark:bg-gray-700" />
-
-                    <Form importance_types={importance_types}></Form>
-                    <div className="mt-6 flex justify-end">
-                        <ButtonStandard btn_style="green" type="submit">
-                            Add
-                        </ButtonStandard>
-                        <ButtonStandard
-                            className="ms-3"
-                            onClick={closeAddModal}
-                        >
-                            Cancel
-                        </ButtonStandard>
-                    </div>
-                </form>
-            </Modal> */}
-
-            {/* ---------------- Edit ---------------- */}
-            {/*             <Message
-                color="yellow"
-                message="Item was successfully updated."
-                messageShow={editMessageShow}
-                setMessageShow={setEditMessageShow}
-            />
-
-            <Modal show={editModal} onClose={closeEditModal}>
-                <form onSubmit={null} className="p-6">
-                    <h2 className="text-lg font-medium text-gray-900">
-                        Edit Item
-                    </h2>
-
-                    <hr className="h-px mt-2 mb-6 bg-gray-200 border-0 dark:bg-gray-700" />
-                    <Form importance_types={importance_types}></Form>
-
-                    <div className="mt-6 flex justify-end">
-                        <ButtonStandard btn_style="yellow" type="submit">
-                            Update
-                        </ButtonStandard>
-                        <ButtonStandard
-                            className="ms-3"
-                            onClick={closeEditModal}
-                        >
-                            Cancel
-                        </ButtonStandard>
-                    </div>
-                </form>
-            </Modal> */}
+            {/* ---------------- Add ---------------- */}
+            <ModalAdd
+                showModal={addModal}
+                setShowModal={setAddModal}
+                changeMessage={changeMessage}
+                importance_types={importance_types}
+                new_item={new_item}
+            ></ModalAdd>
 
             {/* ---------------- Delete ---------------- */}
             <ModalDestroy
                 showModal={deletionModal}
                 setShowModal={setDeletionModal}
                 deletionTarget={currentTarget}
+                changeMessage={changeMessage}
             ></ModalDestroy>
 
             {/* ---------------- Table ---------------- */}

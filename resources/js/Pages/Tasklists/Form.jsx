@@ -5,20 +5,21 @@ import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import SelectInput from "@/Components/SelectInput";
 
-export default function Form({ importance_types }) {
+export default function Form({ importance_types, new_item }) {
     return (
         <>
+            {new_item.description}
             {/* Description */}
             <div className="mt-2">
                 <InputLabel htmlFor="description" value="Description" />
                 <TextInput
                     id="description"
                     name="description"
-                    //value={data.description}
+                    //value={new_item.description}
                     className="mt-1 block w-full"
                     autoComplete="description"
                     isFocused={true}
-                    onChange={(e) => setData("description", e.target.value)}
+                    /*  onChange={(e) => setData("description", e.target.value)} */
                     required
                 />
                 <InputError
@@ -32,12 +33,12 @@ export default function Form({ importance_types }) {
                 <SelectInput
                     id="importance"
                     name="importance"
-                    //value={data.importance}
+                    //value={new_item.importance}
                     className="mt-2 block w-full"
                     autoComplete="importance"
                     isFocused={true}
                     options={importance_types}
-                    onChange={(e) => setData("importance", e.target.value)}
+                    /* onChange={(e) => setData("importance", e.target.value)} */
                     required
                 />
                 <InputError

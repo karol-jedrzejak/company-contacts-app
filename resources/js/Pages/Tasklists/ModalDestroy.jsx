@@ -1,17 +1,14 @@
 import ButtonStandard from "@/Components/ButtonStandard";
 import Modal from "@/Components/Modal";
 import React from "react";
-import Message from "@/Components/Message";
-import { useState } from "react";
 import { router } from "@inertiajs/react";
 
 export default function ModalDestroy({
     deletionTarget,
     showModal,
     setShowModal,
+    changeMessage,
 }) {
-    const [messageShow, setMessageShow] = useState(false);
-
     const closeModal = () => {
         setShowModal(false);
     };
@@ -21,19 +18,11 @@ export default function ModalDestroy({
         e.preventDefault();
         closeModal();
         router.delete(route("tasklists.destroy", deletionTarget));
-        setMessageShow(true);
+        changeMessage("destroy");
     };
 
     return (
         <>
-            {/* ---------------- Delete ---------------- */}
-            <Message
-                color="red"
-                message="Item was successfully deleted."
-                messageShow={messageShow}
-                setMessageShow={setMessageShow}
-            />
-
             <Modal show={showModal} onClose={closeModal}>
                 <form onSubmit={destroy} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900">
