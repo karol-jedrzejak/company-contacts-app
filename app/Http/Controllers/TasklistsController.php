@@ -62,8 +62,9 @@ class TasklistsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dd($request->post());
-        return "update";
+        $data = $request->post();
+        $item = Tasklists::find($id);
+        $item->update($data);
     }
 
     /**

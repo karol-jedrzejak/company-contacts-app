@@ -17,7 +17,7 @@ export default function ModalDestroy({
     const destroy = (e) => {
         e.preventDefault();
         closeModal();
-        router.delete(route("tasklists.destroy", deletionTarget));
+        router.delete(route("tasklists.destroy", deletionTarget.id));
         changeMessage("destroy");
     };
 

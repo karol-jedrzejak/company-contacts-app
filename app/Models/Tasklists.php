@@ -13,7 +13,7 @@ class Tasklists extends Model
     protected $attributes = [
         'id' => '',
         'user_id' => '',
-        'description' => 'Text Zadania',
+        'description' => 'Text of task',
         'importance' => 'High',
         'created_at' => '',
         'updated_at' => '',

@@ -9,10 +9,11 @@ import { useState } from "react";
 import Message from "@/Components/Message";
 
 import ModalAdd from "@/Pages/Tasklists/ModalAdd";
+import ModalEdit from "@/Pages/Tasklists/ModalEdit";
 import ModalDestroy from "@/Pages/Tasklists/ModalDestroy";
 
 export default function Index({ auth, items, importance_types, new_item }) {
-    const [currentTarget, setCurrentTarget] = useState(null);
+    const [currentTarget, setCurrentTarget] = useState(new_item);
 
     // Message
     const [messageShow, setMessageShow] = useState(false);
@@ -53,11 +54,13 @@ export default function Index({ auth, items, importance_types, new_item }) {
 
     // Edit
     const [editModal, setEditModal] = useState(false);
-    const [editMessageShow, setEditMessageShow] = useState(false);
-    let editTarget = null;
 
     function confirmEdit(e) {
-        editTarget = e.currentTarget.getAttribute("target_id");
+        setCurrentTarget(
+            items.find(
+                (item) => item.id == e.currentTarget.getAttribute("target_id")
+            )
+        );
         setEditModal(true);
     }
 
@@ -65,7 +68,11 @@ export default function Index({ auth, items, importance_types, new_item }) {
     const [deletionModal, setDeletionModal] = useState(false);
 
     function confirmDeletion(e) {
-        setCurrentTarget(e.currentTarget.getAttribute("target_id"));
+        setCurrentTarget(
+            items.find(
+                (item) => item.id == e.currentTarget.getAttribute("target_id")
+            )
+        );
         setDeletionModal(true);
     }
 
@@ -149,21 +156,49 @@ export default function Index({ auth, items, importance_types, new_item }) {
             />
 
             {/* ---------------- Add ---------------- */}
-            <ModalAdd
-                showModal={addModal}
-                setShowModal={setAddModal}
-                changeMessage={changeMessage}
-                importance_types={importance_types}
-                item={new_item}
-            ></ModalAdd>
+
+            <>
+                {addModal ? (
+                    <ModalAdd
+                        showModal={addModal}
+                        setShowModal={setAddModal}
+                        changeMessage={changeMessage}
+                        importance_types={importance_types}
+                        item={new_item}
+                    ></ModalAdd>
+                ) : (
+                    <></>
+                )}
+            </>
+
+            {/* ---------------- Edit ---------------- */}
+            <>
+                {editModal ? (
+                    <ModalEdit
+                        showModal={editModal}
+                        setShowModal={setEditModal}
+                        changeMessage={changeMessage}
+                        importance_types={importance_types}
+                        item={currentTarget}
+                    ></ModalEdit>
+                ) : (
+                    <></>
+                )}
+            </>
 
             {/* ---------------- Delete ---------------- */}
-            <ModalDestroy
-                showModal={deletionModal}
-                setShowModal={setDeletionModal}
-                deletionTarget={currentTarget}
-                changeMessage={changeMessage}
-            ></ModalDestroy>
+            <>
+                {deletionModal ? (
+                    <ModalDestroy
+                        showModal={deletionModal}
+                        setShowModal={setDeletionModal}
+                        deletionTarget={currentTarget}
+                        changeMessage={changeMessage}
+                    ></ModalDestroy>
+                ) : (
+                    <></>
+                )}
+            </>
 
             {/* ---------------- Table ---------------- */}
             <Table
