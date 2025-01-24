@@ -60,7 +60,7 @@ export default function ModalAdd({
             },
         });
 
-        changeMessage("add");
+        changeMessage("store");
         closeModal();
     };
 

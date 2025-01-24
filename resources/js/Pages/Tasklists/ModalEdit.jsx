@@ -50,7 +50,7 @@ export default function ModalEdit({
             },
         });
 
-        changeMessage("add");
+        changeMessage("update");
         closeModal();
     };
 
