@@ -66,6 +66,10 @@ class CompaniesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $company = Companies::find($id);
+        $test = Companies::findOrFail($id)->companiesEmployees;
+
+        dd([$company, $test]);
+        Companies::find($id)->delete();
     }
 }

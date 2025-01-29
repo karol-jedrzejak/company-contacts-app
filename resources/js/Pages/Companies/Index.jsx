@@ -8,8 +8,8 @@ import { useState } from "react";
 
 import Message from "@/Components/Message";
 
-import ModalChange from "@/Pages/Tasklists/ModalChange";
-import ModalDestroy from "@/Pages/Tasklists/ModalDestroy";
+import ModalChange from "@/Pages/Companies/ModalChange";
+import ModalDestroy from "@/Pages/Companies/ModalDestroy";
 
 export default function Index({ auth, items, new_item }) {
     const [currentTarget, setCurrentTarget] = useState(new_item);
@@ -147,7 +147,7 @@ export default function Index({ auth, items, new_item }) {
                 </h2>
             }
         >
-            <Head title="Tasklists" />
+            <Head title="Coampnies" />
 
             {/* ---------------- Message ---------------- */}
             <Message
