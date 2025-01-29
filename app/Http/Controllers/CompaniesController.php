@@ -71,7 +71,8 @@ class CompaniesController extends Controller
         if ($numer_of_emplyees == 0) {
             Companies::find($id)->delete();
         } else {
-            null;
+            $error = "bład krytyczny d?";
+            return $error;
         }
     }
 }

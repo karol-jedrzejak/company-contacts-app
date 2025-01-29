@@ -17,8 +17,20 @@ export default function ModalDestroy({
     const destroy = (e) => {
         e.preventDefault();
         closeModal();
-        let test = router.delete(route("companies.destroy", deletionTarget.id));
-        console.log(test);
+        console.log("pred");
+        let test = router.delete(
+            route("companies.destroy", deletionTarget.id),
+            {
+                onSuccess: () => {
+                    console.log("ok");
+                },
+                onError: (errors) => {
+                    console.log("nieok");
+                    console.log(errors);
+                },
+            }
+        );
+        console.log("po");
         changeMessage("destroy");
     };
 
