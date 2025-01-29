@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\Companies;
+use App\Models\CompaniesEmployees;
 
 use Inertia\Inertia;
 use Inertia\Response;
@@ -66,10 +67,11 @@ class CompaniesController extends Controller
      */
     public function destroy(string $id)
     {
-        $company = Companies::find($id);
-        $test = Companies::findOrFail($id)->companiesEmployees;
-
-        dd([$company, $test]);
-        Companies::find($id)->delete();
+        $numer_of_emplyees = CompaniesEmployees::InCompany($id)->count();
+        if ($numer_of_emplyees == 0) {
+            Companies::find($id)->delete();
+        } else {
+            null;
+        }
     }
 }
