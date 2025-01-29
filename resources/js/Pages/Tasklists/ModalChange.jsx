@@ -8,16 +8,16 @@ import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import SelectInput from "@/Components/SelectInput";
 
-import { router } from "@inertiajs/react";
 import { useRef } from "react";
 import { useForm } from "@inertiajs/react";
 
-export default function ModalAdd({
+export default function ModalChange({
     showModal,
     setShowModal,
     changeMessage,
     importance_types,
     item,
+    mode,
 }) {
     const descriptionInput = useRef();
     const importanceInput = useRef();
@@ -26,6 +26,7 @@ export default function ModalAdd({
         data,
         setData,
         errors,
+        put,
         post,
         reset,
         processing,
@@ -40,36 +41,56 @@ export default function ModalAdd({
     };
 
     // Functions
-    const add = (e) => {
+    const change = (e) => {
         e.preventDefault();
-        console.log("test");
 
-        post(route("tasklists.store"), {
-            preserveScroll: true,
-            onSuccess: () => reset(),
-            onError: (errors) => {
-                if (errors.description) {
-                    reset("description");
-                    descriptionInput.current.focus();
-                }
+        if (mode == "add") {
+            post(route("tasklists.store"), {
+                preserveScroll: true,
+                onSuccess: () => reset(),
+                onError: (errors) => {
+                    if (errors.description) {
+                        reset("description");
+                        descriptionInput.current.focus();
+                    }
 
-                if (errors.importance) {
-                    reset("importance");
-                    importanceInput.current.focus();
-                }
-            },
-        });
+                    if (errors.importance) {
+                        reset("importance");
+                        importanceInput.current.focus();
+                    }
+                },
+            });
 
-        changeMessage("store");
+            changeMessage("store");
+        } else {
+            put(route("tasklists.update", item.id), {
+                preserveScroll: true,
+                onSuccess: () => reset(),
+                onError: (errors) => {
+                    if (errors.description) {
+                        reset("description");
+                        descriptionInput.current.focus();
+                    }
+
+                    if (errors.importance) {
+                        reset("importance");
+                        importanceInput.current.focus();
+                    }
+                },
+            });
+
+            changeMessage("update");
+        }
+
         closeModal();
     };
 
     return (
         <>
             <Modal show={showModal} onClose={closeModal}>
-                <form onSubmit={add} className="p-6">
+                <form onSubmit={change} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900">
-                        Add Item
+                        {mode == "add" ? <>Add Item</> : <>Edit Item</>}
                     </h2>
 
                     <hr className="h-px mt-2 mb-6 bg-gray-200 border-0 dark:bg-gray-700" />
@@ -114,13 +135,23 @@ export default function ModalAdd({
                         />
                     </div>
                     <div className="mt-6 flex justify-end">
-                        <ButtonStandard
-                            btn_style="green"
-                            disabled={processing}
-                            type="submit"
-                        >
-                            Add
-                        </ButtonStandard>
+                        {mode == "add" ? (
+                            <ButtonStandard
+                                btn_style="green"
+                                disabled={processing}
+                                type="submit"
+                            >
+                                Add
+                            </ButtonStandard>
+                        ) : (
+                            <ButtonStandard
+                                btn_style="yellow"
+                                disabled={processing}
+                                type="submit"
+                            >
+                                Update
+                            </ButtonStandard>
+                        )}
                         <ButtonStandard className="ms-3" onClick={closeModal}>
                             Cancel
                         </ButtonStandard>

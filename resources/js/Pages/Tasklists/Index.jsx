@@ -8,8 +8,7 @@ import { useState } from "react";
 
 import Message from "@/Components/Message";
 
-import ModalAdd from "@/Pages/Tasklists/ModalAdd";
-import ModalEdit from "@/Pages/Tasklists/ModalEdit";
+import ModalChange from "@/Pages/Tasklists/ModalChange";
 import ModalDestroy from "@/Pages/Tasklists/ModalDestroy";
 
 export default function Index({ auth, items, importance_types, new_item }) {
@@ -159,13 +158,14 @@ export default function Index({ auth, items, importance_types, new_item }) {
 
             <>
                 {addModal ? (
-                    <ModalAdd
+                    <ModalChange
                         showModal={addModal}
                         setShowModal={setAddModal}
                         changeMessage={changeMessage}
                         importance_types={importance_types}
                         item={new_item}
-                    ></ModalAdd>
+                        mode="add"
+                    ></ModalChange>
                 ) : (
                     <></>
                 )}
@@ -174,13 +174,14 @@ export default function Index({ auth, items, importance_types, new_item }) {
             {/* ---------------- Edit ---------------- */}
             <>
                 {editModal ? (
-                    <ModalEdit
+                    <ModalChange
                         showModal={editModal}
                         setShowModal={setEditModal}
                         changeMessage={changeMessage}
                         importance_types={importance_types}
                         item={currentTarget}
-                    ></ModalEdit>
+                        mode="edit"
+                    ></ModalChange>
                 ) : (
                     <></>
                 )}
