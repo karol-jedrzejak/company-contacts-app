@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TasklistsController;
+use App\Http\Controllers\CompaniesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('tasklists', TasklistsController::class);
+
+    Route::resource('companies', CompaniesController::class);
 });
 
 require __DIR__ . '/auth.php';

@@ -29,6 +29,12 @@ export default function Authenticated({ user, header, children }) {
                                     Tasklist
                                 </NavLink>
                                 <NavLink
+                                    href={route("companies.index")}
+                                    active={route().current("companies.index")}
+                                >
+                                    Companies
+                                </NavLink>
+                                <NavLink
                                     href={route("dashboard")}
                                     active={route().current("dashboard")}
                                 >

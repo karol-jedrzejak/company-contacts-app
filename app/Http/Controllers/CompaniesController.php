@@ -4,21 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\Tasklists;
 use Illuminate\Http\Request;
+use App\Models\Companies;
 
 use Inertia\Inertia;
+use Inertia\Response;
 
-class TasklistsController extends Controller
+class CompaniesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tasklists = Tasklists::where('user_id', Auth::id())->get();
-        $importance_types = $this->get_set_values('tasklists', 'importance');
-        return Inertia::render('Tasklists/Index', ['items' => $tasklists, 'importance_types' => $importance_types, 'new_item' => new Tasklists]);
+        $companies = Companies::get();
+        return Inertia::render('Companies/Index', ['items' => $companies, 'new_item' => new Companies]);
     }
 
     /**
@@ -26,7 +26,7 @@ class TasklistsController extends Controller
      */
     public function create()
     {
-        return "create";
+        //
     }
 
     /**
@@ -34,10 +34,7 @@ class TasklistsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->post();
-        $data['id'] = null;
-        $data['user_id'] = Auth::id();
-        Tasklists::create($data);
+        //
     }
 
     /**
@@ -45,7 +42,7 @@ class TasklistsController extends Controller
      */
     public function show(string $id)
     {
-        return "show";
+        //
     }
 
     /**
@@ -53,7 +50,7 @@ class TasklistsController extends Controller
      */
     public function edit(string $id)
     {
-        return "edit";
+        //
     }
 
     /**
@@ -61,9 +58,7 @@ class TasklistsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = $request->post();
-        $item = Tasklists::find($id);
-        $item->update($data);
+        //
     }
 
     /**
@@ -71,6 +66,6 @@ class TasklistsController extends Controller
      */
     public function destroy(string $id)
     {
-        Tasklists::find($id)->delete();
+        //
     }
 }
