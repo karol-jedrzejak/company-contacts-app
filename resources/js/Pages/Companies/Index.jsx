@@ -4,7 +4,7 @@ import ButtonStandard from "@/Components/ButtonStandard";
 import BadgeTable from "@/Components/BadgeTable";
 import Table from "@/Components/Table";
 import React from "react";
-import { useState, forceUpdate } from "react";
+import { useState } from "react";
 
 import Message from "@/Components/Message";
 
@@ -28,14 +28,22 @@ export default function Index({ auth, items, new_item }) {
                 break;
 
             case "update":
-                setMessageColor("yellow");
+                setMessageColor("green");
                 setMessageText("Item was successfully updated.");
                 setMessageShow(true);
                 break;
 
             case "destroy":
-                setMessageColor("red");
+                setMessageColor("yellow");
                 setMessageText("Item was successfully removed.");
+                setMessageShow(true);
+                break;
+
+            case "error-employees":
+                setMessageColor("red");
+                setMessageText(
+                    "Can't remove item. Fist you must remove employees from the company."
+                );
                 setMessageShow(true);
                 break;
 
@@ -147,7 +155,7 @@ export default function Index({ auth, items, new_item }) {
                 </h2>
             }
         >
-            <Head title="Coampnies" />
+            <Head title="Companies" />
 
             {/* ---------------- Message ---------------- */}
             <Message

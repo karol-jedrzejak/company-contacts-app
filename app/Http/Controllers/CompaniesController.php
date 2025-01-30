@@ -71,11 +71,11 @@ class CompaniesController extends Controller
         if ($numer_of_emplyees == 0) {
             Companies::find($id)->delete();
             return response()->json([
-                'name' => 'ok'
+                'state' => 'destroy'
             ]);
         } else {
             return response()->json([
-                'name' => 'nok'
+                'state' => 'error-employees'
             ]);
         }
     }

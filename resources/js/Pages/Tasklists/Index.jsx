@@ -28,13 +28,13 @@ export default function Index({ auth, items, importance_types, new_item }) {
                 break;
 
             case "update":
-                setMessageColor("yellow");
+                setMessageColor("green");
                 setMessageText("Item was successfully updated.");
                 setMessageShow(true);
                 break;
 
             case "destroy":
-                setMessageColor("red");
+                setMessageColor("yellow");
                 setMessageText("Item was successfully removed.");
                 setMessageShow(true);
                 break;

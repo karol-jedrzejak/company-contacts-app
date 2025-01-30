@@ -1,7 +1,6 @@
 import ButtonStandard from "@/Components/ButtonStandard";
 import Modal from "@/Components/Modal";
 import React from "react";
-import { router } from "@inertiajs/react";
 import axios from "axios";
 
 export default function ModalDestroy({
@@ -21,8 +20,8 @@ export default function ModalDestroy({
         axios
             .delete(route("companies.destroy", deletionTarget.id))
             .then((response) => {
-                console.log(response.data.name);
-                changeMessage("destroy");
+                changeMessage(response.data.state);
+                route("companies.index");
             });
     };
 
