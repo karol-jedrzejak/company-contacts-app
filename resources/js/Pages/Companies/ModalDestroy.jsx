@@ -21,7 +21,7 @@ export default function ModalDestroy({
             .delete(route("companies.destroy", deletionTarget.id))
             .then((response) => {
                 changeMessage(response.data.state);
-                route("companies.index");
+                window.open(route("companies.index"), "_self");
             });
     };
 
