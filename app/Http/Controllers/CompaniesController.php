@@ -70,9 +70,13 @@ class CompaniesController extends Controller
         $numer_of_emplyees = CompaniesEmployees::InCompany($id)->count();
         if ($numer_of_emplyees == 0) {
             Companies::find($id)->delete();
+            return response()->json([
+                'name' => 'ok'
+            ]);
         } else {
-            $error = "bład krytyczny d?";
-            return $error;
+            return response()->json([
+                'name' => 'nok'
+            ]);
         }
     }
 }
