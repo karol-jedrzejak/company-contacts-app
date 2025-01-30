@@ -4,7 +4,7 @@ import ButtonStandard from "@/Components/ButtonStandard";
 import BadgeTable from "@/Components/BadgeTable";
 import Table from "@/Components/Table";
 import React from "react";
-import { useState } from "react";
+import { useState, forceUpdate } from "react";
 
 import Message from "@/Components/Message";
 

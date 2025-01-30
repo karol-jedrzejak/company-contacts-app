@@ -18,14 +18,12 @@ export default function ModalDestroy({
     const destroy = (e) => {
         e.preventDefault();
         closeModal();
-        console.log("pred");
         axios
             .delete(route("companies.destroy", deletionTarget.id))
             .then((response) => {
-                console.log(response);
+                console.log(response.data.name);
+                changeMessage("destroy");
             });
-        console.log("po");
-        changeMessage("destroy");
     };
 
     return (
