@@ -183,15 +183,15 @@ export default function ModalChange({
     return (
         <>
             <Modal show={showModal} onClose={closeModal}>
-                <form onSubmit={change} className="p-6">
-                    <h2 className="text-lg font-medium text-gray-900">
+                <form onSubmit={change} className="p-6 grid grid-cols-2 gap-1">
+                    <h2 className="text-lg font-medium text-gray-900 col-span-2">
                         {mode == "add" ? <>Add Item</> : <>Edit Item</>}
                     </h2>
 
-                    <hr className="h-px mt-2 mb-6 bg-gray-200 border-0 dark:bg-gray-700" />
+                    <hr className="h-px mt-2 mb-6 bg-gray-200 border-0 dark:bg-gray-700 col-span-2" />
 
                     {/* nip */}
-                    <div className="mt-2">
+                    <div className="mt-2 col-span-2">
                         <InputLabel htmlFor="nip" value="nip" />
                         <TextInput
                             id="nip"
@@ -205,7 +205,7 @@ export default function ModalChange({
                         <InputError message={errors.nip} className="mt-2" />
                     </div>
                     {/* name_short */}
-                    <div className="mt-2">
+                    <div className="mt-2  col-span-2">
                         <InputLabel htmlFor="name_short" value="name_short" />
                         <TextInput
                             id="name_short"
@@ -224,7 +224,7 @@ export default function ModalChange({
                         />
                     </div>
                     {/* name_complete */}
-                    <div className="mt-2">
+                    <div className="mt-2  col-span-2">
                         <InputLabel
                             htmlFor="name_complete"
                             value="name_complete"
@@ -242,28 +242,6 @@ export default function ModalChange({
                         />
                         <InputError
                             message={errors.name_complete}
-                            className="mt-2"
-                        />
-                    </div>
-                    {/* adress_number */}
-                    <div className="mt-2">
-                        <InputLabel
-                            htmlFor="adress_number"
-                            value="adress_number"
-                        />
-                        <TextInput
-                            id="adress_number"
-                            name="adress_number"
-                            ref={adress_numberInput}
-                            value={data.adress_number}
-                            onChange={(e) =>
-                                setData("adress_number", e.target.value)
-                            }
-                            className="mt-2 block w-full"
-                            required
-                        />
-                        <InputError
-                            message={errors.adress_number}
                             className="mt-2"
                         />
                     </div>
@@ -286,6 +264,28 @@ export default function ModalChange({
                         />
                         <InputError
                             message={errors.adress_street}
+                            className="mt-2"
+                        />
+                    </div>
+                    {/* adress_number */}
+                    <div className="mt-2">
+                        <InputLabel
+                            htmlFor="adress_number"
+                            value="adress_number"
+                        />
+                        <TextInput
+                            id="adress_number"
+                            name="adress_number"
+                            ref={adress_numberInput}
+                            value={data.adress_number}
+                            onChange={(e) =>
+                                setData("adress_number", e.target.value)
+                            }
+                            className="mt-2 block w-full"
+                            required
+                        />
+                        <InputError
+                            message={errors.adress_number}
                             className="mt-2"
                         />
                     </div>
@@ -331,7 +331,7 @@ export default function ModalChange({
                         />
                     </div>
                     {/* country */}
-                    <div className="mt-2">
+                    <div className="mt-2  col-span-2">
                         <InputLabel htmlFor="country" value="country" />
                         <TextInput
                             id="country"
@@ -345,7 +345,7 @@ export default function ModalChange({
                         <InputError message={errors.country} className="mt-2" />
                     </div>
                     {/* coordinate_latitude */}
-                    <div className="mt-2">
+                    <div className="mt-2 col-span-1">
                         <InputLabel
                             htmlFor="coordinate_latitude"
                             value="coordinate_latitude"
@@ -367,7 +367,7 @@ export default function ModalChange({
                         />
                     </div>
                     {/* coordinate_longitude */}
-                    <div className="mt-2">
+                    <div className="mt-2 col-span-1">
                         <InputLabel
                             htmlFor="coordinate_longitude"
                             value="coordinate_longitude"
@@ -389,7 +389,7 @@ export default function ModalChange({
                         />
                     </div>
                     {/* active */}
-                    <div className="mt-2">
+                    <div className="mt-2 col-span-2">
                         <InputLabel htmlFor="active" value="active" />
                         <TextInput
                             id="active"
@@ -403,7 +403,7 @@ export default function ModalChange({
                         <InputError message={errors.active} className="mt-2" />
                     </div>
 
-                    <div className="mt-6 flex justify-end">
+                    <div className="col-span-2 mt-6 flex justify-end">
                         {mode == "add" ? (
                             <ButtonStandard
                                 btn_style="green"
