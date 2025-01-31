@@ -11,7 +11,6 @@ class Tasklists extends Model
     use HasFactory;
 
     protected $attributes = [
-        'id' => '',
         'user_id' => '',
         'description' => 'Text of task',
         'importance' => 'High',
@@ -20,7 +19,6 @@ class Tasklists extends Model
     ];
 
     protected $fillable = [
-        'id',
         'user_id',
         'description',
         'importance',

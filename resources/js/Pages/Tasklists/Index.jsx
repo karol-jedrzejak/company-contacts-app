@@ -20,6 +20,7 @@ export default function Index({ auth, items, importance_types, new_item }) {
     const [messageText, setMessageText] = useState("");
 
     function changeMessage(message) {
+        setMessageShow(false);
         setMessageColor(message.color);
         setMessageText(message.text);
         setMessageShow(true);

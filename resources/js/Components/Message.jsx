@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Message({
     color,
@@ -7,16 +6,13 @@ export default function Message({
     messageShow,
     setMessageShow,
 }) {
-    /*     useEffect(() => {
-        const timeout = setTimeout(() => setMessageShow(false), 2000);
-        return () => {
-            clearTimeout(timeout);
-        };
-    }); */
-
-    let classes =
-        "fixed bottom-4 right-4 rounded-lg p-2 m-4 text-lg animate-appear opacity-0";
-
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setMessageShow(false);
+        }, 3000);
+        return () => clearTimeout(timer);
+    }, []);
+    let classes = "fixed bottom-4 right-4 rounded-lg p-2 m-4 text-lg";
     switch (color) {
         case "green":
             classes += " bg-green-700 text-black";
@@ -34,7 +30,5 @@ export default function Message({
             break;
     }
 
-    return (
-        <>{messageShow ? <div className={classes}>{message}</div> : <></>}</>
-    );
+    return <div className={classes}>{message}</div>;
 }
