@@ -1,17 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function Message({
-    color,
-    message,
-    messageShow,
-    setMessageShow,
-}) {
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setMessageShow(false);
-        }, 3000);
-        return () => clearTimeout(timer);
-    }, []);
+export default function Message({ color, message }) {
     let classes = "fixed bottom-4 right-4 rounded-lg p-2 m-4 text-lg";
     switch (color) {
         case "green":

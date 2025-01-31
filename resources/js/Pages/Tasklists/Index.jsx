@@ -4,7 +4,7 @@ import ButtonStandard from "@/Components/ButtonStandard";
 import BadgeTable from "@/Components/BadgeTable";
 import Table from "@/Components/Table";
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import Message from "@/Components/Message";
 
@@ -19,11 +19,14 @@ export default function Index({ auth, items, importance_types, new_item }) {
     const [messageColor, setMessageColor] = useState("");
     const [messageText, setMessageText] = useState("");
 
+    const timeoutRef = useRef();
+
     function changeMessage(message) {
-        setMessageShow(false);
+        timeoutRef.current && clearTimeout(timeoutRef.current);
         setMessageColor(message.color);
         setMessageText(message.text);
         setMessageShow(true);
+        timeoutRef.current = setTimeout(() => setMessageShow(false), 3000);
     }
 
     // Add
