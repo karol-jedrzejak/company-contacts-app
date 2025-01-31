@@ -35,7 +35,10 @@ class CompaniesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->post();
+        $data['id'] = null;
+        $data['user_id'] = Auth::id();
+        Companies::create($data);
     }
 
     /**
@@ -59,7 +62,9 @@ class CompaniesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->post();
+        $item = Companies::find($id);
+        $item->update($data);
     }
 
     /**
@@ -67,17 +72,6 @@ class CompaniesController extends Controller
      */
     public function destroy(string $id)
     {
-        $numer_of_emplyees = CompaniesEmployees::InCompany($id)->count();
         Companies::find($id)->delete();
-        /*         if ($numer_of_emplyees == 0) {
-            Companies::find($id)->delete();
-            return response()->json([
-                'state' => 'destroy-ok'
-            ]);
-        } else {
-            return response()->json([
-                'state' => 'error-employees'
-            ]);
-        } */
     }
 }
