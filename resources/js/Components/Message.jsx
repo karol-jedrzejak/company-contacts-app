@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 export default function Message({ color, message }) {
     let classes = "fixed bottom-4 right-4 rounded-lg p-2 m-4 text-lg";

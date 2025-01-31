@@ -133,12 +133,7 @@ export default function Index({ auth, items, importance_types, new_item }) {
 
             {/* ---------------- Message ---------------- */}
             {messageShow ? (
-                <Message
-                    color={messageColor}
-                    message={messageText}
-                    messageShow={messageShow}
-                    setMessageShow={setMessageShow}
-                />
+                <Message color={messageColor} message={messageText} />
             ) : (
                 <></>
             )}

@@ -4,7 +4,7 @@ import ButtonStandard from "@/Components/ButtonStandard";
 import BadgeTable from "@/Components/BadgeTable";
 import Table from "@/Components/Table";
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import Message from "@/Components/Message";
 
@@ -19,37 +19,14 @@ export default function Index({ auth, items, new_item }) {
     const [messageColor, setMessageColor] = useState("");
     const [messageText, setMessageText] = useState("");
 
-    function changeMessage(mode) {
-        switch (mode) {
-            case "store":
-                setMessageColor("green");
-                setMessageText("Item was successfully added.");
-                setMessageShow(true);
-                break;
+    const timeoutRef = useRef();
 
-            case "update":
-                setMessageColor("green");
-                setMessageText("Item was successfully updated.");
-                setMessageShow(true);
-                break;
-
-            case "destroy-ok":
-                setMessageColor("yellow");
-                setMessageText("Item was successfully removed.");
-                setMessageShow(true);
-                break;
-
-            case "error-employees":
-                setMessageColor("red");
-                setMessageText(
-                    "Can't remove item. Fist you must remove employees from the company."
-                );
-                setMessageShow(true);
-                break;
-
-            default:
-                break;
-        }
+    function changeMessage(message) {
+        timeoutRef.current && clearTimeout(timeoutRef.current);
+        setMessageColor(message.color);
+        setMessageText(message.text);
+        setMessageShow(true);
+        timeoutRef.current = setTimeout(() => setMessageShow(false), 3000);
     }
 
     // Add
@@ -158,12 +135,11 @@ export default function Index({ auth, items, new_item }) {
             <Head title="Companies" />
 
             {/* ---------------- Message ---------------- */}
-            <Message
-                color={messageColor}
-                message={messageText}
-                messageShow={messageShow}
-                setMessageShow={setMessageShow}
-            />
+            {messageShow ? (
+                <Message color={messageColor} message={messageText} />
+            ) : (
+                <></>
+            )}
 
             {/* ---------------- Add ---------------- */}
 
