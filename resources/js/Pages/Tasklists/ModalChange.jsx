@@ -60,8 +60,10 @@ export default function ModalChange({
                     }
                 },
             });
-
-            changeMessage("store");
+            changeMessage({
+                color: "green",
+                text: "Task was successfully added.",
+            });
         } else {
             put(route("tasklists.update", item.id), {
                 preserveScroll: true,
@@ -79,7 +81,10 @@ export default function ModalChange({
                 },
             });
 
-            changeMessage("update");
+            changeMessage({
+                color: "green",
+                text: "Task was successfully updated.",
+            });
         }
 
         closeModal();

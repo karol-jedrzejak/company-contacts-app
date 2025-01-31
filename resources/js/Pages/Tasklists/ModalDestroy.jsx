@@ -18,7 +18,10 @@ export default function ModalDestroy({
         e.preventDefault();
         closeModal();
         router.delete(route("tasklists.destroy", deletionTarget.id));
-        changeMessage("destroy");
+        changeMessage({
+            color: "yellow",
+            text: "Task was successfully removed.",
+        });
     };
 
     return (

@@ -19,29 +19,10 @@ export default function Index({ auth, items, importance_types, new_item }) {
     const [messageColor, setMessageColor] = useState("");
     const [messageText, setMessageText] = useState("");
 
-    function changeMessage(mode) {
-        switch (mode) {
-            case "store":
-                setMessageColor("green");
-                setMessageText("Item was successfully added.");
-                setMessageShow(true);
-                break;
-
-            case "update":
-                setMessageColor("green");
-                setMessageText("Item was successfully updated.");
-                setMessageShow(true);
-                break;
-
-            case "destroy":
-                setMessageColor("yellow");
-                setMessageText("Item was successfully removed.");
-                setMessageShow(true);
-                break;
-
-            default:
-                break;
-        }
+    function changeMessage(message) {
+        setMessageColor(message.color);
+        setMessageText(message.text);
+        setMessageShow(true);
     }
 
     // Add
@@ -147,12 +128,16 @@ export default function Index({ auth, items, importance_types, new_item }) {
             <Head title="Tasklists" />
 
             {/* ---------------- Message ---------------- */}
-            <Message
-                color={messageColor}
-                message={messageText}
-                messageShow={messageShow}
-                setMessageShow={setMessageShow}
-            />
+            {messageShow ? (
+                <Message
+                    color={messageColor}
+                    message={messageText}
+                    messageShow={messageShow}
+                    setMessageShow={setMessageShow}
+                />
+            ) : (
+                <></>
+            )}
 
             {/* ---------------- Add ---------------- */}
 

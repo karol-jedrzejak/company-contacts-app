@@ -7,12 +7,12 @@ export default function Message({
     messageShow,
     setMessageShow,
 }) {
-    useEffect(() => {
+    /*     useEffect(() => {
         const timeout = setTimeout(() => setMessageShow(false), 2000);
         return () => {
             clearTimeout(timeout);
         };
-    });
+    }); */
 
     let classes =
         "fixed bottom-4 right-4 rounded-lg p-2 m-4 text-lg animate-appear opacity-0";
