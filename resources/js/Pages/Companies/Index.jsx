@@ -33,7 +33,7 @@ export default function Index({ auth, items, new_item }) {
                 setMessageShow(true);
                 break;
 
-            case "destroy":
+            case "destroy-ok":
                 setMessageColor("yellow");
                 setMessageText("Item was successfully removed.");
                 setMessageShow(true);

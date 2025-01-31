@@ -71,7 +71,7 @@ class CompaniesController extends Controller
         if ($numer_of_emplyees == 0) {
             Companies::find($id)->delete();
             return response()->json([
-                'state' => 'destroy'
+                'state' => 'destroy-ok'
             ]);
         } else {
             return response()->json([
