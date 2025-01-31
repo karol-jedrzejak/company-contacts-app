@@ -31,8 +31,15 @@ class Companies extends Model
         'updated_at'
     ];
 
+    protected $appends = ['has_employees'];
+
     public function companiesEmployees(): HasMany
     {
         return $this->hasMany(CompaniesEmployees::class);
+    }
+
+    public function getHasEmployeesAttribute()
+    {
+        return $this->companiesEmployees()->exists();
     }
 }

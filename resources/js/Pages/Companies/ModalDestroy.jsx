@@ -30,7 +30,7 @@ export default function ModalDestroy({
         router.delete(route("companies.destroy", deletionTarget.id));
         changeMessage({
             color: "yellow",
-            text: "Task was successfully removed.",
+            text: "Company was successfully removed.",
         });
     };
 

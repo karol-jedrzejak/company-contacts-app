@@ -68,7 +68,8 @@ class CompaniesController extends Controller
     public function destroy(string $id)
     {
         $numer_of_emplyees = CompaniesEmployees::InCompany($id)->count();
-        if ($numer_of_emplyees == 0) {
+        Companies::find($id)->delete();
+        /*         if ($numer_of_emplyees == 0) {
             Companies::find($id)->delete();
             return response()->json([
                 'state' => 'destroy-ok'
@@ -77,6 +78,6 @@ class CompaniesController extends Controller
             return response()->json([
                 'state' => 'error-employees'
             ]);
-        }
+        } */
     }
 }

@@ -12,20 +12,39 @@ export default function ButtonStandard({
 
     switch (btn_style) {
         case "danger":
-            stylingClassNames =
-                "border-transparent bg-red-600 text-white hover:bg-red-500 focus:bg-red-700 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 ";
+            if (disabled) {
+                stylingClassNames = "border-transparent bg-red-100 text-white ";
+            } else {
+                stylingClassNames =
+                    "border-transparent bg-red-600 text-white hover:bg-red-500 focus:bg-red-700 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 ";
+            }
             break;
         case "secondary":
-            stylingClassNames =
-                "border-1 border-gray-500 bg-white text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-grey-500 ";
+            if (disabled) {
+                stylingClassNames =
+                    "border-1 border-gray-500 bg-white text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-grey-500 ";
+            } else {
+                stylingClassNames =
+                    "border-1 border-gray-500 bg-white text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-grey-500 ";
+            }
             break;
         case "yellow":
-            stylingClassNames =
-                "border-transparent bg-yellow-600 text-white hover:bg-yellow-500 focus:bg-yellow-700 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-red-500 ";
+            if (disabled) {
+                stylingClassNames =
+                    "border-transparent bg-yellow-600 text-white hover:bg-yellow-500 focus:bg-yellow-700 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-red-500 ";
+            } else {
+                stylingClassNames =
+                    "border-transparent bg-yellow-600 text-white hover:bg-yellow-500 focus:bg-yellow-700 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-red-500 ";
+            }
             break;
         case "green":
-            stylingClassNames =
-                "border-transparent bg-green-600 text-white hover:bg-green-500 focus:bg-green-700 active:bg-green-700 focus:outline-none focus:ring-2 focus:ring-red-500 ";
+            if (disabled) {
+                stylingClassNames =
+                    "border-transparent bg-green-600 text-white hover:bg-green-500 focus:bg-green-700 active:bg-green-700 focus:outline-none focus:ring-2 focus:ring-red-500 ";
+            } else {
+                stylingClassNames =
+                    "border-transparent bg-green-600 text-white hover:bg-green-500 focus:bg-green-700 active:bg-green-700 focus:outline-none focus:ring-2 focus:ring-red-500 ";
+            }
             break;
 
         default:
@@ -43,9 +62,7 @@ export default function ButtonStandard({
                 }}
                 className={
                     stylingClassNames +
-                    ` inline-flex items-center px-4 py-2 border rounded-md font-semibold text-xs uppercase tracking-widest focus:ring-offset-2 transition ease-in-out duration-150 ${
-                        disabled && "opacity-25"
-                    } ` +
+                    ` inline-flex items-center px-4 py-2 border rounded-md font-semibold text-xs uppercase tracking-widest focus:ring-offset-2 transition ease-in-out duration-150 ` +
                     className
                 }
                 disabled={disabled}
@@ -60,9 +77,7 @@ export default function ButtonStandard({
                 type={type}
                 className={
                     stylingClassNames +
-                    `inline-flex items-center px-4 py-2 border rounded-md font-semibold text-xs uppercase tracking-widest  focus:ring-offset-2 transition ease-in-out duration-150 ${
-                        disabled && "opacity-25"
-                    } ` +
+                    `inline-flex items-center px-4 py-2 border rounded-md font-semibold text-xs uppercase tracking-widest  focus:ring-offset-2 transition ease-in-out duration-150 ` +
                     className
                 }
                 disabled={disabled}

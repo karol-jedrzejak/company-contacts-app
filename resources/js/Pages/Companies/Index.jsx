@@ -108,15 +108,35 @@ export default function Index({ auth, items, new_item }) {
                     >
                         Edit
                     </ButtonStandard>
-                    <ButtonStandard
-                        btn_style="danger"
-                        className="mx-2"
-                        target_id={item.id}
-                        tabIndex="-1"
-                        onClick={confirmDeletion}
-                    >
-                        Delete
-                    </ButtonStandard>
+                    <>
+                        {item.has_employees ? (
+                            <>
+                                <ButtonStandard
+                                    data-tooltip-target={"button_" + item.id}
+                                    btn_style="danger"
+                                    className="mx-2 has-tooltip"
+                                    tabIndex="-1"
+                                    disabled
+                                >
+                                    <span class="rounded-full tooltip rounded shadow-lg p-2 bg-gray-200 text-red-500 -mt-8 -ml-[350px]">
+                                        In order to delete company first delete
+                                        employees.
+                                    </span>
+                                    Delete
+                                </ButtonStandard>
+                            </>
+                        ) : (
+                            <ButtonStandard
+                                btn_style="danger"
+                                className="mx-2"
+                                target_id={item.id}
+                                tabIndex="-1"
+                                onClick={confirmDeletion}
+                            >
+                                Delete
+                            </ButtonStandard>
+                        )}
+                    </>
                 </td>
             </tr>
         );
