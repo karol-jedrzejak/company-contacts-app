@@ -30,8 +30,8 @@ class CompaniesStoreRequest extends FormRequest
             'adress_city' => 'required',
             'adress_postcode' => 'required|numeric',
             'country' => 'required',
-            'coordinate_latitude' => 'required',
-            'coordinate_longitude' => 'required',
+            'coordinate_latitude' => 'required|numeric|min:-180|max:180',
+            'coordinate_longitude' => 'required|numeric|min:-180|max:180',
             'active' => 'required',
         ];
     }
