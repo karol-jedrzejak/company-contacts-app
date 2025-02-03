@@ -198,7 +198,7 @@ export default function ModalChange({
 
                     {/* nip */}
                     <div className="mt-2 col-span-2">
-                        <InputLabel htmlFor="nip" value="nip" />
+                        <InputLabel htmlFor="nip" value="NIP" />
                         <TextInput
                             id="nip"
                             name="nip"
@@ -211,7 +211,7 @@ export default function ModalChange({
                     </div>
                     {/* name_short */}
                     <div className="mt-2  col-span-2">
-                        <InputLabel htmlFor="name_short" value="name_short" />
+                        <InputLabel htmlFor="name_short" value="Name" />
                         <TextInput
                             id="name_short"
                             name="name_short"
@@ -232,7 +232,7 @@ export default function ModalChange({
                     <div className="mt-2  col-span-2">
                         <InputLabel
                             htmlFor="name_complete"
-                            value="name_complete"
+                            value="Name Complete"
                         />
                         <TextInput
                             id="name_complete"
@@ -252,10 +252,7 @@ export default function ModalChange({
                     </div>
                     {/* adress_street */}
                     <div className="mt-2">
-                        <InputLabel
-                            htmlFor="adress_street"
-                            value="adress_street"
-                        />
+                        <InputLabel htmlFor="adress_street" value="Street" />
                         <TextInput
                             id="adress_street"
                             name="adress_street"
@@ -274,10 +271,7 @@ export default function ModalChange({
                     </div>
                     {/* adress_number */}
                     <div className="mt-2">
-                        <InputLabel
-                            htmlFor="adress_number"
-                            value="adress_number"
-                        />
+                        <InputLabel htmlFor="adress_number" value="Number" />
                         <TextInput
                             id="adress_number"
                             name="adress_number"
@@ -296,7 +290,7 @@ export default function ModalChange({
                     </div>
                     {/* adress_city */}
                     <div className="mt-2">
-                        <InputLabel htmlFor="adress_city" value="adress_city" />
+                        <InputLabel htmlFor="adress_city" value="City" />
                         <TextInput
                             id="adress_city"
                             name="adress_city"
@@ -317,7 +311,7 @@ export default function ModalChange({
                     <div className="mt-2">
                         <InputLabel
                             htmlFor="adress_postcode"
-                            value="adress_postcode"
+                            value="Postcode"
                         />
                         <TextInput
                             id="adress_postcode"
@@ -337,7 +331,7 @@ export default function ModalChange({
                     </div>
                     {/* country */}
                     <div className="mt-2  col-span-2">
-                        <InputLabel htmlFor="country" value="country" />
+                        <InputLabel htmlFor="country" value="Country" />
                         <TextInput
                             id="country"
                             name="country"
@@ -353,7 +347,7 @@ export default function ModalChange({
                     <div className="mt-2 col-span-1">
                         <InputLabel
                             htmlFor="coordinate_latitude"
-                            value="coordinate_latitude"
+                            value="Coordinate - Latitude"
                         />
                         <TextInput
                             id="coordinate_latitude"
@@ -374,7 +368,7 @@ export default function ModalChange({
                     <div className="mt-2 col-span-1">
                         <InputLabel
                             htmlFor="coordinate_longitude"
-                            value="coordinate_longitude"
+                            value="Coordinate - Longitude"
                         />
                         <TextInput
                             id="coordinate_longitude"
@@ -393,7 +387,7 @@ export default function ModalChange({
                     </div>
                     {/* active */}
                     <div className="mt-2 col-span-2">
-                        <InputLabel htmlFor="active" value="active" />
+                        <InputLabel htmlFor="active" value="Active" />
                         <TextInput
                             id="active"
                             name="active"

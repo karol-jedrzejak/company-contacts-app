@@ -36,13 +36,13 @@ class CompaniesStoreRequest extends FormRequest
         ];
     }
 
-    /*     public function messages(): array
+    public function messages(): array
     {
         return [
-            'name_short.unique' => 'A company with the given short name already exists. Check if the company with the given name is not already in the database.',
-            'name_complete.unique' => 'There is already a company with the given full name. Check if the company with the given name is not already in the database.',
+            'name_short.unique' => 'A company with the given short name already exists. Provide unique name.',
+            'name_complete.unique' => 'There is already a company with the given full name. Provide unique name.',
             'adress_postcode.numeric' => 'Enter the postcode without spaces or dashes.',
             'nip.digits' => 'The NIP number must be 10 digits long.',
         ];
-    } */
+    }
 }
