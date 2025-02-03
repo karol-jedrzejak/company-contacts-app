@@ -118,7 +118,7 @@ export default function Index({ auth, items, new_item }) {
                                     tabIndex="-1"
                                     disabled
                                 >
-                                    <span class="rounded-full tooltip rounded shadow-lg p-2 bg-gray-200 text-red-500 -mt-8 -ml-[350px]">
+                                    <span className="rounded-full tooltip rounded shadow-lg p-2 bg-gray-200 text-red-500 -mt-8 -ml-[350px]">
                                         In order to delete company first delete
                                         employees.
                                     </span>

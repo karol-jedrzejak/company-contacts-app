@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\Companies;
-use App\Models\CompaniesEmployees;
+use App\Http\Requests\CompaniesStoreRequest;
+use App\Http\Requests\CompaniesUpdateRequest;
 
 use Inertia\Inertia;
 use Inertia\Response;
@@ -33,8 +34,9 @@ class CompaniesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CompaniesStoreRequest $request)
     {
+        $request->validated();
         $data = $request->post();
         $data['id'] = null;
         $data['user_id'] = Auth::id();
@@ -60,8 +62,9 @@ class CompaniesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CompaniesUpdateRequest  $request, string $id)
     {
+        $request->validated();
         $data = $request->post();
         $item = Companies::find($id);
         $item->update($data);

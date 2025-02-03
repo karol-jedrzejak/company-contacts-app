@@ -66,7 +66,15 @@ export default function ModalChange({
         if (mode == "add") {
             post(route("companies.store"), {
                 preserveScroll: true,
-                onSuccess: () => reset(),
+                onSuccess: () => {
+                    reset();
+
+                    changeMessage({
+                        color: "green",
+                        text: "Company was successfully added.",
+                    });
+                    closeModal();
+                },
                 onError: (errors) => {
                     if (errors.nip) {
                         reset("nip");
@@ -113,16 +121,19 @@ export default function ModalChange({
                         activeInput.current.focus();
                     }
                 },
-            });
-
-            changeMessage({
-                color: "green",
-                text: "Company was successfully added.",
             });
         } else {
             put(route("companies.update", item.id), {
                 preserveScroll: true,
-                onSuccess: () => reset(),
+                onSuccess: () => {
+                    reset();
+
+                    changeMessage({
+                        color: "green",
+                        text: "Company was successfully updated.",
+                    });
+                    closeModal();
+                },
                 onError: (errors) => {
                     if (errors.nip) {
                         reset("nip");
@@ -170,14 +181,9 @@ export default function ModalChange({
                     }
                 },
             });
-
-            changeMessage({
-                color: "green",
-                text: "Company was successfully updated.",
-            });
         }
 
-        closeModal();
+        //closeModal();
     };
 
     return (
@@ -200,7 +206,6 @@ export default function ModalChange({
                             value={data.nip}
                             onChange={(e) => setData("nip", e.target.value)}
                             className="mt-2 block w-full"
-                            required
                         />
                         <InputError message={errors.nip} className="mt-2" />
                     </div>
@@ -359,7 +364,6 @@ export default function ModalChange({
                                 setData("coordinate_latitude", e.target.value)
                             }
                             className="mt-2 block w-full"
-                            required
                         />
                         <InputError
                             message={errors.coordinate_latitude}
@@ -381,7 +385,6 @@ export default function ModalChange({
                                 setData("coordinate_longitude", e.target.value)
                             }
                             className="mt-2 block w-full"
-                            required
                         />
                         <InputError
                             message={errors.coordinate_longitude}
