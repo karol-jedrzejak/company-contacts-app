@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Companies;
 use App\Http\Requests\CompaniesStoreRequest;
 use App\Http\Requests\CompaniesUpdateRequest;
-
+use \stdClass;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,8 +19,7 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-        $companies = Companies::get();
-        return Inertia::render('Companies/Index', ['items' => $companies, 'new_item' => new Companies]);
+        return Inertia::render('Companies/Index', ['items' => Companies::get(), 'new_item' => new Companies]);
     }
 
     /**
@@ -28,7 +27,7 @@ class CompaniesController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Companies/Create', ['item' => new Companies, 'mode' => 'add']);
     }
 
     /**
@@ -56,7 +55,7 @@ class CompaniesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return Inertia::render('Companies/Create', ['item' => Companies::find($id), 'mode' => 'edit']);
     }
 
     /**

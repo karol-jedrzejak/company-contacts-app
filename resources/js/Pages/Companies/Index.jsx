@@ -11,7 +11,7 @@ import Message from "@/Components/Message";
 import ModalChange from "@/Pages/Companies/ModalChange";
 import ModalDestroy from "@/Pages/Companies/ModalDestroy";
 
-export default function Index({ auth, items, new_item }) {
+export default function Index({ auth, items, new_item, message = null }) {
     const [currentTarget, setCurrentTarget] = useState(new_item);
 
     // Message
@@ -29,23 +29,25 @@ export default function Index({ auth, items, new_item }) {
         timeoutRef.current = setTimeout(() => setMessageShow(false), 3000);
     }
 
+    if (message) {
+        changeMessage(message);
+    }
+
     // Add
-    const [addModal, setAddModal] = useState(false);
+    /*     const [addModal, setAddModal] = useState(false); */
 
     function confirmAdd() {
-        setAddModal(true);
+        window.open(route("companies.create"), "_self");
     }
 
     // Edit
     const [editModal, setEditModal] = useState(false);
 
     function confirmEdit(e) {
-        setCurrentTarget(
-            items.find(
-                (item) => item.id == e.currentTarget.getAttribute("target_id")
-            )
+        let item = items.find(
+            (item) => item.id == e.currentTarget.getAttribute("target_id")
         );
-        setEditModal(true);
+        window.open(route("companies.edit", item.id), "_self");
     }
 
     // Deletion
@@ -161,37 +163,6 @@ export default function Index({ auth, items, new_item }) {
                 <></>
             )}
 
-            {/* ---------------- Add ---------------- */}
-
-            <>
-                {addModal ? (
-                    <ModalChange
-                        showModal={addModal}
-                        setShowModal={setAddModal}
-                        changeMessage={changeMessage}
-                        item={new_item}
-                        mode="add"
-                    ></ModalChange>
-                ) : (
-                    <></>
-                )}
-            </>
-
-            {/* ---------------- Edit ---------------- */}
-            <>
-                {editModal ? (
-                    <ModalChange
-                        showModal={editModal}
-                        setShowModal={setEditModal}
-                        changeMessage={changeMessage}
-                        item={currentTarget}
-                        mode="edit"
-                    ></ModalChange>
-                ) : (
-                    <></>
-                )}
-            </>
-
             {/* ---------------- Delete ---------------- */}
             <>
                 {deletionModal ? (
@@ -209,8 +180,8 @@ export default function Index({ auth, items, new_item }) {
             {/* ---------------- Table ---------------- */}
             <Table
                 addButton={confirmAdd}
-                defaultSort="name_short"
-                defaultSortDirection="asc"
+                defaultSort="id"
+                defaultSortDirection="desc"
                 items={items}
                 searchitems={searchitems}
                 columns={columns}
