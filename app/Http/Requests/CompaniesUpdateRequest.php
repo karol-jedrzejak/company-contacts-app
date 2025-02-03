@@ -22,17 +22,17 @@ class CompaniesUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nip' => ['nullable', 'digits:10'],
-            /*             'name_short' => 'required|unique:companies',
+            'nip' => 'nullable|digits:10',
+            'name_short' => 'required|unique:companies',
             'name_complete' => 'required|unique:companies',
-            'adress_number' => ['required'],
+            'adress_number' => 'required',
             'adress_street' => 'required',
             'adress_city' => 'required',
             'adress_postcode' => 'required|numeric',
             'country' => 'required',
             'coordinate_latitude' => 'required',
             'coordinate_longitude' => 'required',
-            'active' => 'required', */
+            'active' => 'required',
         ];
     }
 
