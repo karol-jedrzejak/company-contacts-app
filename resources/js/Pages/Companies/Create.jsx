@@ -415,6 +415,29 @@ export default function Create({ auth, item, mode }) {
                             />
                         </div>
 
+                        {/* active */}
+                        {/*
+                        <div className="mt-2">
+                            <InputLabel htmlFor="active" value="active" />
+                            <SelectInput
+                                id="active"
+                                name="active"
+                                ref={activeInput}
+                                value={data.active}
+                                className="mt-2 block w-full"
+                                onChange={(e) =>
+                                    setData("active", e.target.value)
+                                }
+                                options={active_types}
+                                required
+                            />
+                            <InputError
+                                message={errors.active}
+                                className="mt-2"
+                            />
+                        </div>
+                        */}
+
                         <div className="col-span-2 mt-6 flex justify-end">
                             {mode == "add" ? (
                                 <ButtonStandard
