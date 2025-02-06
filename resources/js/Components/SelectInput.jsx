@@ -1,7 +1,14 @@
 import { forwardRef, useEffect, useRef } from "react";
 
 export default forwardRef(function SelectInput(
-    { type = "text", className = "", isFocused = false, options, ...props },
+    {
+        type = "text",
+        className = "",
+        isFocused = false,
+        yesNo = false,
+        options,
+        ...props
+    },
     ref
 ) {
     const select = ref ? ref : useRef();
@@ -32,14 +39,28 @@ export default forwardRef(function SelectInput(
             }
             ref={select}
         >
-            {options.map((value, id) => {
-                let text = value.charAt(0).toUpperCase() + value.substr(1);
-                return (
-                    <option key={id} value={value}>
-                        {text}
+            {yesNo ? (
+                <>
+                    <option key={1} value={1}>
+                        Yes
                     </option>
-                );
-            })}
+                    <option key={0} value={0}>
+                        No
+                    </option>
+                </>
+            ) : (
+                <>
+                    {options.map((value, id) => {
+                        let text =
+                            value.charAt(0).toUpperCase() + value.substr(1);
+                        return (
+                            <option key={id} value={value}>
+                                {text}
+                            </option>
+                        );
+                    })}
+                </>
+            )}
         </select>
     );
 });

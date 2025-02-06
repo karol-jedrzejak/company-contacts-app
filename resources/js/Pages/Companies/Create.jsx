@@ -7,6 +7,7 @@ import ButtonStandard from "@/Components/ButtonStandard";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
+import SelectInput from "@/Components/SelectInput";
 
 import { useRef } from "react";
 import { useForm } from "@inertiajs/react";
@@ -395,40 +396,20 @@ export default function Create({ auth, item, mode }) {
                                 className="mt-2"
                             />
                         </div>
-                        {/* active */}
-                        <div className="mt-2 col-span-2">
-                            <InputLabel htmlFor="active" value="Active" />
-                            <TextInput
-                                id="active"
-                                name="active"
-                                ref={activeInput}
-                                value={data.active}
-                                onChange={(e) =>
-                                    setData("active", e.target.value)
-                                }
-                                className="mt-2 block w-full"
-                                required
-                            />
-                            <InputError
-                                message={errors.active}
-                                className="mt-2"
-                            />
-                        </div>
 
                         {/* active */}
-                        {/*
-                        <div className="mt-2">
+                        <div className="mt-2 col-span-2">
                             <InputLabel htmlFor="active" value="active" />
                             <SelectInput
                                 id="active"
                                 name="active"
                                 ref={activeInput}
                                 value={data.active}
+                                yesNo={true}
                                 className="mt-2 block w-full"
                                 onChange={(e) =>
                                     setData("active", e.target.value)
                                 }
-                                options={active_types}
                                 required
                             />
                             <InputError
@@ -436,7 +417,6 @@ export default function Create({ auth, item, mode }) {
                                 className="mt-2"
                             />
                         </div>
-                        */}
 
                         <div className="col-span-2 mt-6 flex justify-end">
                             {mode == "add" ? (

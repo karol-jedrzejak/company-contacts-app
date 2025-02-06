@@ -23,7 +23,6 @@ class Controller extends BaseController
 
         $options = rtrim($querry->COLUMN_TYPE, ")");
         $options = ltrim($options, "set(");
-
         $options = str_getcsv($options, ",", "'");
 
         return $options;
