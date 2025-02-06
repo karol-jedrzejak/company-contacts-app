@@ -44,7 +44,7 @@ export default forwardRef(function SelectInput(
                     <option key={1} value={1}>
                         Yes
                     </option>
-                    <option key={0} value={0}>
+                    <option key={2} value={0}>
                         No
                     </option>
                 </>
