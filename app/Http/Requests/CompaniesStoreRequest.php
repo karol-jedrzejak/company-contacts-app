@@ -22,7 +22,7 @@ class CompaniesStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nip' => 'nullable|digits:10',
+            'nip' => 'unique:companies|digits:10',
             'name_short' => 'required|unique:companies',
             'name_complete' => 'required|unique:companies',
             'adress_number' => 'required',
@@ -39,6 +39,7 @@ class CompaniesStoreRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'nip.unique' => 'A company with the given NIP already exists.',
             'name_short.unique' => 'A company with the given short name already exists. Provide unique name.',
             'name_complete.unique' => 'There is already a company with the given full name. Provide unique name.',
             'adress_postcode.numeric' => 'Enter the postcode without spaces or dashes.',

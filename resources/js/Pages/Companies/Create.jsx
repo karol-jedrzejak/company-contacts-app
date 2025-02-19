@@ -190,6 +190,17 @@ export default function Create({ auth, item, mode }) {
 
                         <hr className="h-px mt-2 mb-6 bg-gray-200 border-0 dark:bg-gray-700 col-span-2" />
 
+                        {mode == "edit" ? (
+                            <input
+                                type="hidden"
+                                id="id"
+                                name="id"
+                                value={item.id}
+                            />
+                        ) : (
+                            <></>
+                        )}
+
                         {/* nip */}
                         <div className="mt-2 col-span-2">
                             <InputLabel htmlFor="nip" value="NIP" />

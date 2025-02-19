@@ -31,6 +31,21 @@ class Companies extends Model
         'updated_at'
     ];
 
+    protected $attributes = [
+        'nip' => '',
+        'name_short' => '',
+        'name_complete' => '',
+        'adress_number' => '',
+        'adress_street' => '',
+        'adress_city' => '',
+        'adress_postcode' => '',
+        'country' => '',
+        'coordinate_longitude' => '',
+        'coordinate_latitude' => '',
+        'active' => 1,
+    ];
+
+
     protected $appends = ['has_employees'];
 
     public function companiesEmployees(): HasMany

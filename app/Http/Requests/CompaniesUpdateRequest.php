@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CompaniesUpdateRequest extends FormRequest
 {
@@ -22,9 +23,18 @@ class CompaniesUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nip' => 'nullable|digits:10',
-            'name_short' => 'required|unique:companies',
-            'name_complete' => 'required|unique:companies',
+            'nip' => [
+                'digits:10',
+                Rule::unique('companies')->ignore($this->company),
+            ],
+            'name_short' => [
+                'required',
+                Rule::unique('companies')->ignore($this->company),
+            ],
+            'name_complete' => [
+                'required',
+                Rule::unique('companies')->ignore($this->company),
+            ],
             'adress_number' => 'required',
             'adress_street' => 'required',
             'adress_city' => 'required',
@@ -39,6 +49,7 @@ class CompaniesUpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'nip.unique' => 'A company with the given NIP already exists.',
             'name_short.unique' => 'A company with the given short name already exists. Provide unique name.',
             'name_complete.unique' => 'There is already a company with the given full name. Provide unique name.',
             'adress_postcode.numeric' => 'Enter the postcode without spaces or dashes.',

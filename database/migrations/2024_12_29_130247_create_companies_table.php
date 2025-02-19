@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('nip')->nullable();
+            $table->bigInteger('nip');
             $table->string('name_short');
             $table->string('name_complete');
             $table->string('adress_number');
