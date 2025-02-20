@@ -63,7 +63,7 @@ export default function Index({ auth, items, new_item, message = null }) {
     }
 
     // Tables
-    const searchitems = ["description", "importance"];
+    const searchitems = ["nip", "name_short", "name_complete"];
     const columns = [
         {
             id: 1,
