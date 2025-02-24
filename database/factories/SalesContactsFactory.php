@@ -19,6 +19,7 @@ class SalesContactsFactory extends Factory
         return [
             'topic' => fake()->sentence(),
             'importance' => fake()->randomElement(['high', 'medium', 'low']),
+            'active' => fake()->numberBetween(0, 1),
             'created_at' => now(),
             'updated_at' => now(),
         ];

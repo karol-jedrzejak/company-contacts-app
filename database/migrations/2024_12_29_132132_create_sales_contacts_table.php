@@ -19,6 +19,7 @@ return new class extends Migration
 
             $table->string('topic');
             $table->set('importance', ['high', 'medium', 'low']);
+            $table->boolean('active');
 
             $table->timestamps();
         });

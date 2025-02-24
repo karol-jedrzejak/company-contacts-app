@@ -17,7 +17,6 @@ class CompaniesEmployeesFactory extends Factory
     public function definition(): array
     {
         return [
-            // 'company' => '',
             'name' => fake()->firstName(),
             'surname' => fake()->lastName(),
             'position' => '',

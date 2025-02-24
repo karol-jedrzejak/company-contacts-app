@@ -137,7 +137,7 @@ export default function Show({ auth, item, child_count }) {
                                     </tr>
                                     <tr>
                                         <td>Sales Topics</td>
-                                        {/*                                         <td>
+                                        <td>
                                             {child_count.sales_topics.active}
                                         </td>
                                         <td>
@@ -147,7 +147,7 @@ export default function Show({ auth, item, child_count }) {
                                             {child_count.sales_topics.active +
                                                 child_count.sales_topics
                                                     .archive}
-                                        </td> */}
+                                        </td>
                                         <td>
                                             <ButtonStandard
                                                 className="my-2"

@@ -48,13 +48,6 @@ class CompaniesController extends Controller
      */
     public function show(string $id)
     {
-        $employees = CompaniesEmployees::select('id')->inCompany($id)->get();
-
-        $employees2 = DB::table('sales_contacts')
-            ->join('companies_employees', 'sales_contacts.companies_employees_id', 'companies_employees.id')
-            ->join('companies', 'companies_employees.companies_id', 'companies.id')
-            ->where('companies_id', '=', $id)->where('companies_id', '=', $id)->count();
-
         return Inertia::render(
             'Companies/Show',
             [
@@ -67,14 +60,25 @@ class CompaniesController extends Controller
                     ],
                     'sales_topics' =>
                     [
-                        "active" =>
-                        $employees2,
-                        "archive" => 5
+                        "active" => DB::table('sales_contacts')
+                            ->join('companies_employees', 'sales_contacts.companies_employees_id', 'companies_employees.id')
+                            ->join('companies', 'companies_employees.companies_id', 'companies.id')
+                            ->where('sales_contacts.active', '=', 1)->where('companies_id', '=', $id)->count(),
+                        "archive" => DB::table('sales_contacts')
+                            ->join('companies_employees', 'sales_contacts.companies_employees_id', 'companies_employees.id')
+                            ->join('companies', 'companies_employees.companies_id', 'companies.id')
+                            ->where('sales_contacts.active', '=', 0)->where('companies_id', '=', $id)->count()
                     ],
                     'meetings' =>
                     [
-                        "active" => 56,
-                        "archive" => 12
+                        "active" => DB::table('calendars')
+                            ->join('companies_employees', 'calendars.companies_employees_id', 'companies_employees.id')
+                            ->join('companies', 'companies_employees.companies_id', 'companies.id')
+                            ->whereDate('end', '>', \Carbon\Carbon::now())->where('companies_id', '=', $id)->count(),
+                        "archive" => DB::table('calendars')
+                            ->join('companies_employees', 'calendars.companies_employees_id', 'companies_employees.id')
+                            ->join('companies', 'companies_employees.companies_id', 'companies.id')
+                            ->whereDate('end', '<=', \Carbon\Carbon::now())->where('companies_id', '=', $id)->count()
                     ]
                 ]
             ]

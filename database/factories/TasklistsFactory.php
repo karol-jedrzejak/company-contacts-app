@@ -17,7 +17,6 @@ class TasklistsFactory extends Factory
     public function definition(): array
     {
         return [
-            //'users_id' => fake()->numberBetween(1, 250),
             'description' => fake()->sentence(),
             'importance' => fake()->randomElement(['high', 'medium', 'low']),
             'created_at' => now(),
