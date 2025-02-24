@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TasklistsController;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\CompaniesEmployeesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('tasklists', TasklistsController::class);
 
     Route::resource('companies', CompaniesController::class);
+    Route::resource('companies.employees', CompaniesEmployeesController::class)->where(['id' => '[0-9]+']);
 });
 
 require __DIR__ . '/auth.php';

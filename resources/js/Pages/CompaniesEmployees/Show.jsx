@@ -6,11 +6,8 @@ import ButtonStandard from "@/Components/ButtonStandard";
 export default function Show({ auth, item, child_count }) {
     console.log(child_count);
     // Edit
-    function linkEdit() {
+    function itemEdit() {
         window.open(route("companies.edit", item.id), "_self");
-    }
-    function linkEmployees() {
-        window.open(route("companies.employees.index", item.id), "_self");
     }
     return (
         <>
@@ -100,7 +97,7 @@ export default function Show({ auth, item, child_count }) {
                                     <ButtonStandard
                                         className=""
                                         tabIndex="-1"
-                                        onClick={linkEdit}
+                                        onClick={itemEdit}
                                     >
                                         Edit
                                     </ButtonStandard>
@@ -132,7 +129,7 @@ export default function Show({ auth, item, child_count }) {
                                             <ButtonStandard
                                                 className="my-2"
                                                 tabIndex="-1"
-                                                onClick={linkEmployees}
+                                                onClick={itemEdit}
                                             >
                                                 Show
                                             </ButtonStandard>
@@ -155,7 +152,7 @@ export default function Show({ auth, item, child_count }) {
                                             <ButtonStandard
                                                 className="my-2"
                                                 tabIndex="-1"
-                                                onClick={linkEdit}
+                                                onClick={itemEdit}
                                             >
                                                 Show
                                             </ButtonStandard>
@@ -173,7 +170,7 @@ export default function Show({ auth, item, child_count }) {
                                             <ButtonStandard
                                                 className="my-2"
                                                 tabIndex="-1"
-                                                onClick={linkEdit}
+                                                onClick={itemEdit}
                                             >
                                                 Show
                                             </ButtonStandard>
