@@ -53,7 +53,7 @@ class CompaniesController extends Controller
         $employees2 = DB::table('sales_contacts')
             ->join('companies_employees', 'sales_contacts.companies_employees_id', 'companies_employees.id')
             ->join('companies', 'companies_employees.companies_id', 'companies.id')
-            ->where('sales_contacts.', '=', $id)->where('companies_id', '=', $id)->where('companies_id', '=', $id)->count();
+            ->where('companies_id', '=', $id)->where('companies_id', '=', $id)->count();
 
         return Inertia::render(
             'Companies/Show',
