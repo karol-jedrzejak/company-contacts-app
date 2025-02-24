@@ -36,12 +36,12 @@ export default function Index({ auth, items, new_item, message = null }) {
         let item = items.find(
             (item) => item.id == e.currentTarget.getAttribute("target_id")
         );
-        window.open(route("companies.show", item.id), "_self");
+        window.open(route("companies.employees.show", item.id), "_self");
     }
 
     // Add
     function confirmAdd() {
-        window.open(route("companies.create"), "_self");
+        window.open(route("companies.employees.create"), "_self");
     }
 
     // Edit
@@ -49,7 +49,7 @@ export default function Index({ auth, items, new_item, message = null }) {
         let item = items.find(
             (item) => item.id == e.currentTarget.getAttribute("target_id")
         );
-        window.open(route("companies.edit", item.id), "_self");
+        window.open(route("companies.employees.edit", item.id), "_self");
     }
 
     // Deletion
@@ -75,21 +75,33 @@ export default function Index({ auth, items, new_item, message = null }) {
         },
         {
             id: 2,
-            variable: "name_short",
-            text: "name short",
+            variable: "name",
+            text: "name",
             sortable: true,
         },
         {
             id: 3,
-            variable: "name_complete",
-            text: "name complete",
+            variable: "surname",
+            text: "surname",
             sortable: true,
         },
         {
             id: 4,
-            variable: "country",
-            text: "country",
+            variable: "position",
+            text: "position",
             sortable: true,
+        },
+        {
+            id: 5,
+            variable: "mobile",
+            text: "mobile",
+            sortable: false,
+        },
+        {
+            id: 6,
+            variable: "email",
+            text: "email",
+            sortable: false,
         },
     ];
 
@@ -100,9 +112,11 @@ export default function Index({ auth, items, new_item, message = null }) {
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
             >
                 <td className="px-4 py-2">{item.id}</td>
-                <td className="px-4 py-2">{item.name_short}</td>
-                <td className="px-4 py-2 text-center">{item.name_complete}</td>
-                <td className="px-4 py-2 text-center">{item.country}</td>
+                <td className="px-4 py-2">{item.name}</td>
+                <td className="px-4 py-2 text-center">{item.surname}</td>
+                <td className="px-4 py-2 text-center">{item.position}</td>
+                <td className="px-4 py-2 text-center">{item.mobile}</td>
+                <td className="px-4 py-2 text-center">{item.email}</td>
                 <td className="px-4 py-2 whitespace-nowrap w-px">
                     <ButtonStandard
                         className="mx-2"
@@ -132,8 +146,9 @@ export default function Index({ auth, items, new_item, message = null }) {
                                     disabled
                                 >
                                     <span className="rounded-full tooltip rounded shadow-lg p-2 bg-gray-200 text-red-500 -mt-8 -ml-[350px]">
-                                        In order to delete company first delete
-                                        employees.
+                                        In order to delete employee first delete
+                                        sales topics and meetings. Alternatively
+                                        make person unactive.
                                     </span>
                                     Delete
                                 </ButtonStandard>
@@ -161,7 +176,7 @@ export default function Index({ auth, items, new_item, message = null }) {
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    COMPANIES
+                    COMPANIES EMPLOYEES
                 </h2>
             }
         >

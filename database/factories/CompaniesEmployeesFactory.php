@@ -16,10 +16,18 @@ class CompaniesEmployeesFactory extends Factory
      */
     public function definition(): array
     {
+        $titles = [
+            'account',
+            'manager',
+            'worker',
+            'project manager',
+            'director',
+            'manual worker',
+        ];
         return [
             'name' => fake()->firstName(),
             'surname' => fake()->lastName(),
-            'position' => '',
+            'position' => fake()->randomElement($titles),
             'mobile' => fake()->phoneNumber(),
             'phone' => fake()->phoneNumber(),
             'email' => fake()->email(),
