@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-use Illuminate\Http\Request;
 use App\Models\Companies;
+use App\Models\CompaniesEmployees;
+use App\Models\SalesContacts;
+use App\Models\Calendars;
 use App\Http\Requests\CompaniesStoreRequest;
 use App\Http\Requests\CompaniesUpdateRequest;
-use \stdClass;
+
 use Inertia\Inertia;
-use Inertia\Response;
+
 
 class CompaniesController extends Controller
 {
@@ -27,7 +29,7 @@ class CompaniesController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Companies/Create', ['item' => new Companies, 'mode' => 'add']);
+        return Inertia::render('Companies/Edit', ['item' => new Companies, 'mode' => 'add']);
     }
 
     /**
@@ -38,7 +40,6 @@ class CompaniesController extends Controller
         $request->validated();
         $data = $request->post();
         $data['id'] = null;
-        $data['user_id'] = Auth::id();
         Companies::create($data);
     }
 
@@ -47,7 +48,37 @@ class CompaniesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $employees = CompaniesEmployees::select('id')->inCompany($id)->get();
+
+        $employees2 = DB::table('sales_contacts')
+            ->join('companies_employees', 'sales_contacts.companies_employees_id', 'companies_employees.id')
+            ->join('companies', 'companies_employees.companies_id', 'companies.id')
+            ->where('sales_contacts.', '=', $id)->where('companies_id', '=', $id)->where('companies_id', '=', $id)->count();
+
+        return Inertia::render(
+            'Companies/Show',
+            [
+                'item' => Companies::find($id),
+                'child_count' => [
+                    'employees' =>
+                    [
+                        "active" => CompaniesEmployees::where('active', "=", 1)->inCompany($id)->count(),
+                        "archive" => CompaniesEmployees::where('active', "=", 0)->inCompany($id)->count()
+                    ],
+                    'sales_topics' =>
+                    [
+                        "active" =>
+                        $employees2,
+                        "archive" => 5
+                    ],
+                    'meetings' =>
+                    [
+                        "active" => 56,
+                        "archive" => 12
+                    ]
+                ]
+            ]
+        );
     }
 
     /**
@@ -55,7 +86,7 @@ class CompaniesController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('Companies/Create', ['item' => Companies::find($id), 'mode' => 'edit']);
+        return Inertia::render('Companies/Edit', ['item' => Companies::find($id), 'mode' => 'edit']);
     }
 
     /**

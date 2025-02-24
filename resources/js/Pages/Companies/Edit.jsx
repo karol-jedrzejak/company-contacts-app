@@ -12,7 +12,7 @@ import SelectInput from "@/Components/SelectInput";
 import { useRef } from "react";
 import { useForm } from "@inertiajs/react";
 
-export default function Create({ auth, item, mode }) {
+export default function Edit({ auth, item, mode }) {
     const nipInput = useRef();
     const name_shortInput = useRef();
     const name_completeInput = useRef();

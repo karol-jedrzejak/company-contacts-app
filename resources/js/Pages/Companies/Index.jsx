@@ -1,14 +1,12 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import ButtonStandard from "@/Components/ButtonStandard";
-import BadgeTable from "@/Components/BadgeTable";
 import Table from "@/Components/Table";
 import React from "react";
 import { useState, useRef } from "react";
 
 import Message from "@/Components/Message";
 
-import ModalChange from "@/Pages/Companies/ModalChange";
 import ModalDestroy from "@/Pages/Companies/ModalDestroy";
 
 export default function Index({ auth, items, new_item, message = null }) {
@@ -33,16 +31,20 @@ export default function Index({ auth, items, new_item, message = null }) {
         changeMessage(message);
     }
 
-    // Add
-    /*     const [addModal, setAddModal] = useState(false); */
+    //Show
+    function linkShow(e) {
+        let item = items.find(
+            (item) => item.id == e.currentTarget.getAttribute("target_id")
+        );
+        window.open(route("companies.show", item.id), "_self");
+    }
 
+    // Add
     function confirmAdd() {
         window.open(route("companies.create"), "_self");
     }
 
     // Edit
-    const [editModal, setEditModal] = useState(false);
-
     function confirmEdit(e) {
         let item = items.find(
             (item) => item.id == e.currentTarget.getAttribute("target_id")
@@ -102,6 +104,15 @@ export default function Index({ auth, items, new_item, message = null }) {
                 <td className="px-4 py-2 text-center">{item.name_complete}</td>
                 <td className="px-4 py-2 text-center">{item.country}</td>
                 <td className="px-4 py-2 whitespace-nowrap w-px">
+                    <ButtonStandard
+                        className="mx-2"
+                        btn_style="green"
+                        target_id={item.id}
+                        tabIndex="-1"
+                        onClick={linkShow}
+                    >
+                        Show
+                    </ButtonStandard>
                     <ButtonStandard
                         className="mx-2"
                         target_id={item.id}
