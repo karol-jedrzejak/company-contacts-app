@@ -11,6 +11,24 @@ class Calendars extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'companies_employees_id',
+        'description',
+        'start',
+        'end',
+        'created_at',
+        'updated_at'
+    ];
+
+    protected $attributes = [
+        'user_id' => "",
+        'companies_employees_id' => "",
+        'description' => "",
+        'start' => "",
+        'end' => "",
+    ];
+
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class);

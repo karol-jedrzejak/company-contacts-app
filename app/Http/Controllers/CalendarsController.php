@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Calendars;
 use App\Models\Companies;
@@ -21,7 +22,7 @@ class CalendarsController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Calendars/Index', ['items' => Calendars::get(), 'new_item' => new Calendars]);
+        return Inertia::render('Calendars/Index', ['items' => Calendars::where('user_id', Auth::id())->get(), 'new_item' => new Calendars]);
     }
 
     /**

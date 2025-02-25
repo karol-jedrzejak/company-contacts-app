@@ -35,6 +35,12 @@ export default function Authenticated({ user, header, children }) {
                                     Companies
                                 </NavLink>
                                 <NavLink
+                                    href={route("calendars.index")}
+                                    active={route().current("calendars.index")}
+                                >
+                                    Calendar
+                                </NavLink>
+                                <NavLink
                                     href={route("dashboard")}
                                     active={route().current("dashboard")}
                                 >
@@ -143,6 +149,24 @@ export default function Authenticated({ user, header, children }) {
                             active={route().current("dashboard")}
                         >
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route("tasklists.index")}
+                            active={route().current("tasklists.index")}
+                        >
+                            Tasklist
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route("companies.index")}
+                            active={route().current("companies.index")}
+                        >
+                            Companies
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route("calendars.index")}
+                            active={route().current("calendars.index")}
+                        >
+                            Calendar
                         </ResponsiveNavLink>
                     </div>
 
