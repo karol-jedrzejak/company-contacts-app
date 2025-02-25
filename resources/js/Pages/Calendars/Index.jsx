@@ -1,13 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import ButtonStandard from "@/Components/ButtonStandard";
-import Table from "@/Components/Table";
 import React from "react";
-import { useState, useRef } from "react";
-
-import Message from "@/Components/Message";
-
-import ModalDestroy from "@/Pages/Calendars/ModalDestroy";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!

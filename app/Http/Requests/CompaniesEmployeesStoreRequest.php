@@ -22,7 +22,6 @@ class CompaniesEmployeesStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'adress_number' => 'required',
             'name' => 'required',
             'surname' => 'required',
             'position' => 'required',

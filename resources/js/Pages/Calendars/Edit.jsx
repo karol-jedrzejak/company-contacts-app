@@ -12,18 +12,11 @@ import SelectInput from "@/Components/SelectInput";
 import { useRef } from "react";
 import { useForm } from "@inertiajs/react";
 
-export default function Edit({ auth, item, mode }) {
-    const nipInput = useRef();
-    const name_shortInput = useRef();
-    const name_completeInput = useRef();
-    const adress_numberInput = useRef();
-    const adress_streetInput = useRef();
-    const adress_cityInput = useRef();
-    const adress_postcodeInput = useRef();
-    const countryInput = useRef();
-    const coordinate_latitudeInput = useRef();
-    const coordinate_longitudeInput = useRef();
-    const activeInput = useRef();
+export default function Edit({ auth, item, mode, employees }) {
+    const companies_employees_idInput = useRef();
+    const titleInput = useRef();
+    const startInput = useRef();
+    const endInput = useRef();
 
     const {
         data,
@@ -35,19 +28,10 @@ export default function Edit({ auth, item, mode }) {
         processing,
         recentlySuccessful,
     } = useForm({
-        nip: item.nip,
-        importance: item.importance,
-        nip: item.nip,
-        name_short: item.name_short,
-        name_complete: item.name_complete,
-        adress_number: item.adress_number,
-        adress_street: item.adress_street,
-        adress_city: item.adress_city,
-        adress_postcode: item.adress_postcode,
-        country: item.country,
-        coordinate_latitude: item.coordinate_latitude,
-        coordinate_longitude: item.coordinate_longitude,
-        active: item.active,
+        companies_employees_id: item.companies_employees_id,
+        title: item.title,
+        start: item.start,
+        end: item.end,
     });
 
     // Functions
@@ -55,108 +39,52 @@ export default function Edit({ auth, item, mode }) {
         e.preventDefault();
 
         if (mode == "add") {
-            post(route("companies.store"), {
+            post(route("calendars.store"), {
                 preserveScroll: true,
                 onSuccess: () => {
-                    window.open(route("companies.index"), "_self");
+                    window.open(route("calendars.index"), "_self");
                 },
                 onError: (errors) => {
-                    if (errors.nip) {
-                        reset("nip");
-                        nipInput.current.focus();
+                    if (errors.companies_employees_id) {
+                        reset("companies_employees_id");
+                        companies_employees_idInput.current.focus();
                     }
-                    if (errors.name_short) {
-                        reset("name_short");
-                        name_shortInput.current.focus();
+                    if (errors.title) {
+                        reset("title");
+                        titleInput.current.focus();
                     }
-                    if (errors.name_complete) {
-                        reset("name_complete");
-                        name_completeInput.current.focus();
+                    if (errors.start) {
+                        reset("start");
+                        startInput.current.focus();
                     }
-                    if (errors.adress_number) {
-                        reset("adress_number");
-                        adress_numberInput.current.focus();
-                    }
-                    if (errors.adress_street) {
-                        reset("adress_street");
-                        adress_streetInput.current.focus();
-                    }
-                    if (errors.adress_city) {
-                        reset("adress_city");
-                        adress_cityInput.current.focus();
-                    }
-                    if (errors.adress_postcode) {
-                        reset("adress_postcode");
-                        adress_postcodeInput.current.focus();
-                    }
-                    if (errors.country) {
-                        reset("country");
-                        countryInput.current.focus();
-                    }
-                    if (errors.coordinate_latitude) {
-                        reset("coordinate_latitude");
-                        coordinate_latitudeInput.current.focus();
-                    }
-                    if (errors.coordinate_longitude) {
-                        reset("coordinate_longitude");
-                        coordinate_longitudeInput.current.focus();
-                    }
-                    if (errors.active) {
-                        reset("active");
-                        activeInput.current.focus();
+                    if (errors.end) {
+                        reset("end");
+                        endInput.current.focus();
                     }
                 },
             });
         } else {
-            put(route("companies.update", item.id), {
+            put(route("calendars.update", item.id), {
                 preserveScroll: true,
                 onSuccess: () => {
-                    window.open(route("companies.index"), "_self");
+                    window.open(route("calendars.index"), "_self");
                 },
                 onError: (errors) => {
-                    if (errors.nip) {
-                        reset("nip");
-                        nipInput.current.focus();
+                    if (errors.companies_employees_id) {
+                        reset("companies_employees_id");
+                        companies_employees_idInput.current.focus();
                     }
-                    if (errors.name_short) {
-                        reset("name_short");
-                        name_shortInput.current.focus();
+                    if (errors.title) {
+                        reset("title");
+                        titleInput.current.focus();
                     }
-                    if (errors.name_complete) {
-                        reset("name_complete");
-                        name_completeInput.current.focus();
+                    if (errors.start) {
+                        reset("start");
+                        startInput.current.focus();
                     }
-                    if (errors.adress_number) {
-                        reset("adress_number");
-                        adress_numberInput.current.focus();
-                    }
-                    if (errors.adress_street) {
-                        reset("adress_street");
-                        adress_streetInput.current.focus();
-                    }
-                    if (errors.adress_city) {
-                        reset("adress_city");
-                        adress_cityInput.current.focus();
-                    }
-                    if (errors.adress_postcode) {
-                        reset("adress_postcode");
-                        adress_postcodeInput.current.focus();
-                    }
-                    if (errors.country) {
-                        reset("country");
-                        countryInput.current.focus();
-                    }
-                    if (errors.coordinate_latitude) {
-                        reset("coordinate_latitude");
-                        coordinate_latitudeInput.current.focus();
-                    }
-                    if (errors.coordinate_longitude) {
-                        reset("coordinate_longitude");
-                        coordinate_longitudeInput.current.focus();
-                    }
-                    if (errors.active) {
-                        reset("active");
-                        activeInput.current.focus();
+                    if (errors.end) {
+                        reset("end");
+                        endInput.current.focus();
                     }
                 },
             });
@@ -169,14 +97,14 @@ export default function Edit({ auth, item, mode }) {
                 user={auth.user}
                 header={
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        COMPANIES
+                        CALENDAR
                     </h2>
                 }
             >
                 {mode == "add" ? (
-                    <Head title="Companies -> Add" />
+                    <Head title="Calendar -> Add" />
                 ) : (
-                    <Head title="Companies -> Edit" />
+                    <Head title="Calendar -> Edit" />
                 )}
 
                 <div className="flex flex-col justify-center items-center">
@@ -201,232 +129,86 @@ export default function Edit({ auth, item, mode }) {
                             <></>
                         )}
 
-                        {/* nip */}
+                        {/* companies_employees_id */}
                         <div className="mt-2 col-span-2">
-                            <InputLabel htmlFor="nip" value="NIP" />
-                            <TextInput
-                                id="nip"
-                                name="nip"
-                                ref={nipInput}
-                                value={data.nip}
-                                onChange={(e) => setData("nip", e.target.value)}
-                                className="mt-2 block w-full"
-                            />
-                            <InputError message={errors.nip} className="mt-2" />
-                        </div>
-                        {/* name_short */}
-                        <div className="mt-2  col-span-2">
-                            <InputLabel htmlFor="name_short" value="Name" />
-                            <TextInput
-                                id="name_short"
-                                name="name_short"
-                                ref={name_shortInput}
-                                value={data.name_short}
-                                onChange={(e) =>
-                                    setData("name_short", e.target.value)
-                                }
-                                className="mt-2 block w-full"
-                                required
-                            />
-                            <InputError
-                                message={errors.name_short}
-                                className="mt-2"
-                            />
-                        </div>
-                        {/* name_complete */}
-                        <div className="mt-2  col-span-2">
                             <InputLabel
-                                htmlFor="name_complete"
-                                value="Name Complete"
+                                htmlFor="companies_employees_id"
+                                value="Company Employee"
                             />
                             <TextInput
-                                id="name_complete"
-                                name="name_complete"
-                                ref={name_completeInput}
-                                value={data.name_complete}
-                                onChange={(e) =>
-                                    setData("name_complete", e.target.value)
-                                }
-                                className="mt-2 block w-full"
-                                required
-                            />
-                            <InputError
-                                message={errors.name_complete}
-                                className="mt-2"
-                            />
-                        </div>
-                        {/* adress_street */}
-                        <div className="mt-2">
-                            <InputLabel
-                                htmlFor="adress_street"
-                                value="Street"
-                            />
-                            <TextInput
-                                id="adress_street"
-                                name="adress_street"
-                                ref={adress_streetInput}
-                                value={data.adress_street}
-                                onChange={(e) =>
-                                    setData("adress_street", e.target.value)
-                                }
-                                className="mt-2 block w-full"
-                                required
-                            />
-                            <InputError
-                                message={errors.adress_street}
-                                className="mt-2"
-                            />
-                        </div>
-                        {/* adress_number */}
-                        <div className="mt-2">
-                            <InputLabel
-                                htmlFor="adress_number"
-                                value="Number"
-                            />
-                            <TextInput
-                                id="adress_number"
-                                name="adress_number"
-                                ref={adress_numberInput}
-                                value={data.adress_number}
-                                onChange={(e) =>
-                                    setData("adress_number", e.target.value)
-                                }
-                                className="mt-2 block w-full"
-                                required
-                            />
-                            <InputError
-                                message={errors.adress_number}
-                                className="mt-2"
-                            />
-                        </div>
-                        {/* adress_city */}
-                        <div className="mt-2">
-                            <InputLabel htmlFor="adress_city" value="City" />
-                            <TextInput
-                                id="adress_city"
-                                name="adress_city"
-                                ref={adress_cityInput}
-                                value={data.adress_city}
-                                onChange={(e) =>
-                                    setData("adress_city", e.target.value)
-                                }
-                                className="mt-2 block w-full"
-                                required
-                            />
-                            <InputError
-                                message={errors.adress_city}
-                                className="mt-2"
-                            />
-                        </div>
-                        {/* adress_postcode */}
-                        <div className="mt-2">
-                            <InputLabel
-                                htmlFor="adress_postcode"
-                                value="Postcode"
-                            />
-                            <TextInput
-                                id="adress_postcode"
-                                name="adress_postcode"
-                                ref={adress_postcodeInput}
-                                value={data.adress_postcode}
-                                onChange={(e) =>
-                                    setData("adress_postcode", e.target.value)
-                                }
-                                className="mt-2 block w-full"
-                                required
-                            />
-                            <InputError
-                                message={errors.adress_postcode}
-                                className="mt-2"
-                            />
-                        </div>
-                        {/* country */}
-                        <div className="mt-2  col-span-2">
-                            <InputLabel htmlFor="country" value="Country" />
-                            <TextInput
-                                id="country"
-                                name="country"
-                                ref={countryInput}
-                                value={data.country}
-                                onChange={(e) =>
-                                    setData("country", e.target.value)
-                                }
-                                className="mt-2 block w-full"
-                                required
-                            />
-                            <InputError
-                                message={errors.country}
-                                className="mt-2"
-                            />
-                        </div>
-                        {/* coordinate_latitude */}
-                        <div className="mt-2 col-span-1">
-                            <InputLabel
-                                htmlFor="coordinate_latitude"
-                                value="Coordinate - Latitude"
-                            />
-                            <TextInput
-                                id="coordinate_latitude"
-                                name="coordinate_latitude"
-                                ref={coordinate_latitudeInput}
-                                value={data.coordinate_latitude}
+                                id="companies_employees_id"
+                                name="companies_employees_id"
+                                ref={companies_employees_idInput}
+                                value={data.companies_employees_id}
                                 onChange={(e) =>
                                     setData(
-                                        "coordinate_latitude",
+                                        "companies_employees_id",
                                         e.target.value
                                     )
                                 }
                                 className="mt-2 block w-full"
                             />
                             <InputError
-                                message={errors.coordinate_latitude}
-                                className="mt-2"
-                            />
-                        </div>
-                        {/* coordinate_longitude */}
-                        <div className="mt-2 col-span-1">
-                            <InputLabel
-                                htmlFor="coordinate_longitude"
-                                value="Coordinate - Longitude"
-                            />
-                            <TextInput
-                                id="coordinate_longitude"
-                                name="coordinate_longitude"
-                                ref={coordinate_longitudeInput}
-                                value={data.coordinate_longitude}
-                                onChange={(e) =>
-                                    setData(
-                                        "coordinate_longitude",
-                                        e.target.value
-                                    )
-                                }
-                                className="mt-2 block w-full"
-                            />
-                            <InputError
-                                message={errors.coordinate_longitude}
+                                message={errors.companies_employees_id}
                                 className="mt-2"
                             />
                         </div>
 
-                        {/* active */}
-                        <div className="mt-2 col-span-2">
-                            <InputLabel htmlFor="active" value="active" />
-                            <SelectInput
-                                id="active"
-                                name="active"
-                                ref={activeInput}
-                                value={data.active}
-                                yesNo={true}
-                                className="mt-2 block w-full"
+                        {/* title */}
+                        <div className="mt-2  col-span-2">
+                            <InputLabel htmlFor="title" value="Name" />
+                            <TextInput
+                                id="title"
+                                name="title"
+                                ref={titleInput}
+                                value={data.title}
                                 onChange={(e) =>
-                                    setData("active", e.target.value)
+                                    setData("title", e.target.value)
                                 }
+                                className="mt-2 block w-full"
                                 required
                             />
                             <InputError
-                                message={errors.active}
+                                message={errors.title}
                                 className="mt-2"
                             />
+                        </div>
+
+                        {/* start */}
+                        <div className="mt-2  col-span-2">
+                            <InputLabel htmlFor="start" value="Start" />
+                            <TextInput
+                                id="start"
+                                name="start"
+                                ref={startInput}
+                                value={data.start}
+                                type="datetime-local"
+                                onChange={(e) =>
+                                    setData("start", e.target.value)
+                                }
+                                className="mt-2 block w-full"
+                                required
+                            />
+                            <InputError
+                                message={errors.start}
+                                className="mt-2"
+                            />
+                        </div>
+
+                        {/* end */}
+                        <div className="mt-2  col-span-2">
+                            <InputLabel htmlFor="end" value="End" />
+                            <TextInput
+                                id="end"
+                                name="end"
+                                ref={endInput}
+                                value={data.end}
+                                type="datetime-local"
+                                onChange={(e) => setData("end", e.target.value)}
+                                className="mt-2 block w-full"
+                                required
+                            />
+                            <InputError message={errors.end} className="mt-2" />
                         </div>
 
                         <div className="col-span-2 mt-6 flex justify-end">
@@ -447,9 +229,6 @@ export default function Edit({ auth, item, mode }) {
                                     Update
                                 </ButtonStandard>
                             )}
-                            {/*                         <ButtonStandard className="ms-3" onClick={closeModal}>
-                            Cancel
-                        </ButtonStandard> */}
                         </div>
                     </form>
                 </div>

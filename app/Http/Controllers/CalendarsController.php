@@ -22,7 +22,6 @@ class CalendarsController extends Controller
      */
     public function index()
     {
-        //$events = Calendars::where('user_id', Auth::id())->get();
         $events = DB::table('calendars')
             ->join('companies_employees', 'calendars.companies_employees_id', 'companies_employees.id')
             ->join('companies', 'companies_employees.companies_id', 'companies.id')
@@ -34,7 +33,6 @@ class CalendarsController extends Controller
             )
             ->where('user_id', Auth::id())->get();
 
-
         return Inertia::render('Calendars/Index', ['items' => $events, 'events' => $events]);
     }
 
@@ -43,7 +41,16 @@ class CalendarsController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Calendars/Edit', ['item' => new Calendars, 'mode' => 'add']);
+        return Inertia::render('Calendars/Edit', [
+            'item' => new Calendars,
+            'mode' => 'add',
+            'employees' => DB::table('companies_employees')
+                ->join('companies', 'companies_employees.companies_id', 'companies.id')
+                ->select(
+                    'companies_employees.*',
+                    'companies.name_short as company_name',
+                )->get()
+        ]);
     }
 
     /**
@@ -54,6 +61,7 @@ class CalendarsController extends Controller
         $request->validated();
         $data = $request->post();
         $data['id'] = null;
+        $data['user_id'] = Auth::id();
         Calendars::create($data);
     }
 
@@ -62,41 +70,7 @@ class CalendarsController extends Controller
      */
     public function show(string $id)
     {
-        return Inertia::render(
-            'Calendars/Show',
-            [
-                'item' => Calendars::find($id),
-                'child_count' => [
-                    'employees' =>
-                    [
-                        "active" => CompaniesEmployees::where('active', "=", 1)->inCompany($id)->count(),
-                        "archive" => CompaniesEmployees::where('active', "=", 0)->inCompany($id)->count()
-                    ],
-                    'sales_topics' =>
-                    [
-                        "active" => DB::table('sales_contacts')
-                            ->join('companies_employees', 'sales_contacts.companies_employees_id', 'companies_employees.id')
-                            ->join('companies', 'companies_employees.companies_id', 'companies.id')
-                            ->where('sales_contacts.active', '=', 1)->where('companies_id', '=', $id)->count(),
-                        "archive" => DB::table('sales_contacts')
-                            ->join('companies_employees', 'sales_contacts.companies_employees_id', 'companies_employees.id')
-                            ->join('companies', 'companies_employees.companies_id', 'companies.id')
-                            ->where('sales_contacts.active', '=', 0)->where('companies_id', '=', $id)->count()
-                    ],
-                    'meetings' =>
-                    [
-                        "active" => DB::table('calendars')
-                            ->join('companies_employees', 'calendars.companies_employees_id', 'companies_employees.id')
-                            ->join('companies', 'companies_employees.companies_id', 'companies.id')
-                            ->whereDate('end', '>', \Carbon\Carbon::now())->where('companies_id', '=', $id)->count(),
-                        "archive" => DB::table('calendars')
-                            ->join('companies_employees', 'calendars.companies_employees_id', 'companies_employees.id')
-                            ->join('companies', 'companies_employees.companies_id', 'companies.id')
-                            ->whereDate('end', '<=', \Carbon\Carbon::now())->where('companies_id', '=', $id)->count()
-                    ]
-                ]
-            ]
-        );
+        return abort(404, 'Page not found');
     }
 
     /**
@@ -104,7 +78,17 @@ class CalendarsController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('Calendars/Edit', ['item' => Calendars::find($id), 'mode' => 'edit']);
+        return Inertia::render('Calendars/Edit', [
+            'item' => Calendars::find($id),
+            'mode' =>
+            'edit',
+            'employees' => DB::table('companies_employees')
+                ->join('companies', 'companies_employees.companies_id', 'companies.id')
+                ->select(
+                    'companies_employees.*',
+                    'companies.name_short as company_name',
+                )->get()
+        ]);
     }
 
     /**
