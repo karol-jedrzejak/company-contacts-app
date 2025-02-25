@@ -21,7 +21,16 @@ class CompaniesEmployeesStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [];
+        return [
+            'adress_number' => 'required',
+            'name' => 'required',
+            'surname' => 'required',
+            'position' => 'required',
+            'mobile' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'active' => 'required',
+        ];
     }
 
     public function messages(): array
