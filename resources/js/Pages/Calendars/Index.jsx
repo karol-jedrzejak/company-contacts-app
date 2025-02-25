@@ -16,7 +16,7 @@ export default function Index({ auth, items, events }) {
 
     // Edit
     const handleEventClick = (arg) => {
-        window.open(route("calendars.edit", arg.event.id), "_self");
+        window.open(route("calendars.show", arg.event.id), "_self");
     };
 
     // View

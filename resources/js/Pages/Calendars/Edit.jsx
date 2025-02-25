@@ -8,15 +8,21 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import SelectEmployeeInput from "@/Components/SelectEmployeeInput";
+import Modal from "@/Components/Modal";
 
 import { useRef } from "react";
 import { useForm } from "@inertiajs/react";
+import { router } from "@inertiajs/react";
 
 export default function Edit({ auth, item, mode, employees }) {
     const companies_employees_idInput = useRef();
     const titleInput = useRef();
     const startInput = useRef();
     const endInput = useRef();
+
+    if (item.companies_employees_id == "") {
+        item.companies_employees_id = employees[0].id;
+    }
 
     const {
         data,
@@ -213,8 +219,8 @@ export default function Edit({ auth, item, mode, employees }) {
                             <InputError message={errors.end} className="mt-2" />
                         </div>
 
-                        <div className="col-span-2 mt-6 flex justify-end">
-                            {mode == "add" ? (
+                        {mode == "add" ? (
+                            <div className="col-span-2 mt-6 flex justify-end">
                                 <ButtonStandard
                                     btn_style="green"
                                     disabled={processing}
@@ -222,7 +228,9 @@ export default function Edit({ auth, item, mode, employees }) {
                                 >
                                     Add
                                 </ButtonStandard>
-                            ) : (
+                            </div>
+                        ) : (
+                            <div className="col-span-2 mt-6 flex justify-end">
                                 <ButtonStandard
                                     btn_style="yellow"
                                     disabled={processing}
@@ -230,8 +238,8 @@ export default function Edit({ auth, item, mode, employees }) {
                                 >
                                     Update
                                 </ButtonStandard>
-                            )}
-                        </div>
+                            </div>
+                        )}
                     </form>
                 </div>
             </AuthenticatedLayout>

@@ -70,7 +70,30 @@ class CalendarsController extends Controller
      */
     public function show(string $id)
     {
-        return abort(404, 'Page not found');
+        /*         $item = DB::table('calendars')
+            ->join('companies_employees', 'calendars.companies_employees_id', 'companies_employees.id')
+            ->join('companies', 'companies_employees.companies_id', 'companies.id')
+            ->select(
+                'calendars.*',
+                'companies.id as company_id',
+                'companies.name_short as company_name',
+                'companies_employees.id as companies_employees_id',
+                'companies_employees.name as companies_employees_name',
+                'companies_employees.surname as companies_employees_surname',
+            )
+            ->where('calendars.id', $id)->first(); */
+
+        $item = Calendars::find($id);
+        $employee = CompaniesEmployees::find($item->companies_employees_id);
+        $company = Companies::find(
+            $employee->companies_id
+        );
+
+        return Inertia::render('Calendars/Show', [
+            'item' => $item,
+            'employee' => $employee,
+            'company' => $company,
+        ]);
     }
 
     /**
