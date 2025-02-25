@@ -12,6 +12,30 @@ class CompaniesEmployees extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'surname',
+        'position',
+        'mobile',
+        'phone',
+        'email',
+        'active',
+        'companies_id',
+        'created_at',
+        'updated_at'
+    ];
+
+    protected $attributes = [
+        'name' => "",
+        'surname' => "",
+        'position' => "",
+        'mobile' => "",
+        'phone' => "",
+        'email' => "",
+        'active' => 1,
+    ];
+
+
     public function companies(): BelongsTo
     {
         return $this->belongsTo(Companies::class);
@@ -30,5 +54,17 @@ class CompaniesEmployees extends Model
     public function scopeInCompany(Builder $query, $id): Builder
     {
         return $query->where('companies_id', '=', $id);
+    }
+
+    protected $appends = ['has_contacts', 'has_calendars'];
+
+    public function getHasContactsAttribute()
+    {
+        return $this->salesContacts()->exists();
+    }
+
+    public function getHasCalendarsAttribute()
+    {
+        return $this->calendars()->exists();
     }
 }

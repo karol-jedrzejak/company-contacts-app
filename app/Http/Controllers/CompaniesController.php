@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Companies;
 use App\Models\CompaniesEmployees;
-use App\Models\SalesContacts;
-use App\Models\Calendars;
+
 use App\Http\Requests\CompaniesStoreRequest;
 use App\Http\Requests\CompaniesUpdateRequest;
 

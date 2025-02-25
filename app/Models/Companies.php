@@ -45,7 +45,6 @@ class Companies extends Model
         'active' => 1,
     ];
 
-
     protected $appends = ['has_employees'];
 
     public function companiesEmployees(): HasMany

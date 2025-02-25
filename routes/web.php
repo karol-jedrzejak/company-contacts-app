@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('tasklists', TasklistsController::class);
 
     Route::resource('companies', CompaniesController::class);
-    Route::resource('companies.employees', CompaniesEmployeesController::class)->where(['id' => '[0-9]+']);
+    Route::resource('companies.employees', CompaniesEmployeesController::class)->where(['id' => '[0-9]+'])->shallow();
 });
 
 require __DIR__ . '/auth.php';
