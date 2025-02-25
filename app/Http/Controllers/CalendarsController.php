@@ -23,9 +23,15 @@ class CalendarsController extends Controller
     public function index()
     {
         $events = Calendars::where('user_id', Auth::id())->get();
+        $events2 = DB::table('calendars')
+            ->join('companies_employees', 'calendars.companies_employees_id', 'companies_employees.id')
+            ->join('companies', 'companies_employees.companies_id', 'companies.id')
+            ->select('calendars.*')
+            //->select(['calendars.*'; 'companies.* as company'; 'companies_employees.* as employee'])
+            ->where('user_id', Auth::id())->get();
 
 
-        return Inertia::render('Calendars/Index', ['items' => $events, 'events' => $events]);
+        return Inertia::render('Calendars/Index', ['items' => $events, 'events' => $events, 'events2' => $events2]);
     }
 
     /**
