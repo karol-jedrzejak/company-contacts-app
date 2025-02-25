@@ -12,21 +12,18 @@ import ModalDestroy from "@/Pages/Calendars/ModalDestroy";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 
-export default function Index({ auth, items, events, message = null }) {
+export default function Index({ auth, items, events }) {
     console.log(events);
 
     // Add
     function confirmAdd() {
-        window.open(route("companies.create"), "_self");
+        window.open(route("calendars.create"), "_self");
     }
 
     // Edit
-    function confirmEdit(e) {
-        let item = items.find(
-            (item) => item.id == e.currentTarget.getAttribute("target_id")
-        );
-        window.open(route("companies.edit", item.id), "_self");
-    }
+    const handleEventClick = (arg) => {
+        window.open(route("calendars.edit", arg.event.id), "_self");
+    };
 
     // View
     return (
@@ -54,8 +51,11 @@ export default function Index({ auth, items, events, message = null }) {
                         </div>
                         <FullCalendar
                             plugins={[dayGridPlugin]}
+                            timeZone="Europe/Warsaw"
                             initialView="dayGridMonth"
                             events={items}
+                            eventClick={handleEventClick}
+                            editable={true}
                         />
                     </div>
                 </div>
