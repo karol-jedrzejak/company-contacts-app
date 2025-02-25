@@ -34,7 +34,7 @@ class CalendarsFactory extends Factory
         return [
             'user_id' => fake()->numberBetween(1, 20),
             'companies_employees_id' => fake()->numberBetween(1, 200),
-            'description' => fake()->sentence(),
+            'title' => fake()->sentence(),
             'start' => $date_start,
             'end' => $date_end,
             'created_at' => now(),

@@ -14,7 +14,7 @@ class Calendars extends Model
     protected $fillable = [
         'user_id',
         'companies_employees_id',
-        'description',
+        'title',
         'start',
         'end',
         'created_at',
@@ -24,7 +24,7 @@ class Calendars extends Model
     protected $attributes = [
         'user_id' => "",
         'companies_employees_id' => "",
-        'description' => "",
+        'title' => "",
         'start' => "",
         'end' => "",
     ];

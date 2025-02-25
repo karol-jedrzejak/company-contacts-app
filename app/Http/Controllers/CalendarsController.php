@@ -22,7 +22,10 @@ class CalendarsController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Calendars/Index', ['items' => Calendars::where('user_id', Auth::id())->get(), 'new_item' => new Calendars]);
+        $events = Calendars::where('user_id', Auth::id())->get();
+
+
+        return Inertia::render('Calendars/Index', ['items' => $events, 'events' => $events]);
     }
 
     /**

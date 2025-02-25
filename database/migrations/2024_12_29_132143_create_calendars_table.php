@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('companies_employees_id')->nullable()->constrained();
             $table->foreign('companies_employees_id')->references('id')->on('companies_employees');
 
-            $table->text('description');
+            $table->text('title');
 
             $table->dateTime('start');
             $table->dateTime('end');
