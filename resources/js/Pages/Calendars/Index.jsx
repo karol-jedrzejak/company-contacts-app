@@ -12,15 +12,8 @@ import ModalDestroy from "@/Pages/Calendars/ModalDestroy";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 
-export default function Index({
-    auth,
-    items,
-    events,
-    events2,
-    message = null,
-}) {
-    //console.log(events);
-    console.log(events2);
+export default function Index({ auth, items, events, message = null }) {
+    console.log(events);
 
     // Add
     function confirmAdd() {
