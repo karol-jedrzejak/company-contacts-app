@@ -49,7 +49,7 @@ class CalendarsController extends Controller
                 ->select(
                     'companies_employees.*',
                     'companies.name_short as company_name',
-                )->get()
+                )->orderBy('companies_employees.name', 'asc')->orderBy('companies_employees.surname', 'asc')->get()
         ]);
     }
 
@@ -87,7 +87,7 @@ class CalendarsController extends Controller
                 ->select(
                     'companies_employees.*',
                     'companies.name_short as company_name',
-                )->get()
+                )->orderBy('companies_employees.name', 'asc')->orderBy('companies_employees.surname', 'asc')->get()
         ]);
     }
 

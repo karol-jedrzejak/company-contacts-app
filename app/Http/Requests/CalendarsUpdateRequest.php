@@ -22,7 +22,12 @@ class CalendarsUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [];
+        return [
+            'companies_employees_id' => 'required|integer',
+            'title' => 'required',
+            'start' => 'required|date',
+            'end' => 'required|date|after_or_equal:start',
+        ];
     }
 
     public function messages(): array

@@ -7,7 +7,7 @@ import ButtonStandard from "@/Components/ButtonStandard";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
-import SelectInput from "@/Components/SelectInput";
+import SelectEmployeeInput from "@/Components/SelectEmployeeInput";
 
 import { useRef } from "react";
 import { useForm } from "@inertiajs/react";
@@ -135,7 +135,7 @@ export default function Edit({ auth, item, mode, employees }) {
                                 htmlFor="companies_employees_id"
                                 value="Company Employee"
                             />
-                            <TextInput
+                            <SelectEmployeeInput
                                 id="companies_employees_id"
                                 name="companies_employees_id"
                                 ref={companies_employees_idInput}
@@ -147,6 +147,8 @@ export default function Edit({ auth, item, mode, employees }) {
                                     )
                                 }
                                 className="mt-2 block w-full"
+                                employees={employees}
+                                required
                             />
                             <InputError
                                 message={errors.companies_employees_id}
