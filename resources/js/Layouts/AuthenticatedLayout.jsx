@@ -5,7 +5,7 @@ import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
 
-export default function Authenticated({ user, header, children }) {
+export default function Authenticated({ user, header, children, flex = null }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
@@ -204,7 +204,17 @@ export default function Authenticated({ user, header, children }) {
                 </header>
             )}
 
-            <main>{children}</main>
+            {flex ? (
+                <>
+                    <main className="grow flex justify-center content-center flex-wrap">
+                        {children}
+                    </main>
+                </>
+            ) : (
+                <>
+                    <main>{children}</main>
+                </>
+            )}
         </div>
     );
 }
