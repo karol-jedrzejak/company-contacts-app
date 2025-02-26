@@ -46,6 +46,15 @@ export default function ButtonStandard({
                     "border-transparent bg-green-600 text-white hover:bg-green-500 focus:bg-green-700 active:bg-green-700 focus:outline-none focus:ring-2 focus:ring-red-500 ";
             }
             break;
+        case "white":
+            if (disabled) {
+                stylingClassNames =
+                    "border-transparent bg-stone-100 text-gray-500 hover:bg-stone-200 focus:bg-stone-300 active:bg-stone-300 focus:outline-none focus:ring-2 focus:ring-red-500 ";
+            } else {
+                stylingClassNames =
+                    "border-transparent bg-stone-100 text-gray-500 hover:bg-stone-200 focus:bg-stone-300 active:bg-stone-300 focus:outline-none focus:ring-2 focus:ring-red-500 ";
+            }
+            break;
 
         default:
             break;

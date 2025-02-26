@@ -4,6 +4,7 @@ import ButtonStandard from "@/Components/ButtonStandard";
 import Table from "@/Components/Table";
 import React from "react";
 import { useState, useRef } from "react";
+import BadgeTable from "@/Components/BadgeTable";
 
 import Message from "@/Components/Message";
 
@@ -37,12 +38,12 @@ export default function Index({ auth, items, new_item, message = null }) {
         let item = items.find(
             (item) => item.id == e.currentTarget.getAttribute("target_id")
         );
-        window.open(route("companies.show", item.id), "_self");
+        window.open(route("sales_contacts.show", item.id), "_self");
     }
 
     // Add
     function confirmAdd() {
-        window.open(route("companies.create"), "_self");
+        window.open(route("sales_contacts.create"), "_self");
     }
 
     // Edit
@@ -50,7 +51,7 @@ export default function Index({ auth, items, new_item, message = null }) {
         let item = items.find(
             (item) => item.id == e.currentTarget.getAttribute("target_id")
         );
-        window.open(route("companies.edit", item.id), "_self");
+        window.open(route("sales_contacts.edit", item.id), "_self");
     }
 
     // Deletion
@@ -77,28 +78,64 @@ export default function Index({ auth, items, new_item, message = null }) {
         {
             id: 1,
             variable: "id",
-            text: "id",
+            text: "Id",
             sortable: true,
         },
         {
             id: 2,
             variable: "topic",
-            text: "topic",
+            text: "Topic",
             sortable: true,
         },
         {
             id: 3,
             variable: "company_name",
-            text: "company_name",
+            text: "Company Name",
             sortable: true,
         },
         {
             id: 4,
             variable: "companies_employees_name",
-            text: "companies_employees_name",
+            text: "Employee",
+            sortable: true,
+        },
+        {
+            id: 5,
+            variable: "latest_description",
+            text: "Latest Update",
+            sortable: true,
+        },
+        {
+            id: 6,
+            variable: "latest_updated_at",
+            text: "Update date",
+            sortable: true,
+        },
+        {
+            id: 7,
+            variable: "importance",
+            text: "importance",
             sortable: true,
         },
     ];
+
+    function companyInfo(e) {
+        window.open(
+            route(
+                "companies.show",
+
+                e.currentTarget.getAttribute("target_id")
+            ),
+            "_self"
+        );
+    }
+
+    function employeeInfo(e) {
+        window.open(
+            route("employees.show", e.currentTarget.getAttribute("target_id")),
+            "_self"
+        );
+    }
 
     function rowLayout(item) {
         return (
@@ -107,9 +144,35 @@ export default function Index({ auth, items, new_item, message = null }) {
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
             >
                 <td className="px-4 py-2">{item.id}</td>
-                <td className="px-4 py-2">{item.name_short}</td>
-                <td className="px-4 py-2 text-center">{item.name_complete}</td>
-                <td className="px-4 py-2 text-center">{item.country}</td>
+                <td className="px-4 py-2">{item.topic}</td>
+                <td className="px-4 py-2 text-center">
+                    <ButtonStandard
+                        className="mx-2"
+                        target_id={item.company_id}
+                        btn_style="white"
+                        onClick={companyInfo}
+                    >
+                        {item.company_name}
+                    </ButtonStandard>
+                </td>
+                <td className="px-4 py-2 text-center">
+                    <ButtonStandard
+                        className="mx-2"
+                        target_id={item.companies_employees_id}
+                        btn_style="white"
+                        onClick={employeeInfo}
+                    >
+                        {item.companies_employees_name}{" "}
+                        {item.companies_employees_surname}
+                    </ButtonStandard>
+                </td>
+                <td className="px-4 py-2">{item.latest_description}</td>
+                <td className="px-4 py-2">{item.latest_updated_at}</td>
+                <td className="px-4 py-2 text-center">
+                    <BadgeTable bdg_style={item.importance}>
+                        {item.importance}
+                    </BadgeTable>
+                </td>
                 <td className="px-4 py-2 whitespace-nowrap w-px">
                     <ButtonStandard
                         className="mx-2"
@@ -168,11 +231,11 @@ export default function Index({ auth, items, new_item, message = null }) {
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    COMPANIES
+                    SALES CONTACTS
                 </h2>
             }
         >
-            <Head title="Companies" />
+            <Head title="Sales Contacts" />
 
             {/* ---------------- Message ---------------- */}
             {messageShow ? (

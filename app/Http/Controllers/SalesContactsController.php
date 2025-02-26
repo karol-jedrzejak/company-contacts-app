@@ -43,6 +43,7 @@ class SalesContactsController extends Controller
                 'sales_contacts.*',
                 'companies.id as company_id',
                 'companies.name_short as company_name',
+                'companies_employees.id as companies_employees_id',
                 'companies_employees.name as companies_employees_name',
                 'companies_employees.surname as companies_employees_surname',
                 'companies_employees.surname as companies_employees_surname',
