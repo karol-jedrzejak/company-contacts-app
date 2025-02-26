@@ -41,6 +41,14 @@ export default function Authenticated({ user, header, children, flex = null }) {
                                     Calendar
                                 </NavLink>
                                 <NavLink
+                                    href={route("sales_contacts.index")}
+                                    active={route().current(
+                                        "sales_contacts.index"
+                                    )}
+                                >
+                                    Sales Contacts
+                                </NavLink>
+                                <NavLink
                                     href={route("dashboard")}
                                     active={route().current("dashboard")}
                                 >
@@ -167,6 +175,12 @@ export default function Authenticated({ user, header, children, flex = null }) {
                             active={route().current("calendars.index")}
                         >
                             Calendar
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route("sales_contacts.index")}
+                            active={route().current("sales_contacts.index")}
+                        >
+                            Sales Contacts
                         </ResponsiveNavLink>
                     </div>
 

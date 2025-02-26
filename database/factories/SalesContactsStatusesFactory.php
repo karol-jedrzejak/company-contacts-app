@@ -17,12 +17,10 @@ class SalesContactsStatusesFactory extends Factory
     public function definition(): array
     {
         return [
-            'sales_contacts_id' => fake()->numberBetween(1, 200),
             'user_id' => fake()->numberBetween(1, 20),
             'description' => fake()->sentence(),
             'created_at' => now(),
             'updated_at' => now(),
-
         ];
     }
 }

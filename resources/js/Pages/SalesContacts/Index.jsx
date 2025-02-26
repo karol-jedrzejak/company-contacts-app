@@ -7,15 +7,9 @@ import { useState, useRef } from "react";
 
 import Message from "@/Components/Message";
 
-import ModalDestroy from "@/Pages/CompaniesEmployees/ModalDestroy";
+import ModalDestroy from "@/Pages/SalesContacts/ModalDestroy";
 
-export default function Index({
-    company,
-    auth,
-    items,
-    new_item,
-    message = null,
-}) {
+export default function Index({ auth, items, new_item, message = null }) {
     const [currentTarget, setCurrentTarget] = useState(new_item);
 
     // Message
@@ -38,21 +32,16 @@ export default function Index({
     }
 
     //Show
-    function companyInfo() {
-        window.open(route("companies.show", company.id), "_self");
-    }
-
-    //Show
     function linkShow(e) {
         let item = items.find(
             (item) => item.id == e.currentTarget.getAttribute("target_id")
         );
-        window.open(route("employees.show", item.id), "_self");
+        window.open(route("companies.show", item.id), "_self");
     }
 
     // Add
     function confirmAdd() {
-        window.open(route("companies.employees.create", company.id), "_self");
+        window.open(route("companies.create"), "_self");
     }
 
     // Edit
@@ -60,7 +49,7 @@ export default function Index({
         let item = items.find(
             (item) => item.id == e.currentTarget.getAttribute("target_id")
         );
-        window.open(route("employees.edit", item.id), "_self");
+        window.open(route("companies.edit", item.id), "_self");
     }
 
     // Deletion
@@ -86,53 +75,34 @@ export default function Index({
         },
         {
             id: 2,
-            variable: "name",
-            text: "name",
+            variable: "name_short",
+            text: "name short",
             sortable: true,
         },
         {
             id: 3,
-            variable: "surname",
-            text: "surname",
+            variable: "name_complete",
+            text: "name complete",
             sortable: true,
         },
         {
             id: 4,
-            variable: "position",
-            text: "position",
+            variable: "country",
+            text: "country",
             sortable: true,
-        },
-        {
-            id: 5,
-            variable: "mobile",
-            text: "mobile",
-            sortable: false,
-        },
-        {
-            id: 6,
-            variable: "email",
-            text: "email",
-            sortable: false,
         },
     ];
 
     function rowLayout(item) {
-        let colors = "";
-        if (item.active) {
-            colors = "bg-white border-b dark:bg-gray-800 dark:border-gray-700";
-        } else {
-            colors =
-                "bg-slate-200 border-b dark:bg-gray-800 dark:border-gray-700";
-        }
-
         return (
-            <tr key={item.id} className={colors}>
+            <tr
+                key={item.id}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+            >
                 <td className="px-4 py-2">{item.id}</td>
-                <td className="px-4 py-2">{item.name}</td>
-                <td className="px-4 py-2 text-center">{item.surname}</td>
-                <td className="px-4 py-2 text-center">{item.position}</td>
-                <td className="px-4 py-2 text-center">{item.mobile}</td>
-                <td className="px-4 py-2 text-center">{item.email}</td>
+                <td className="px-4 py-2">{item.name_short}</td>
+                <td className="px-4 py-2 text-center">{item.name_complete}</td>
+                <td className="px-4 py-2 text-center">{item.country}</td>
                 <td className="px-4 py-2 whitespace-nowrap w-px">
                     <ButtonStandard
                         className="mx-2"
@@ -152,7 +122,7 @@ export default function Index({
                         Edit
                     </ButtonStandard>
                     <>
-                        {item.has_contacts || item.has_meetings ? (
+                        {item.has_employees ? (
                             <>
                                 <ButtonStandard
                                     data-tooltip-target={"button_" + item.id}
@@ -161,9 +131,9 @@ export default function Index({
                                     tabIndex="-1"
                                     disabled
                                 >
-                                    <span className="rounded-full tooltip rounded shadow-lg p-2 bg-gray-200 text-red-500 -mt-8 -ml-[550px]">
-                                        In order to delete employee first delete
-                                        sales topics and meetings.
+                                    <span className="rounded-full tooltip rounded shadow-lg p-2 bg-gray-200 text-red-500 -mt-8 -ml-[350px]">
+                                        In order to delete company first delete
+                                        employees.
                                     </span>
                                     Delete
                                 </ButtonStandard>
@@ -191,20 +161,11 @@ export default function Index({
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    COMPANIES EMPLOYEES
+                    COMPANIES
                 </h2>
             }
         >
-            <Head title="Companies Employees" />
-
-            <div className="bg-white shadow">
-                <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {company.name_complete}{" "}
-                    <ButtonStandard className="mx-2" onClick={companyInfo}>
-                        Show
-                    </ButtonStandard>
-                </div>
-            </div>
+            <Head title="Companies" />
 
             {/* ---------------- Message ---------------- */}
             {messageShow ? (

@@ -7,8 +7,6 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 
 export default function Index({ auth, items, events }) {
-    console.log(events);
-
     // Add
     function confirmAdd() {
         window.open(route("calendars.create"), "_self");

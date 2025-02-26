@@ -21,8 +21,15 @@ class companiesSeeder extends Seeder
             ->count(20)
             ->has(
                 CompaniesEmployees::factory()
-                    ->count(10)->has(SalesContacts::factory()->count(1))
+                    ->count(10)
             )
             ->create();
+        /*         Companies::factory()
+            ->count(20)
+            ->has(
+                CompaniesEmployees::factory()
+                    ->count(10)->has(SalesContacts::factory()->count(1))
+            )
+            ->create(); */
     }
 }

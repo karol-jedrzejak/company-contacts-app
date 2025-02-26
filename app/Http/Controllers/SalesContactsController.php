@@ -5,33 +5,35 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\Calendars;
+use App\Models\SalesContacts;
 use App\Models\Companies;
 use App\Models\CompaniesEmployees;
 
-use App\Http\Requests\CalendarsStoreRequest;
-use App\Http\Requests\CalendarsUpdateRequest;
+use App\Http\Requests\SalesContactsStoreRequest;
+use App\Http\Requests\SalesContactsUpdateRequest;
 
 use Inertia\Inertia;
 
 
-class CalendarsController extends Controller
+class SalesContactsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Calendars/Index', ['items' => DB::table('calendars')
-            ->join('companies_employees', 'calendars.companies_employees_id', 'companies_employees.id')
+        $sales_contacts = DB::table('sales_contacts')
+            ->join('companies_employees', 'sales_contacts.companies_employees_id', 'companies_employees.id')
             ->join('companies', 'companies_employees.companies_id', 'companies.id')
             ->select(
-                'calendars.*',
+                'sales_contacts.*',
                 'companies.name_short as company_name',
                 'companies_employees.name as companies_employees_name',
                 'companies_employees.surname as companies_employees_surname',
             )
-            ->where('user_id', Auth::id())->get()]);
+            ->get();
+
+        return Inertia::render('SalesContacts/Index', ['items' => $sales_contacts]);
     }
 
     /**
@@ -39,8 +41,8 @@ class CalendarsController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Calendars/Edit', [
-            'item' => new Calendars,
+        return Inertia::render('SalesContacts/Edit', [
+            'item' => new SalesContacts,
             'mode' => 'add',
             'employees' => DB::table('companies_employees')
                 ->join('companies', 'companies_employees.companies_id', 'companies.id')
@@ -54,13 +56,13 @@ class CalendarsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CalendarsStoreRequest $request)
+    public function store(SalesContactsStoreRequest $request)
     {
         $request->validated();
         $data = $request->post();
         $data['id'] = null;
         $data['user_id'] = Auth::id();
-        Calendars::create($data);
+        SalesContacts::create($data);
     }
 
     /**
@@ -68,26 +70,26 @@ class CalendarsController extends Controller
      */
     public function show(string $id)
     {
-        /*         $item = DB::table('calendars')
-            ->join('companies_employees', 'calendars.companies_employees_id', 'companies_employees.id')
+        /*         $item = DB::table('SalesContacts')
+            ->join('companies_employees', 'SalesContacts.companies_employees_id', 'companies_employees.id')
             ->join('companies', 'companies_employees.companies_id', 'companies.id')
             ->select(
-                'calendars.*',
+                'SalesContacts.*',
                 'companies.id as company_id',
                 'companies.name_short as company_name',
                 'companies_employees.id as companies_employees_id',
                 'companies_employees.name as companies_employees_name',
                 'companies_employees.surname as companies_employees_surname',
             )
-            ->where('calendars.id', $id)->first(); */
+            ->where('SalesContacts.id', $id)->first(); */
 
-        $item = Calendars::find($id);
+        $item = SalesContacts::find($id);
         $employee = CompaniesEmployees::find($item->companies_employees_id);
         $company = Companies::find(
             $employee->companies_id
         );
 
-        return Inertia::render('Calendars/Show', [
+        return Inertia::render('SalesContacts/Show', [
             'item' => $item,
             'employee' => $employee,
             'company' => $company,
@@ -99,8 +101,8 @@ class CalendarsController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('Calendars/Edit', [
-            'item' => Calendars::find($id),
+        return Inertia::render('SalesContacts/Edit', [
+            'item' => SalesContacts::find($id),
             'mode' =>
             'edit',
             'employees' => DB::table('companies_employees')
@@ -115,11 +117,11 @@ class CalendarsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CalendarsUpdateRequest  $request, string $id)
+    public function update(SalesContactsUpdateRequest  $request, string $id)
     {
         $request->validated();
         $data = $request->post();
-        $item = Calendars::find($id);
+        $item = SalesContacts::find($id);
         $item->update($data);
     }
 
@@ -128,6 +130,6 @@ class CalendarsController extends Controller
      */
     public function destroy(string $id)
     {
-        Calendars::find($id)->delete();
+        SalesContacts::find($id)->delete();
     }
 }

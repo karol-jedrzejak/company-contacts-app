@@ -15,7 +15,6 @@ import { useForm } from "@inertiajs/react";
 import { router } from "@inertiajs/react";
 
 export default function Edit({ auth, item, employee, company }) {
-    console.log(item, employee, company);
     const [showModal, setShowModal] = useState(false);
 
     const openModal = () => {

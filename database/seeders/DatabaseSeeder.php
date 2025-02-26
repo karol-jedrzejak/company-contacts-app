@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CompaniesSeeder::class,
             CalendarsSeeder::class,
-            SalesContactsStatusesSeeder::class,
+            SalesContactsSeeder::class,
         ]);
     }
 }
