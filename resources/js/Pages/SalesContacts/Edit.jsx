@@ -169,7 +169,7 @@ export default function Edit({ auth, item, mode }) {
                 user={auth.user}
                 header={
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        COMPANIES
+                        SALES CONTACT
                     </h2>
                 }
             >

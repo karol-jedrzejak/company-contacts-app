@@ -16,11 +16,13 @@ class SalesContactsStatusesFactory extends Factory
      */
     public function definition(): array
     {
+        $date =
+            fake()->dateTimeBetween('-2 years', '-1 day');
         return [
             'user_id' => fake()->numberBetween(1, 20),
             'description' => fake()->sentence(),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => $date,
+            'updated_at' => $date,
         ];
     }
 }
