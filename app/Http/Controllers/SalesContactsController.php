@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Query\JoinClause;
 
 use App\Models\SalesContacts;
 use App\Models\Companies;
@@ -22,15 +23,34 @@ class SalesContactsController extends Controller
      */
     public function index()
     {
+
+        $latest_updates = DB::table('sales_contacts_statuses')
+            ->select(
+                DB::raw('max(sales_contacts_statuses.id) as id'),
+                'sales_contacts_id',
+            )->groupBy('sales_contacts_id');
+
+
         $sales_contacts = DB::table('sales_contacts')
             ->join('companies_employees', 'sales_contacts.companies_employees_id', 'companies_employees.id')
             ->join('companies', 'companies_employees.companies_id', 'companies.id')
+            ->joinSub($latest_updates, 'latest_updates', function (JoinClause $join) {
+                $join->on('sales_contacts.id', '=', 'latest_updates.sales_contacts_id');
+            })
+            ->join('sales_contacts_statuses', 'sales_contacts_statuses.id', '=', 'latest_updates.id')
+            ->join('users', 'users.id', '=', 'sales_contacts_statuses.user_id')
             ->select(
                 'sales_contacts.*',
-                'companies.idas company_id',
+                'companies.id as company_id',
                 'companies.name_short as company_name',
                 'companies_employees.name as companies_employees_name',
                 'companies_employees.surname as companies_employees_surname',
+                'companies_employees.surname as companies_employees_surname',
+                'sales_contacts_statuses.user_id as latest_user_id',
+                'sales_contacts_statuses.description as latest_description',
+                'sales_contacts_statuses.created_at as latest_created_at',
+                'sales_contacts_statuses.updated_at as latest_updated_at',
+                'users.name as latest_user_name',
             )
             ->get();
 

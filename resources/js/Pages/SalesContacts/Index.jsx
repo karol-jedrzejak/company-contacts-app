@@ -10,6 +10,7 @@ import Message from "@/Components/Message";
 import ModalDestroy from "@/Pages/SalesContacts/ModalDestroy";
 
 export default function Index({ auth, items, new_item, message = null }) {
+    console.log(items);
     const [currentTarget, setCurrentTarget] = useState(new_item);
 
     // Message
