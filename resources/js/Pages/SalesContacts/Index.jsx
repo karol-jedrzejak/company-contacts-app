@@ -65,7 +65,13 @@ export default function Index({ auth, items, new_item, message = null }) {
     }
 
     // Tables
-    const searchitems = ["nip", "name_short", "name_complete"];
+    const searchitems = [
+        "topic",
+        "company_name",
+        "importance",
+        "companies_employees_name",
+        "companies_employees_surname",
+    ];
     const columns = [
         {
             id: 1,
@@ -75,20 +81,20 @@ export default function Index({ auth, items, new_item, message = null }) {
         },
         {
             id: 2,
-            variable: "name_short",
-            text: "name short",
+            variable: "topic",
+            text: "topic",
             sortable: true,
         },
         {
             id: 3,
-            variable: "name_complete",
-            text: "name complete",
+            variable: "company_name",
+            text: "company_name",
             sortable: true,
         },
         {
             id: 4,
-            variable: "country",
-            text: "country",
+            variable: "companies_employees_name",
+            text: "companies_employees_name",
             sortable: true,
         },
     ];

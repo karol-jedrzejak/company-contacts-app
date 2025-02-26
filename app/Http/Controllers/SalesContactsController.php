@@ -27,6 +27,7 @@ class SalesContactsController extends Controller
             ->join('companies', 'companies_employees.companies_id', 'companies.id')
             ->select(
                 'sales_contacts.*',
+                'companies.idas company_id',
                 'companies.name_short as company_name',
                 'companies_employees.name as companies_employees_name',
                 'companies_employees.surname as companies_employees_surname',
