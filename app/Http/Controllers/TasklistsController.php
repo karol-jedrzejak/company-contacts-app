@@ -16,9 +16,11 @@ class TasklistsController extends Controller
      */
     public function index()
     {
-        $tasklists = Tasklists::where('user_id', Auth::id())->get();
-        $importance_types = $this->get_set_values('tasklists', 'importance');
-        return Inertia::render('Tasklists/Index', ['items' => $tasklists, 'importance_types' => $importance_types, 'new_item' => new Tasklists]);
+        return Inertia::render('Tasklists/Index', [
+            'items' => Tasklists::where('user_id', Auth::id())->get(),
+            'importance_types' => $this->get_set_values('tasklists', 'importance'),
+            'new_item' => new Tasklists
+        ]);
     }
 
     /**

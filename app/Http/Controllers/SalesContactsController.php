@@ -30,7 +30,6 @@ class SalesContactsController extends Controller
                 'sales_contacts_id',
             )->groupBy('sales_contacts_id');
 
-
         $sales_contacts = DB::table('sales_contacts')
             ->join('companies_employees', 'sales_contacts.companies_employees_id', 'companies_employees.id')
             ->join('companies', 'companies_employees.companies_id', 'companies.id')
@@ -66,6 +65,7 @@ class SalesContactsController extends Controller
         return Inertia::render('SalesContacts/Edit', [
             'item' => new SalesContacts,
             'mode' => 'add',
+            'importance_types' => $this->get_set_values('sales_contacts', 'importance'),
             'employees' => DB::table('companies_employees')
                 ->join('companies', 'companies_employees.companies_id', 'companies.id')
                 ->select(
@@ -83,7 +83,6 @@ class SalesContactsController extends Controller
         $request->validated();
         $data = $request->post();
         $data['id'] = null;
-        $data['user_id'] = Auth::id();
         SalesContacts::create($data);
     }
 
@@ -125,8 +124,8 @@ class SalesContactsController extends Controller
     {
         return Inertia::render('SalesContacts/Edit', [
             'item' => SalesContacts::find($id),
-            'mode' =>
-            'edit',
+            'mode' => 'edit',
+            'importance_types' => $this->get_set_values('sales_contacts', 'importance'),
             'employees' => DB::table('companies_employees')
                 ->join('companies', 'companies_employees.companies_id', 'companies.id')
                 ->select(
