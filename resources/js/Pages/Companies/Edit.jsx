@@ -455,5 +455,5 @@ export default function Edit({ auth, item, mode }) {
                 </div>
             </AuthenticatedLayout>
         </>
-    );
+    ); => ''
 }
