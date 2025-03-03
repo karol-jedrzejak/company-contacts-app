@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Query\JoinClause;
 
 use App\Models\SalesContacts;
+use App\Models\SalesContactsStatuses;
 use App\Models\Companies;
 use App\Models\CompaniesEmployees;
 
@@ -83,7 +84,12 @@ class SalesContactsController extends Controller
         $request->validated();
         $data = $request->post();
         $data['id'] = null;
-        SalesContacts::create($data);
+        $sales_contacts = SalesContacts::create($data);
+        $data_statuses = [];
+        $data_statuses['sales_contacts_id'] = $sales_contacts->id;
+        $data_statuses['user_id'] = Auth::id();
+        $data_statuses['description'] = "Contact Created";
+        SalesContactsStatuses::create($data_statuses);
     }
 
     /**

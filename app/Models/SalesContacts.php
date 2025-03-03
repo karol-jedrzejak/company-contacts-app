@@ -20,4 +20,20 @@ class SalesContacts extends Model
     {
         return $this->belongsTo(CompaniesEmployees::class);
     }
+
+    protected $fillable = [
+        'companies_employees_id',
+        'topic',
+        'importance',
+        'active',
+        'created_at',
+        'updated_at'
+    ];
+
+    protected $attributes = [
+        'companies_employees_id' => "",
+        'topic' => "",
+        'importance' => "high",
+        'active' => 1,
+    ];
 }

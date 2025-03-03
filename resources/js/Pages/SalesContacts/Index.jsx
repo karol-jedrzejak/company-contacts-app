@@ -138,11 +138,16 @@ export default function Index({ auth, items, new_item, message = null }) {
     }
 
     function rowLayout(item) {
+        let colors = "";
+        if (item.active) {
+            colors = "bg-white border-b dark:bg-gray-800 dark:border-gray-700";
+        } else {
+            colors =
+                "bg-slate-200 border-b dark:bg-gray-800 dark:border-gray-700";
+        }
+
         return (
-            <tr
-                key={item.id}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-            >
+            <tr key={item.id} className={colors}>
                 <td className="px-4 py-2">{item.id}</td>
                 <td className="px-4 py-2">{item.topic}</td>
                 <td className="px-4 py-2 text-center">

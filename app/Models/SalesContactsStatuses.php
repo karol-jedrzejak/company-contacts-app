@@ -20,4 +20,16 @@ class SalesContactsStatuses extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    protected $fillable = [
+        'sales_contacts_id',
+        'user_id',
+        'description',
+        'created_at',
+        'updated_at'
+    ];
+
+    protected $attributes = [
+        'description' => "",
+    ];
 }
